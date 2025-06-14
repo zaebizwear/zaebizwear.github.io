@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>О Сваге | ZAEBIZ®</title>
+  <link rel="icon" href="https://zaebizwear.com/favicon.webp" type="image/webp">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+    }
+    
+    body {
+      background: #fff;
+      color: #222;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+      font-size: 16px;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .logo {
+      display: block;
+      margin: 0 auto 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.8rem;
+      text-decoration: none;
+      color: #222;
+    }
+    
+    h1 {
+      font-size: 1.6rem;
+      margin-bottom: 5px;
+      font-weight: 700;
+    }
+    
+    .subtitle {
+      color: #666;
+      font-size: 0.95rem;
+    }
+    
+    .content {
+      margin-bottom: 30px;
+    }
+    
+    p {
+      margin-bottom: 15px;
+    }
+    
+    h2 {
+      font-size: 1.3rem;
+      margin: 25px 0 15px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .levels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .level {
+      padding: 10px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+    }
+    
+    .level h3 {
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+    
+    .gif {
+      height: 100px;
+      margin: 8px 0;
+    }
+    
+    .gif img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    
+    .description {
+      font-size: 0.9rem;
+      color: #444;
+    }
+    
+    .swagometer {
+      margin: 25px 0;
+      padding: 15px;
+      background: #f8f8f8;
+      border-radius: 4px;
+    }
+    
+    .gradient-bar {
+      height: 18px;
+      background: linear-gradient(to right, 
+        #e53935 0%, #e53935 33%, 
+        #1e88e5 33%, #1e88e5 66%, 
+        #43a047 66%, #43a047 100%);
+      border-radius: 4px;
+      margin: 10px 0;
+      position: relative;
+    }
+    
+    .max-indicator {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 8px;
+      background: #f57c00;
+      border-radius: 0 4px 4px 0;
+    }
+    
+    .labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: #666;
+    }
+    
+    ul {
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: #333;
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 4px;
+      margin-top: 15px;
+      font-size: 1rem;
+    }
+    
+    footer {
+      text-align: center;
+      color: #666;
+      font-size: 0.9rem;
+      padding-top: 20px;
+      margin-top: 20px;
+      border-top: 1px solid #e0e0e0;
+    }
+    
+    @media (max-width: 600px) {
+      .levels {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="https://zaebizwear.com" class="logo">ZAEBIZ®</a>
+    <h1>Как вычисляется свага</h1>
+    <p class="subtitle">Простое объяснение работы свагометра</p>
+  </header>
+  
+  <div class="content">
+    <p>Свагометр ZAEBIZ® анализирует изображения по ключевым параметрам, чтобы определить уровень сваги. Это не просто случайные числа - за каждой оценкой стоит сложный алгоритм.</p>
+    
+    <h2>Уровни сваги</h2>
+    
+    <div class="levels">
+      <div class="level">
+        <h3>LAME (0-40%)</h3>
+        <div class="gif">
+          <img src="https://c.tenor.com/qM90pXzX1KQAAAAd/tenor.gif" alt="Lame">
+        </div>
+        <p class="description">Тусклые цвета, низкая яркость, недостаток контраста. Обычно серые и скучные изображения.</p>
+      </div>
+      
+      <div class="level">
+        <h3>NPC (40-60%)</h3>
+        <div class="gif">
+          <img src="https://c.tenor.com/2_hwjYcJlSoAAAAd/tenor.gif" alt="NPC">
+        </div>
+        <p class="description">Обычные изображения без изюминки. Не плохие, но и не выделяются из толпы.</p>
+      </div>
+      
+      <div class="level">
+        <h3>SWAG (60-100%)</h3>
+        <div class="gif">
+          <img src="https://c.tenor.com/BH3AVKkqbU8AAAAC/tenor.gif" alt="SWAG">
+        </div>
+        <p class="description">Яркие цвета, хороший контраст. Сразу видно - изображение со стилем!</p>
+      </div>
+      
+      <div class="level">
+        <h3>SWAGA МАКС (100%+)</h3>
+        <div class="gif">
+          <img src="https://c.tenor.com/6rBuC3Ip7oYAAAAd/tenor.gif" alt="SWAGA MAX">
+        </div>
+        <p class="description">Золотые оттенки, идеальный контраст. Максимальный уровень сваги!</p>
+      </div>
+    </div>
+    
+    <h2>Шкала свагометра</h2>
+    
+    <div class="swagometer">
+      <div class="gradient-bar">
+        <div class="max-indicator"></div>
+      </div>
+      <div class="labels">
+        <div>LAME</div>
+        <div>NPC</div>
+        <div>SWAG</div>
+        <div>MAX</div>
+      </div>
+    </div>
+    
+    <p>Шкала показывает уровень сваги вашего изображения. Стрелка указывает на ваш результат после анализа.</p>
+    
+    <h2>Как это работает</h2>
+    
+    <p>Свагометр анализирует изображение по нескольким параметрам:</p>
+    
+    <ul>
+      <li><strong>Яркость</strong> - общая освещенность изображения. Яркие изображения получают более высокие оценки.</li>
+      <li><strong>Насыщенность</strong> - интенсивность цветов. Сочные, насыщенные цвета увеличивают свагу.</li>
+      <li><strong>Контраст</strong> - разница между светлыми и темными участками. Высокий контраст = больше сваги.</li>
+      <li><strong>Цветовое разнообразие</strong> - количество различных цветов в изображении.</li>
+      <li><strong>Золотые оттенки</strong> - специальный бонус за золотые и металлические элементы.</li>
+    </ul>
+    
+    <h2>Как получить высокий результат</h2>
+    
+    <p>Чтобы достичь уровня SWAGA MAX:</p>
+    
+    <ul>
+      <li>Используйте яркое, хорошо освещенное изображение</li>
+      <li>Выбирайте насыщенные, сочные цвета</li>
+      <li>Убедитесь, что на изображении есть контраст</li>
+      <li>Добавьте золотые или металлические элементы</li>
+      <li>Избегайте тусклых, блеклых цветов</li>
+    </ul>
+    
+    <a href="https://zaebizwear.com/swagometer" class="btn">Измерить свагу</a>
+  </div>
+  
+  <footer>
+    <p>ZAEBIZ® Камень-на-Оби</p>
+    <p>© 2025 ZAEBIZ®. Все права защищены.</p>
+  </footer>
+</body>
+</html>
