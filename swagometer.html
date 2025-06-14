@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SWAGOMETER | Измерение уровня сваги | ZAEBIZ®</title>
+  <meta name="description" content="Измерь уровень сваги своего изображения с помощью уникального SWAGOMETER от ZAEBIZ®">
+  <meta name="keywords" content="свага, свагометр, измерение сваги, тест на свагу, ZAEBIZ, SWAGOMETER">
+  <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Dela Gothic One', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+
+    body {
+      overflow-x: hidden;
+      background: #0d0d0d;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+    }
+
+    .logo {
+      height: 40px;
+      cursor: pointer;
+      transition: transform 0.3s;
+      margin-bottom: 0.8rem;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo img {
+      height: 100%;
+      width: auto;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(45deg, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff, #ff00ff);
+      background-size: 400% 400%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: rainbowText 8s linear infinite;
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    @keyframes rainbowText {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 400% 50%; }
+    }
+
+    .container {
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .upload-container {
+      background: #1a1a1a;
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+      width: 100%;
+    }
+
+    .upload-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      border: 3px dashed #444;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: all 0.3s;
+      min-height: 200px;
+    }
+
+    .upload-label:hover {
+      border-color: #ff00ff;
+      background: rgba(255, 0, 255, 0.1);
+    }
+
+    .upload-icon {
+      font-size: 3.5rem;
+      margin-bottom: 0.8rem;
+      color: #ff00ff;
+    }
+
+    .upload-text {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
+
+    .upload-hint {
+      color: #aaa;
+      font-size: 0.9rem;
+      margin-top: 0.8rem;
+      text-align: center;
+    }
+
+    #file-input {
+      display: none;
+    }
+
+    .preview-container {
+      display: none;
+      margin: 1.5rem auto;
+      max-width: 100%;
+    }
+
+    #image-preview {
+      max-width: 100%;
+      max-height: 250px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+    }
+
+    .swagometer-section {
+      display: none;
+      width: 100%;
+    }
+
+    .gif-container {
+      margin: 0 auto 1rem;
+      max-width: 100%;
+      max-height: 150px;
+      display: none;
+    }
+
+    .gif-container img {
+      max-width: 100%;
+      max-height: 150px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    .swagometer-container {
+      margin: 1.5rem auto;
+      position: relative;
+      width: 100%;
+    }
+
+    .gradient-bar {
+      height: 35px;
+      background: linear-gradient(to right, 
+        #ff0000 0%, #ff0000 33%, 
+        #00aaff 33%, #00aaff 66%, 
+        #00ff00 66%, #00ff00 100%);
+      border-radius: 18px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .arrow {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-top: 22px solid #fff;
+      z-index: 10;
+      transition: left 0.5s ease;
+    }
+
+    .result-text {
+      font-size: 2.5rem;
+      margin: 1.5rem 0;
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .lame {
+      color: #ff0000;
+      text-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+      font-size: 2.8rem;
+      animation: shakeLittle 0.5s infinite;
+    }
+
+    .npc {
+      color: #00aaff;
+      text-shadow: 0 0 15px rgba(0, 170, 255, 0.7);
+      font-size: 2.8rem;
+      animation: shakeMedium 0.4s infinite;
+    }
+
+    .swag {
+      background: linear-gradient(45deg, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff, #ff00ff);
+      background-size: 400% 400%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: rainbowText 1s linear infinite, shakeHard 0.3s infinite;
+      font-size: 2.8rem;
+    }
+
+    .swaga {
+      background: linear-gradient(45deg, #ffd700, #ffec8b, #fffacd, #ffd700);
+      background-size: 400% 400%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: goldShine 1s linear infinite, shakeExtreme 0.2s infinite;
+      font-size: 2.5rem;
+    }
+
+    /* Анимации дрожания */
+    @keyframes shakeLittle {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-3px); }
+      75% { transform: translateX(3px); }
+    }
+
+    @keyframes shakeMedium {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-4px); }
+      40% { transform: translateX(3px); }
+      60% { transform: translateX(-3px); }
+      80% { transform: translateX(3px); }
+    }
+
+    @keyframes shakeHard {
+      0%, 100% { transform: translateX(0); }
+      10% { transform: translateX(-6px) rotate(-1deg); }
+      30% { transform: translateX(5px) rotate(1deg); }
+      50% { transform: translateX(-4px) rotate(-2deg); }
+      70% { transform: translateX(4px) rotate(2deg); }
+      90% { transform: translateX(-3px) rotate(-1deg); }
+    }
+
+    @keyframes shakeExtreme {
+      0%, 100% { transform: translateX(0) rotate(0); }
+      10% { transform: translateX(-8px) rotate(-3deg); }
+      20% { transform: translateX(7px) rotate(2deg); }
+      30% { transform: translateX(-6px) rotate(-4deg); }
+      40% { transform: translateX(5px) rotate(3deg); }
+      50% { transform: translateX(-5px) rotate(-5deg); }
+      60% { transform: translateX(4px) rotate(4deg); }
+      70% { transform: translateX(-4px) rotate(-3deg); }
+      80% { transform: translateX(3px) rotate(2deg); }
+      90% { transform: translateX(-3px) rotate(-1deg); }
+    }
+
+    @keyframes goldShine {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .measure-btn {
+      padding: 1rem 2.5rem;
+      background: linear-gradient(45deg, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff, #ff00ff);
+      background-size: 400% 400%;
+      animation: rainbowText 8s linear infinite;
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s;
+      margin: 1.5rem auto;
+      display: block;
+    }
+
+    .measure-btn:hover {
+      animation: rainbowTextHover 0.5s linear infinite;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.6);
+    }
+
+    .measure-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    @keyframes rainbowTextHover {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .percentage {
+      font-size: 2rem;
+      margin-top: 1rem;
+      color: #fff;
+      min-height: 40px;
+    }
+
+    .max-indicator {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 15px;
+      background: #ffd700;
+      border-top-right-radius: 18px;
+      border-bottom-right-radius: 18px;
+      box-shadow: 0 0 8px rgba(255, 215, 0, 0.7);
+    }
+
+    .labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .status {
+      font-size: 1.2rem;
+      margin-top: 0.8rem;
+      color: #ff00ff;
+      min-height: 25px;
+    }
+
+    .notification {
+      position: fixed;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, #00ff00, #00cc00, #00ff00);
+      background-size: 200% 200%;
+      animation: notificationGradient 4s linear infinite;
+      color: #000;
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-weight: bold;
+      z-index: 1000;
+      box-shadow: 0 0 12px rgba(0, 255, 0, 0.5);
+      display: none;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    @keyframes notificationGradient {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      color: #aaa;
+      font-size: 0.8rem;
+      margin-top: auto;
+      width: 100%;
+    }
+
+    /* Кнопка управления звуком */
+    .sound-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #ff00ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      transition: all 0.3s;
+    }
+
+    .sound-btn:hover {
+      background: rgba(255, 0, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    .sound-btn i {
+      font-size: 20px;
+      color: #ff00ff;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .result-text {
+        font-size: 2rem;
+        min-height: 70px;
+      }
+      
+      .lame, .npc, .swag {
+        font-size: 2.2rem;
+      }
+      
+      .swaga {
+        font-size: 2rem;
+      }
+      
+      .gradient-bar {
+        height: 30px;
+      }
+      
+      .arrow {
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-top: 18px solid #fff;
+      }
+      
+      .measure-btn {
+        padding: 0.9rem 2rem;
+        font-size: 1.1rem;
+      }
+      
+      .percentage {
+        font-size: 1.8rem;
+      }
+      
+      .status {
+        font-size: 1.1rem;
+      }
+      
+      .upload-container {
+        padding: 1.2rem;
+      }
+      
+      .upload-label {
+        padding: 1.2rem;
+        min-height: 180px;
+      }
+      
+      .upload-icon {
+        font-size: 3rem;
+      }
+      
+      .upload-text {
+        font-size: 1.1rem;
+      }
+      
+      .gif-container {
+        max-height: 120px;
+      }
+      
+      .sound-btn {
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+      }
+    }
+
+    @media (max-width: 350px) {
+      h1 {
+        font-size: 1.7rem;
+      }
+      
+      .result-text {
+        font-size: 1.8rem;
+      }
+      
+      .lame, .npc, .swag {
+        font-size: 2rem;
+      }
+      
+      .swaga {
+        font-size: 1.8rem;
+      }
+      
+      .upload-text {
+        font-size: 1rem;
+      }
+    }
+  </style>
+  <!-- Иконки Font Awesome для кнопки звука -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Элемент для фоновой музыки -->
+  <audio id="background-music" loop>
+    <source src="swaga.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает элемент audio.
+  </audio>
+  
+  <!-- Кнопка управления звуком -->
+  <div class="sound-btn" id="sound-btn">
+    <i class="fas fa-volume-up"></i>
+  </div>
+  
+  <div class="header">
+    <div class="logo" onclick="window.location.href = 'index.html';">
+      <img src="zbs.svg" alt="ZAEBIZ® Логотип">
+    </div>
+    <h1>SWAGOMETER</h1>
+  </div>
+  
+  <div class="container">
+    <div class="upload-container" id="upload-container">
+      <label class="upload-label" id="upload-label" for="file-input">
+        <div class="upload-icon">📁</div>
+        <div class="upload-text">ЗАГРУЗИТЕ ИЗОБРАЖЕНИЕ ДЛЯ ИЗМЕРЕНИЯ СВАГИ</div>
+        <div class="upload-hint">Нажмите или перетащите изображение в эту область</div>
+      </label>
+      <input type="file" id="file-input" accept="image/*">
+      
+      <div class="preview-container" id="preview-container">
+        <img id="image-preview" alt="Предпросмотр изображения">
+        <div class="status" id="upload-status">Изображение загружено!</div>
+      </div>
+    </div>
+    
+    <div class="swagometer-section" id="swagometer-section">
+      <div class="gif-container" id="gif-container">
+        <img id="result-gif" src="" alt="Результат">
+      </div>
+      
+      <div class="result-text" id="result">ZAEBIZ®</div>
+      
+      <div class="swagometer-container">
+        <div class="gradient-bar">
+          <div class="max-indicator"></div>
+        </div>
+        <div class="arrow" id="arrow"></div>
+        <div class="labels">
+          <div>LAME</div>
+          <div>NPC</div>
+          <div>SWAG</div>
+          <div>MAX</div>
+        </div>
+      </div>
+      
+      <div class="percentage" id="percentage">ГОТОВ К ИЗМЕРЕНИЮ</div>
+      <div class="status" id="status"></div>
+      
+      <button class="measure-btn" id="measure-btn" onclick="startMeasurement()" disabled>ИЗМЕРИТЬ СВАГУ</button>
+    </div>
+  </div>
+  
+  <div class="notification" id="notification"></div>
+  
+  <footer>
+    <p>ZAEBIZ® Камень-на-Оби</p>
+    <p>© 2025 ZAEBIZ®. Все права защищены.</p>
+  </footer>
+  
+  <script>
+    let currentImage = null;
+    let measurementInterval;
+    let measurementTimeout;
+    let musicPlaying = false;
+    
+    // GIF-адреса для разных результатов
+    const gifs = {
+      lame: "https://c.tenor.com/qM90pXzX1KQAAAAd/tenor.gif",
+      npc: "https://c.tenor.com/2_hwjYcJlSoAAAAd/tenor.gif",
+      swag: "https://c.tenor.com/BH3AVKkqbU8AAAAC/tenor.gif",
+      swaga: "https://c.tenor.com/6rBuC3Ip7oYAAAAd/tenor.gif"
+    };
+
+    // Инициализация при загрузке
+    document.addEventListener('DOMContentLoaded', () => {
+      // Начальное положение стрелки в начале шкалы
+      const arrow = document.getElementById('arrow');
+      arrow.style.left = '0px';
+      
+      // Настройка загрузки файла
+      const fileInput = document.getElementById('file-input');
+      const uploadLabel = document.getElementById('upload-label');
+      const previewContainer = document.getElementById('preview-container');
+      const imagePreview = document.getElementById('image-preview');
+      const measureBtn = document.getElementById('measure-btn');
+      
+      // Обработка выбора файла
+      fileInput.addEventListener('change', function(e) {
+        if (this.files && this.files[0]) {
+          const file = this.files[0];
+          
+          // Проверка типа файла
+          if (!file.type.match('image.*')) {
+            showNotification('Пожалуйста, загрузите изображение!');
+            return;
+          }
+          
+          const reader = new FileReader();
+          
+          reader.onload = function(e) {
+            // Отображаем превью
+            imagePreview.src = e.target.result;
+            previewContainer.style.display = 'block';
+            
+            // Обновляем статус
+            document.getElementById('upload-status').textContent = "Изображение загружено!";
+            
+            // Показываем уведомление
+            showNotification('ИЗОБРАЖЕНИЕ УСПЕШНО ЗАГРУЖЕНО!');
+            
+            // Активируем кнопку измерения
+            measureBtn.disabled = false;
+            measureBtn.textContent = "ИЗМЕРИТЬ СВАГУ";
+            
+            // Сохраняем текущее изображение
+            currentImage = file;
+            
+            // Через 3 секунды скрываем блок загрузки и показываем свагометр
+            setTimeout(() => {
+              document.getElementById('upload-container').style.display = 'none';
+              document.getElementById('swagometer-section').style.display = 'block';
+              resetSwagometer();
+            }, 3000);
+          };
+          
+          reader.readAsDataURL(file);
+        }
+      });
+      
+      // Drag and drop
+      uploadLabel.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        this.style.borderColor = '#ff00ff';
+        this.style.backgroundColor = 'rgba(255, 0, 255, 0.2)';
+      });
+      
+      uploadLabel.addEventListener('dragleave', function() {
+        this.style.borderColor = '#444';
+        this.style.backgroundColor = 'transparent';
+      });
+      
+      uploadLabel.addEventListener('drop', function(e) {
+        e.preventDefault();
+        this.style.borderColor = '#444';
+        this.style.backgroundColor = 'transparent';
+        
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          fileInput.files = e.dataTransfer.files;
+          const event = new Event('change', { bubbles: true });
+          fileInput.dispatchEvent(event);
+        }
+      });
+      
+      // Управление звуком
+      const soundBtn = document.getElementById('sound-btn');
+      const backgroundMusic = document.getElementById('background-music');
+      
+      soundBtn.addEventListener('click', function() {
+        if (musicPlaying) {
+          backgroundMusic.pause();
+          soundBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        } else {
+          // Попытка воспроизведения с обработкой ошибки
+          backgroundMusic.play().catch(error => {
+            console.log('Автовоспроизведение заблокировано:', error);
+            // Показываем сообщение для пользователя
+            showNotification('Нажмите на кнопку звука для включения музыки');
+          });
+          soundBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+        }
+        musicPlaying = !musicPlaying;
+      });
+      
+      // Попробуем автоматически включить музыку при загрузке
+      setTimeout(() => {
+        backgroundMusic.play().then(() => {
+          musicPlaying = true;
+          soundBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+        }).catch(error => {
+          console.log('Автовоспроизведение заблокировано:', error);
+          musicPlaying = false;
+          soundBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        });
+      }, 1000);
+    });
+    
+    // Функция сброса состояния свагометра
+    function resetSwagometer() {
+      document.getElementById('result').textContent = "ZAEBIZ®";
+      document.getElementById('result').className = "result-text";
+      document.getElementById('percentage').textContent = "ГОТОВ К ИЗМЕРЕНИЮ";
+      document.getElementById('status').textContent = "";
+      document.getElementById('arrow').style.left = '0px';
+      document.getElementById('gif-container').style.display = 'none';
+    }
+    
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      if (notification) {
+        notification.textContent = message;
+        notification.style.display = 'block';
+        setTimeout(() => {
+          notification.style.display = 'none';
+        }, 3000);
+      }
+    }
+    
+    function startMeasurement() {
+      if (!currentImage) {
+        showNotification('Сначала загрузите изображение!');
+        return;
+      }
+      
+      const btn = document.getElementById('measure-btn');
+      btn.disabled = true;
+      btn.textContent = "ИДЁТ ИЗМЕРЕНИЕ...";
+      
+      const resultElement = document.getElementById('result');
+      const percentage = document.getElementById('percentage');
+      const status = document.getElementById('status');
+      
+      status.textContent = "Анализ уровня сваги...";
+      
+      // Случайный финальный результат
+      let finalValue;
+      if (Math.random() > 0.85) {
+        // Шанс 15% на результат >100% (101-110%)
+        finalValue = Math.floor(Math.random() * 10) + 101;
+      } else {
+        finalValue = Math.floor(Math.random() * 100) + 1;
+      }
+      
+      // Определение категории
+      let text, className, gifKey;
+      if (finalValue <= 40) {
+        text = "LAME";
+        className = "lame";
+        gifKey = "lame";
+      } else if (finalValue <= 60) {
+        text = "NPC";
+        className = "npc";
+        gifKey = "npc";
+      } else if (finalValue <= 100) {
+        text = "SWAG";
+        className = "swag";
+        gifKey = "swag";
+      } else {
+        text = "SWAGA МАКСИМАЛЬНАЯ";
+        className = "swaga";
+        gifKey = "swaga";
+      }
+      
+      // Анимация измерения
+      const maxWidth = document.querySelector('.gradient-bar').offsetWidth;
+      const arrow = document.getElementById('arrow');
+      
+      // Начальная позиция случайная
+      let currentPos = Math.random() * maxWidth;
+      arrow.style.left = `${currentPos}px`;
+      
+      // Начальная скорость случайная
+      let animationSpeed = (Math.random() * 10) - 5; // от -5 до +5
+      
+      // Случайное время измерения от 20 до 60 секунд
+      const measurementDuration = Math.floor(Math.random() * 40000) + 20000;
+      
+      measurementInterval = setInterval(() => {
+        // Изменяем позицию
+        currentPos += animationSpeed;
+        
+        // Если достигли края - меняем направление
+        if (currentPos < 0) {
+          currentPos = 0;
+          animationSpeed = Math.abs(animationSpeed);
+        } else if (currentPos > maxWidth) {
+          currentPos = maxWidth;
+          animationSpeed = -Math.abs(animationSpeed);
+        }
+        
+        // Случайное изменение скорости (направление и величина)
+        if (Math.random() > 0.95) {
+          animationSpeed = (Math.random() * 10) - 5;
+        }
+        
+        // Обновляем позицию стрелки
+        arrow.style.left = `${currentPos}px`;
+        
+        // Временный результат для отображения
+        const tempValue = Math.min(Math.floor(currentPos / maxWidth * 110), 110);
+        percentage.textContent = `${tempValue}%`;
+        
+        // Временная надпись с дрожанием
+        if (tempValue <= 40) {
+          resultElement.textContent = "LAME";
+          resultElement.className = "result-text lame";
+        } else if (tempValue <= 60) {
+          resultElement.textContent = "NPC";
+          resultElement.className = "result-text npc";
+        } else if (tempValue <= 100) {
+          resultElement.textContent = "SWAG";
+          resultElement.className = "result-text swag";
+        } else {
+          resultElement.textContent = "SWAGA МАКСИМАЛЬНАЯ";
+          resultElement.className = "result-text swaga";
+        }
+      }, 50);
+      
+      // Завершение измерения через заданное время
+      measurementTimeout = setTimeout(() => {
+        finishMeasurement(finalValue, text, className, gifKey);
+      }, measurementDuration);
+    }
+    
+    function finishMeasurement(value, text, className, gifKey) {
+      // Остановка анимации
+      clearInterval(measurementInterval);
+      clearTimeout(measurementTimeout);
+      
+      const arrow = document.getElementById('arrow');
+      const percentage = document.getElementById('percentage');
+      const status = document.getElementById('status');
+      
+      // Анимация к финальной позиции
+      const maxWidth = document.querySelector('.gradient-bar').offsetWidth;
+      const finalPosition = Math.min(value, 110) / 110 * maxWidth;
+      
+      let currentPos = parseFloat(arrow.style.left) || 0;
+      const animationInterval = setInterval(() => {
+        const diff = finalPosition - currentPos;
+        currentPos += diff * 0.1;
+        
+        arrow.style.left = `${currentPos}px`;
+        
+        if (Math.abs(diff) < 1) {
+          clearInterval(animationInterval);
+          arrow.style.left = `${finalPosition}px`;
+          
+          // Установка финальных значений
+          document.getElementById('result').textContent = text;
+          document.getElementById('result').className = `result-text ${className}`;
+          percentage.textContent = `${value}%`;
+          status.textContent = "ИЗМЕРЕНИЕ ЗАВЕРШЕНО!";
+          
+          // Показываем соответствующую гифку
+          const gifContainer = document.getElementById('gif-container');
+          const resultGif = document.getElementById('result-gif');
+          resultGif.src = gifs[gifKey];
+          gifContainer.style.display = 'block';
+          
+          // Меняем кнопку на "ЗАГРУЗИТЬ НОВОЕ ИЗОБРАЖЕНИЕ"
+          const btn = document.getElementById('measure-btn');
+          btn.disabled = false;
+          btn.textContent = "ЗАГРУЗИТЬ НОВОЕ ИЗОБРАЖЕНИЕ";
+          btn.onclick = restartProcess;
+        }
+      }, 20);
+    }
+    
+    function restartProcess() {
+      // Сброс всех значений
+      currentImage = null;
+      
+      // Показываем блок загрузки
+      document.getElementById('upload-container').style.display = 'block';
+      
+      // Скрываем свагометр
+      document.getElementById('swagometer-section').style.display = 'none';
+      
+      // Сбрасываем загрузку файла
+      document.getElementById('file-input').value = '';
+      document.getElementById('preview-container').style.display = 'none';
+      
+      // Сбрасываем кнопку измерения
+      const btn = document.getElementById('measure-btn');
+      btn.disabled = true;
+      btn.textContent = "ИЗМЕРИТЬ СВАГУ";
+      btn.onclick = startMeasurement;
+      
+      // Сбрасываем состояние свагометра
+      resetSwagometer();
+      
+      // Показываем уведомление
+      showNotification('ЗАГРУЗИТЕ НОВОЕ ИЗОБРАЖЕНИЕ ДЛЯ ИЗМЕРЕНИЯ');
+    }
+  </script>
+</body>
+</html>
