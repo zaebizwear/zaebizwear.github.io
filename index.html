@@ -1,1095 +1,298 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZAEBIZ® - Русский Стритвир</title>
-  <link rel="icon" type="image/png" href="https://static.wikia.nocookie.net/zaebiz/images/3/3a/Favicona.png/revision/latest?cb=20250614075553&format=original&path-prefix=ru">
+  <meta name="description" content="ZAEBIZ® — дерзкий русский стритвир из Камень-на-Оби. Футболки и кепки с уникальными принтами: UYOBISHE, ROSSIYA, DOYAR OCHKA. Погрузитесь в культуру улиц!">
+  <meta name="keywords" content="ZAEBIZ, русский стритвир, уличная мода, футболки, кепки, Камень-на-Оби, UYOBISHE, ROSSIYA, DOYAR OCHKA">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="ZAEBIZ®">
+  <meta property="og:title" content="ZAEBIZ® - Русский Стритвир">
+  <meta property="og:description" content="ZAEBIZ® — бренд уличной моды из Камень-на-Оби. Дерзкие футболки и кепки с принтами UYOBISHE, ROSSIYA, DOYAR OCHKA.">
+  <meta property="og:image" content="zbs.svg">
+  <meta property="og:url" content="zaebizwear.github.io">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ZAEBIZ® - Русский Стритвир">
+  <meta name="twitter:description" content="ZAEBIZ® — дерзкий стритвир из Камень-на-Оби. Футболки и кепки с уникальными дизайнами.">
+  <meta name="twitter:image" content="zbs.svg">
+  <link rel="canonical" href="zaebizwear.github.io">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" as="style">
+  <link rel="preload" href="zbs.svg" as="image">
+  <link rel="icon" type="image/webp" href="favicon.webp">
   <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Dela Gothic One', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-
-    body {
-      overflow-x: hidden;
-      background: #0d0d0d;
-      color: #fff;
-    }
-
-    #disclaimer {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #0d0d0d;
-      color: #fff;
-      text-align: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 2000;
-    }
-
-    #disclaimer div {
-      padding: 2rem;
-      max-width: 600px;
-    }
-
-    #disclaimer img {
-      width: 200px;
-      margin-bottom: 1.5rem;
-      filter: drop-shadow(0 0 10px #ff00ff);
-    }
-
-    #disclaimer h2 {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-      color: #00ff00;
-      text-shadow: 0 0 10px #00ff00;
-    }
-
-    #disclaimer p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      color: #fff;
-    }
-
-    #disclaimer button {
-      padding: 0.7rem 1.5rem;
-      font-size: 1.1rem;
-      background: #1a1a1a;
-      color: #fff;
-      border: 3px solid #ff00ff;
-      border-radius: 0;
-      cursor: pointer;
-      margin: 0.5rem;
-      transition: all 0.3s;
-    }
-
-    #disclaimer button:hover {
-      background: #ff00ff;
-      color: #000;
-      box-shadow: 0 0 15px #ff00ff;
-    }
-
-    .safe-mode header, .safe-mode nav, .safe-mode footer, .safe-mode .modal-content, .safe-mode .product-card, .safe-mode .cart-item {
-      background: #1a1a1a;
-      color: #fff;
-      border-color: #fff;
-      box-shadow: none;
-    }
-
-    .safe-mode header img, .safe-mode nav a, .safe-mode .modal-content h3, .safe-mode .product-card h3, .safe-mode .cart-item h3, .safe-mode .cart-total {
-      color: #fff;
-      text-shadow: none;
-    }
-
-    .safe-mode .modal-content button, .safe-mode .checkout-btn, .safe-mode .remove-btn {
-      background: #1a1a1a;
-      color: #fff;
-      border-color: #fff;
-    }
-
-    .safe-mode .modal-content button:hover, .safe-mode .checkout-btn:hover, .safe-mode .remove-btn:hover {
-      background: #333;
-    }
-
-    .safe-mode .modal-content .close, .safe-mode footer p.warning, .safe-mode .modal-content p.warning {
-      color: #fff;
-      text-shadow: none;
-    }
-
-    .safe-mode nav a:hover {
-      background: #333;
-      color: #fff;
-    }
-
-    .safe-mode img {
-      border-color: #fff;
-    }
-
-    .safe-mode .modal {
-      background: rgba(10, 10, 10, 0.95);
-    }
-
-    .safe-mode select, .safe-mode input {
-      background: #1a1a1a;
-      color: #fff;
-      border-color: #fff;
-    }
-
-    .epilepsy-mode body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle, rgba(255,0,255,0.3), rgba(0,255,0,0.2), transparent);
-      animation: pulse 4s ease-in-out infinite;
-      z-index: -1;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.3; }
-      50% { transform: scale(1.3); opacity: 0.5; }
-      100% { transform: scale(1); opacity: 0.3; }
-    }
-
-    .epilepsy-mode header {
-      text-align: center;
-      padding: 1.5rem;
-      background: #000;
-      border-bottom: 6px solid #ff00ff;
-      box-shadow: 0 0 60px #00ffff;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .epilepsy-mode header::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 200%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, #ff00ff, #00ff00, transparent);
-      animation: slide 1.5s linear infinite;
-    }
-
-    @keyframes slide {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-
-    .epilepsy-mode header img {
-      width: 220px;
-      height: auto;
-      filter: drop-shadow(0 0 25px #ff00ff) drop-shadow(0 0 45px #00ffff) drop-shadow(0 0 65px #ff0000);
-      animation: spark 0.2s infinite alternate;
-      position: relative;
-      z-index: 1;
-    }
-
-    @keyframes spark {
-      0% { filter: drop-shadow(0 0 25px #ff00ff) drop-shadow(0 0 45px #00ffff) drop-shadow(0 0 65px #ff0000); }
-      50% { filter: drop-shadow(0 0 30px #00ff00) drop-shadow(0 0 55px #ff00ff) drop-shadow(0 0 75px #00ffff); }
-      100% { filter: drop-shadow(0 0 25px #ff0000) drop-shadow(0 0 45px #00ff00) drop-shadow(0 0 65px #ff00ff); }
-    }
-
-    .safe-mode header img {
-      width: 220px;
-      height: auto;
-      filter: none;
-    }
-
-    .epilepsy-mode nav {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      padding: 1rem;
-      background: #000;
-      box-shadow: 0 0 50px #ff00ff;
-      position: relative;
-    }
-
-    .epilepsy-mode nav::before {
-      content: '';
-      position: absolute;
-      top: -10px;
-      left: 0;
-      width: 100%;
-      height: 5px;
-      background: linear-gradient(90deg, #ff00ff, #00ff00, #ff00ff);
-      animation: neonFlow 2s linear infinite;
-    }
-
-    @keyframes neonFlow {
-      0% { background-position: 0; }
-      100% { background-position: 200%; }
-    }
-
-    .epilepsy-mode nav a {
-      color: #00ffff;
-      text-decoration: none;
-      font-size: 1.2rem;
-      padding: 0.5rem 1rem;
-      position: relative;
-      transition: all 0.3s;
-    }
-
-    .epilepsy-mode nav a:hover {
-      color: #ff00ff;
-      text-shadow: 0 0 30px #ff00ff;
-      background: rgba(255, 0, 255, 0.3);
-      transform: scale(1.1);
-    }
-
-    .products, .cart, .section {
-      display: none;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-      max-width: 1300px;
-      margin: 0 auto;
-    }
-
-    .products.active, .cart.active, .section.active {
-      display: grid;
-    }
-
-    .section {
-      display: none;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    .epilepsy-mode .section h2 {
-      color: #00ffff;
-      text-shadow: 0 0 20px #00ffff;
-      font-size: 2.2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .epilepsy-mode .section p {
-      color: #fff;
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
-      text-shadow: 0 0 8px #ff00ff;
-    }
-
-    .epilepsy-mode .section img {
-      max-width: 100%;
-      max-height: 450px;
-      border: 4px solid #ff00ff;
-      border-radius: 0;
-      box-shadow: 0 0 30px #00ff00;
-      margin-bottom: 1.5rem;
-    }
-
-    .epilepsy-mode .product-card, .epilepsy-mode .cart-item {
-      background: #1a1a1a;
-      border: 4px solid #00ff00;
-      padding: 1rem;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-      box-shadow: 0 0 30px #00ff00;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .epilepsy-mode .product-card::before, .epilepsy-mode .cart-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 200%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,0,255,0.3), transparent);
-      animation: cardSlide 2.5s linear infinite;
-    }
-
-    @keyframes cardSlide {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-
-    .epilepsy-mode .product-card:hover, .epilepsy-mode .cart-item:hover {
-      transform: scale(1.08);
-      box-shadow: 0 0 60px #ff00ff;
-    }
-
-    .product-card img, .cart-item img {
-      max-width: 100%;
-      border-radius: 0;
-      border: 3px solid #ff00ff;
-    }
-
-    .epilepsy-mode .product-card h3, .epilepsy-mode .cart-item h3 {
-      font-size: 1.6rem;
-      margin: 0.8rem 0;
-      color: #00ffff;
-      text-shadow: 0 0 8px #00ffff;
-    }
-
-    .product-card p, .cart-item p {
-      font-size: 1rem;
-      color: #fff;
-    }
-
-    .cart-item {
-      position: relative;
-    }
-
-    .remove-btn {
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-      background: #ff0000;
-      color: #fff;
-      border: 3px solid #00ff00;
-      border-radius: 0;
-      cursor: pointer;
-      margin-top: 0.8rem;
-      transition: all 0.3s;
-    }
-
-    .epilepsy-mode .remove-btn:hover {
-      background: #00ff00;
-      color: #000;
-      box-shadow: 0 0 15px #00ff00;
-      transform: scale(1.1);
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(10, 10, 10, 0.95);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-      overflow-y: auto;
-    }
-
-    .epilepsy-mode .modal-content {
-      background: #1a1a1a;
-      border: 4px solid #00ff00;
-      padding: 1.5rem;
-      max-width: 450px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 0 60px #ff00ff;
-      position: relative;
-      animation: flicker 0.05s infinite alternate;
-    }
-
-    @keyframes flicker {
-      from { box-shadow: 0 0 60px #ff00ff; }
-      to { box-shadow: 0 0 70px #00ff00; }
-    }
-
-    .modal-content img {
-      max-width: 100%;
-      border-radius: 0;
-      border: 3px solid #ff00ff;
-      margin-bottom: 1rem;
-    }
-
-    .epilepsy-mode .modal-content h3 {
-      font-size: 1.8rem;
-      color: #00ffff;
-      text-shadow: 0 0 8px #00ffff;
-      margin-bottom: 1rem;
-    }
-
-    .modal-content p {
-      font-size: 0.9rem;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
-
-    .modal-content select, .modal-content input {
-      padding: 0.5rem;
-      font-size: 0.9rem;
-      background: #1a1a1a;
-      color: #fff;
-      border: 3px solid #ff00ff;
-      border-radius: 0;
-      margin-bottom: 1rem;
-      width: 100%;
-    }
-
-    .epilepsy-mode .modal-content button {
-      padding: 0.7rem 1.5rem;
-      font-size: 1rem;
-      background: #ff00ff;
-      color: #fff;
-      border: 3px solid #00ff00;
-      border-radius: 0;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .epilepsy-mode .modal-content button:hover {
-      background: #00ff00;
-      color: #000;
-      box-shadow: 0 0 30px #00ff00;
-      transform: scale(1.1);
-    }
-
-    .modal-content .close {
-      position: absolute;
-      top: 0.7rem;
-      right: 0.7rem;
-      font-size: 1.5rem;
-      color: #ff0000;
-      cursor: pointer;
-      text-shadow: 0 0 8px #ff0000;
-    }
-
-    .cart-total {
-      text-align: center;
-      padding: 1rem;
-      font-size: 1.6rem;
-      color: #00ffff;
-      text-shadow: 0 0 8px #00ffff;
-    }
-
-    .cart-options {
-      padding: 1rem;
-      max-width: 450px;
-      margin: 0 auto;
-      text-align: left;
-    }
-
-    .cart-options label {
-      display: block;
-      font-size: 1rem;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
-
-    .cart-options select, .cart-options input {
-      width: 100%;
-      padding: 0.5rem;
-      font-size: 0.9rem;
-      background: #1a1a1a;
-      color: #fff;
-      border: 3px solid #ff00ff;
-      border-radius: 0;
-      margin-bottom: 1rem;
-    }
-
-    .checkout-btn {
-      display: block;
-      margin: 1.5rem auto;
-      padding: 0.8rem 2rem;
-      font-size: 1.2rem;
-      background: #ff0000;
-      color: #fff;
-      border: 3px solid #00ff00;
-      border-radius: 0;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .epilepsy-mode .checkout-btn:hover {
-      background: #00ff00;
-      color: #000;
-      box-shadow: 0 0 30px #00ff00;
-      transform: scale(1.1);
-    }
-
-    .epilepsy-mode footer {
-      text-align: center;
-      padding: 1.5rem;
-      background: #000;
-      border-top: 6px solid #ff0000;
-      color: #00ff00;
-      font-size: 1rem;
-      text-shadow: 0 0 12px #00ff00;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .epilepsy-mode footer::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 200%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, #ff0000, #00ff00, transparent);
-      animation: slide 2.5s linear infinite;
-    }
-
-    .safe-mode footer {
-      background: #1a1a1a;
-      color: #fff;
-      border-top: 6px solid #fff;
-    }
-
-    footer p {
-      position: relative;
-      z-index: 1;
-    }
-
-    .epilepsy-mode footer p.warning {
-      color: #ff0000;
-      text-shadow: 0 0 12px #ff0000;
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-    }
-
-    .telegram-btn {
-      display: inline-block;
-      padding: 0.7rem 1.5rem;
-      font-size: 1rem;
-      background: #0088cc;
-      color: #fff;
-      border: 3px solid #00ff00;
-      border-radius: 0;
-      text-decoration: none;
-      margin-top: 1rem;
-      transition: all 0.3s;
-    }
-
-    .epilepsy-mode .telegram-btn:hover {
-      background: #00ff00;
-      color: #000;
-      box-shadow: 0 0 15px #00ff00;
-      transform: scale(1.1);
-    }
-
-    .safe-mode .telegram-btn {
-      background: #0088cc;
-      border-color: #fff;
-    }
-
-    .safe-mode .telegram-btn:hover {
-      background: #333;
-      color: #fff;
-    }
-
-    #screamer-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      z-index: 1500;
-      justify-content: center;
-      align-items: center;
-    }
-
-    #screamer-modal img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      animation: shake 0.1s infinite;
-    }
-
-    @keyframes shake {
-      0% { transform: translate(0, 0); }
-      25% { transform: translate(5px, -5px); }
-      50% { transform: translate(-5px, 5px); }
-      75% { transform: translate(5px, 5px); }
-      100% { transform: translate(-5px, -5px); }
-    }
-
-    @media (max-width: 768px) {
-      #disclaimer h2 {
-        font-size: 1.8rem;
-      }
-
-      #disclaimer p {
-        font-size: 0.9rem;
-      }
-
-      #disclaimer button {
-        font-size: 0.9rem;
-        padding: 0.5rem 1rem;
-      }
-
-      #disclaimer img {
-        width: 150px;
-      }
-
-      .epilepsy-mode header img {
-        width: 180px;
-      }
-
-      .epilepsy-mode nav {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .epilepsy-mode nav a {
-        font-size: 1rem;
-      }
-
-      .products, .cart {
-        grid-template-columns: 1fr;
-        padding: 1.5rem;
-      }
-
-      .modal-content {
-        width: 95%;
-        padding: 1rem;
-      }
-
-      .epilepsy-mode .modal-content h3 {
-        font-size: 1.5rem;
-      }
-
-      .modal-content p {
-        font-size: 0.8rem;
-      }
-
-      .epilepsy-mode .product-card h3, .epilepsy-mode .cart-item h3 {
-        font-size: 1.4rem;
-      }
-
-      .product-card p, .cart-item p {
-        font-size: 0.9rem;
-      }
-
-      .cart-total {
-        font-size: 1.4rem;
-      }
-
-      .checkout-btn {
-        font-size: 1rem;
-        padding: 0.6rem 1.5rem;
-      }
-
-      .remove-btn {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.8rem;
-      }
-
-      .telegram-btn {
-        font-size: 0.9rem;
-        padding: 0.5rem 1rem;
-      }
-
-      .epilepsy-mode footer p {
-        font-size: 0.9rem;
-      }
-
-      .epilepsy-mode footer p.warning {
-        font-size: 1rem;
-      }
-
-      .epilepsy-mode .section h2 {
-        font-size: 1.8rem;
-      }
-
-      .epilepsy-mode .section p {
-        font-size: 1rem;
-      }
-
-      .epilepsy-mode .section img {
-        max-height: 350px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      #disclaimer h2 {
-        font-size: 1.5rem;
-      }
-
-      #disclaimer p {
-        font-size: 0.8rem;
-      }
-
-      #disclaimer button {
-        font-size: 0.8rem;
-        padding: 0.4rem 0.8rem;
-      }
-
-      #disclaimer img {
-        width: 120px;
-      }
-
-      .epilepsy-mode header img {
-        width: 150px;
-      }
-
-      .epilepsy-mode nav a {
-        font-size: 0.9rem;
-      }
-
-      .modal-content {
-        max-width: 90%;
-      }
-
-      .epilepsy-mode .section h2 {
-        font-size: 1.5rem;
-      }
-
-      .epilepsy-mode .section p {
-        font-size: 0.9rem;
-      }
-
-      .epilepsy-mode .section img {
-        max-height: 300px;
-      }
-    }
-  </style>
+  <link rel="alternate" hreflang="ru" href="zaebizwear.github.io">
+  <title>ZAEBIZ® - Русский Стритвир из Камень-на-Оби</title>
+  <style>*{margin:0;padding:0;box-sizing:border-box;font-family:'Dela Gothic One',sans-serif;text-transform:uppercase;letter-spacing:.03em}body{overflow-x:hidden;background:#0d0d0d;color:#fff}#disclaimer{display:flex;justify-content:center;align-items:center;height:100vh;background:#0d0d0d;color:#fff;text-align:center;position:fixed;top:0;left:0;width:100%;z-index:2000}#disclaimer div{padding:2rem;max-width:600px}#disclaimer img{width:200px;margin-bottom:1.5rem;filter:drop-shadow(0 0 10px #ff00ff)}#disclaimer h2{font-size:2.2rem;margin-bottom:1rem;color:#00ff00;text-shadow:0 0 10px #00ff00}#disclaimer p{font-size:1.1rem;margin-bottom:2rem;color:#fff}#disclaimer button{padding:.7rem 1.5rem;font-size:1.1rem;background:#1a1a1a;color:#fff;border:3px solid #ff00ff;border-radius:0;cursor:pointer;margin:.5rem;transition:all .3s}#disclaimer button:hover{background:#ff00ff;color:#000;box-shadow:0 0 15px #ff00ff}.safe-mode header,.safe-mode nav,.safe-mode footer,.safe-mode .modal-content,.safe-mode .product-card,.safe-mode .cart-item{background:#1a1a1a;color:#fff;border-color:#fff;box-shadow:none}.safe-mode header img,.safe-mode nav a,.safe-mode .modal-content h3,.safe-mode .product-card h3,.safe-mode .cart-item h3,.safe-mode .cart-total{color:#fff;text-shadow:none}.safe-mode .modal-content button,.safe-mode .checkout-btn,.safe-mode .remove-btn{background:#1a1a1a;color:#fff;border-color:#fff}.safe-mode .modal-content button:hover,.safe-mode .checkout-btn:hover,.safe-mode .remove-btn:hover{background:#333}.safe-mode .modal-content .close,.safe-mode footer p.warning,.safe-mode .modal-content p.warning{color:#fff;text-shadow:none}.safe-mode nav a:hover{background:#333;color:#fff}.safe-mode img{border-color:#fff}.safe-mode .modal{background:rgba(10,10,10,.95)}.safe-mode select,.safe-mode input{background:#1a1a1a;color:#fff;border-color:#fff}.epilepsy-mode body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,rgba(255,0,255,.3),rgba(0,255,0,.2),transparent);animation:pulse 4s ease-in-out infinite;z-index:-1}@keyframes pulse{0%{transform:scale(1);opacity:.3}50%{transform:scale(1.3);opacity:.5}100%{transform:scale(1);opacity:.3}}.epilepsy-mode header{text-align:center;padding:1.5rem;background:#000;border-bottom:6px solid #ff00ff;box-shadow:0 0 60px #00ffff;position:relative;overflow:hidden}.epilepsy-mode header::before{content:'';position:absolute;top:0;left:-100%;width:200%;height:100%;background:linear-gradient(90deg,transparent,#ff00ff,#00ff00,transparent);animation:slide 1.5s linear infinite}@keyframes slide{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}.epilepsy-mode header img{width:220px;height:auto;filter:drop-shadow(0 0 25px #ff00ff) drop-shadow(0 0 45px #00ffff) drop-shadow(0 0 65px #ff0000);animation:spark .2s infinite alternate;position:relative;z-index:1}@keyframes spark{0%{filter:drop-shadow(0 0 25px #ff00ff) drop-shadow(0 0 45px #00ffff) drop-shadow(0 0 65px #ff0000)}50%{filter:drop-shadow(0 0 30px #00ff00) drop-shadow(0 0 55px #ff00ff) drop-shadow(0 0 75px #00ffff)}100%{filter:drop-shadow(0 0 25px #ff0000) drop-shadow(0 0 45px #00ff00) drop-shadow(0 0 65px #ff00ff)}}.safe-mode header img{width:220px;height:auto;filter:none}.epilepsy-mode nav{display:flex;justify-content:center;gap:1.5rem;padding:1rem;background:#000;box-shadow:0 0 50px #ff00ff;position:relative}.epilepsy-mode nav::before{content:'';position:absolute;top:-10px;left:0;width:100%;height:5px;background:linear-gradient(90deg,#ff00ff,#00ff00,#ff00ff);animation:neonFlow 2s linear infinite}@keyframes neonFlow{0%{background-position:0}100%{background-position:200%}}.epilepsy-mode nav a{color:#00ffff;text-decoration:none;font-size:1.2rem;padding:.5rem 1rem;position:relative;transition:0.3s}.epilepsy-mode nav a:hover{color:#ff00ff;text-shadow:0 0 30px #ff00ff;background:rgba(255,0,255,.3);transform:scale(1.1)}.products,.cart,.section{display:none;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;padding:2rem;max-width:1300px;margin:0 auto}.products.active,.cart.active,.section.active{display:grid}.section{display:none;text-align:center;padding:2rem}.section.active{display:block}.epilepsy-mode .section h2{color:#fff;text-shadow:0 0 20px #00ff00;font-size:2.2rem;margin-bottom:1.5rem}.epilepsy-mode .section p{color:#fff;font-size:1.2rem;margin-bottom:1.5rem}.epilepsy-mode .section img{max-width:100%;max-height:450px;border:4px solid #ff00ff;border-radius:0;box-shadow:0 0 30px #00ff00;margin-bottom:1.5rem}.epilepsy-mode .product-card,.epilepsy-mode .cart-item{background:#1a1a1a;border:4px solid #00ff00;padding:1rem;text-align:center;transition:transform .3s,box-shadow .3s;box-shadow:0 0 30px #00ff00;cursor:pointer; overflow: visible; position: relative;}.epilepsy-mode .product-card::before,.epilepsy-mode .cart-item::before{content:'';position:absolute;top:0;left:-100%;width:200%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,0,255,.3),transparent);animation:cardSlide 2.5s linear infinite}@keyframes cardSlide{0% {transform: translateX(-100%);}100% {transform: translateX(100%);}}.epilepsy-mode .product-card:hover,.epilepsy-mode .cart-item:hover{transform:scale(1.08);box-shadow:0 0 60px #ff00ff}.product-card img,.cart-item img{max-width:100%;border-radius:0;border:3px solid #ff00ff}.epilepsy-mode .product-card h3,.epilepsy-mode .cart-item h3{font-size:1.6rem;margin:.8rem 0;color:#00ff00;text-shadow:0 0 5px #ff00ff}.product-card p,.cart-item p{font-size:1rem;color:#fff}.cart-item{ overflow:visible; position: relative;}.remove-btn{padding:.5rem 1rem;font-size:1rem;background:#ff0000;color:#fff;border:3px solid #00ff00;border-radius:0;cursor:pointer;margin-top:.8rem;transition:.3s}.epilepsy-mode .remove-btn:hover{background:#00ff00;color:#000;box-shadow:0 0 15px #00ff00;transform:scale(1.1)}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,10,10,.95);z-index:1000;justify-content:center;align-items:center;overflow-y:auto}.epilepsy-mode .modal-content{background:#1a1a1a;border:4px solid #00ff00;padding:1.5rem;max-width:450px;width:90%;text-align:center;box-shadow:0 0 60px #ff00ff;position:relative;animation:flicker .05s infinite alternate}@keyframes flicker{0%{box-shadow:0 0 60px #ff00ff}100%{box-shadow:0 0 70px #00ff00}}.modal-content img{max-width:100%;border-radius:0;border:3px solid #ff00ff;margin-bottom:1rem}.epilepsy-mode .modal-content h3{font-size:1.8rem;color:#00ff00;text-shadow:0 0 5px #ff00ff;margin-bottom:1rem}.modal-content p{font-size:.9rem;color:#fff;margin-bottom:.5rem}.modal-content select,.modal-content input{padding:.5rem;font-size:.9rem;background:#1a1a1a;color:#fff;border:3px solid #ff00ff;border-radius:0;margin-bottom:1rem;width:100%}.epilepsy-mode .modal-content button{padding:.7rem 1.5rem;font-size:1rem;background:#ff00ff;color:#fff;border:3px solid #00ff00;border-radius:0;cursor:pointer;transition:.3s}.epilepsy-mode .modal-content button:hover{background:#00ff00;color:#000;box-shadow:0 0 30px #00ff00;transform:scale(1.1)}.modal-content .close{position:absolute;top:.7rem;right:.7rem;font-size:1.5rem;color:#ff0000;cursor:pointer;text-shadow:0 0 8px #ff0000}.cart-total{text-align:center;padding:1rem;font-size:1.6rem;color:#00ff00;text-shadow:0 0 5px #ff00ff}.cart-options{padding:1rem;max-width:450px;margin:0 auto;text-align:left}.cart-options label{display:block;font-size:1rem;color:#fff;margin-bottom:.5rem}.cart-options select,.cart-options input{width:100%;padding:.5rem;font-size:.9rem;background:#1a1a1a;color:#fff;border:3px solid #ff00ff;border-radius:0;margin-bottom:1rem}.checkout-btn{display:block;margin:1.5rem auto;padding:.8rem 2rem;font-size:1.2rem;background:#ff0000;color:#fff;border:3px solid #00ff00;border-radius:0;cursor:pointer;transition:.3s}.epilepsy-mode .checkout-btn:hover{background:#00ff00;color:#000;box-shadow:0 0 30px #00ff00;transform:scale(1.1)}.epilepsy-mode footer{text-align:center;padding:1.5rem;background:#000;border-top:6px solid #ff0000;color:#00ff00;font-size:1rem;text-shadow:0 0 12px #00ff00;position:relative;overflow:hidden}.epilepsy-mode footer::before{content:'';position:absolute;top:0;left:-100%;width:200%;height:100%;background:linear-gradient(90deg,transparent,#ff0000,#00ff00,transparent);animation:slide 2.5s linear infinite}.safe-mode footer{background:#1a1a1a;color:#fff;border-top:6px solid #fff}footer p{position:relative;z-index:1}.epilepsy-mode footer p.warning{color:#ff0000;text-shadow:0 0 12px #ff0000;font-size:1.1rem;margin-bottom:1rem}.telegram-btn{display:inline-block;padding:.7rem 1.5rem;font-size:1rem;background:#0088cc;color:#fff;border:3px solid #00ff00;border-radius:0;text-decoration:none;margin-top:1rem;transition:.3s}.epilepsy-mode .telegram-btn:hover{background:#00ff00;color:#000;box-shadow:0 0 15px #00ff00;transform:scale(1.1)}.safe-mode .telegram-btn{background:#0088cc;border-color:#fff}.safe-mode .telegram-btn:hover{background:#333;color:#fff}#screamer-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:1500;justify-content:center;align-items:center}#screamer-modal img{width:100%;height:100%;object-fit:cover;animation:shake .1s infinite}@keyframes shake{0%{transform:translate(0,0)}25%{transform:translate(5px,-5px)}50%{transform:translate(-5px,5px)}75%{transform:translate(5px,5px)}100%{transform:translate(-5px,-5px)}}@media (max-width:768px){#disclaimer h2{font-size:1.8rem}#disclaimer p{font-size:.9rem}#disclaimer button{font-size:.9rem;padding:.5rem 1rem}#disclaimer img{width:150px}.epilepsy-mode header img{width:180px}.epilepsy-mode nav{flex-direction:column;gap:1rem}.epilepsy-mode nav a{font-size:1rem}.products,.cart{grid-template-columns:1fr;padding:1.5rem}.modal-content{width:95%;padding:1rem}.epilepsy-mode .modal-content h3{font-size:1.5rem}.modal-content p{font-size:.8rem}.epilepsy-mode .product-card h3,.epilepsy-mode .cart-item h3{font-size:1.4rem}.product-card p,.cart-item p{font-size:.9rem}.cart-total{font-size:1.4rem}.checkout-btn{font-size:1rem;padding:.6rem 1.5rem}.remove-btn{font-size:.8rem;padding:.4rem .8rem}.telegram-btn{font-size:.9rem;padding:.5rem 1rem}.epilepsy-mode footer p{font-size:.9rem}.epilepsy-mode footer p.warning{font-size:1rem}.epilepsy-mode .section h2{font-size:1.8rem}.epilepsy-mode .section p{font-size:1rem}.epilepsy-mode .section img{max-height:350px}}@media (max-width:480px){#disclaimer h2{font-size:1.5rem}#disclaimer p{font-size:.8rem}#disclaimer button{font-size:.8rem;padding:.4rem .8rem}#disclaimer img{width:120px}.epilepsy-mode header img{width:150px}.epilepsy-mode nav a{font-size:.9rem}.modal-content{max-width:90%}.epilepsy-mode .section h2{font-size:1.5rem}.epilepsy-mode .section p{font-size:.9rem}.epilepsy-mode .section img{max-height:300px}}</style>
 </head>
 <body>
-  <div id="disclaimer">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ZAEBIZ®",
+      "url": "zaebizwear.github.io",
+      "logo": "zbs.svg",
+      "description": "ZAEBIZ® — бренд русской уличной моды из Камень-на-Оби, основанный в 2025 году. Дерзкие футболки и кепки для тех, кто живёт по своим правилам.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "url": "https://t.me/ZAEBIZRUSSIANBRANDBOT"
+      },
+      "sameAs": ["https://t.me/ZAEBIZRUSSIANBRANDBOT"]
+    }
+  </script>
+  <div id="disclaimer" role="dialog" aria-label="Предупреждение об эпилепсии">
     <div>
-      <img src="https://static.wikia.nocookie.net/zaebiz/images/a/a9/Zbs.svg/revision/latest?cb=20250614075326&format=original&path-prefix=ru" alt="ZAEBIZ® Logo">
-      <h2>эпилепсия?</h2>
+      <img src="zbs.svg" alt="ZAEBIZ® Логотип">
+      <h2>Фоточувствительная эпилепсия?</h2>
       <p>Наш сайт использует яркие анимации и неоновые эффекты, которые могут быть опасны для людей с фоточувствительной эпилепсией.</p>
-      <button onclick="setMode('safe')">Безопасный режим</button>
-      <button onclick="setMode('epilepsy')">Полный режим</button>
+      <button onclick="setMode('safe')" aria-label="Включить безопасный режим">Безопасный режим</button>
+      <button onclick="setMode('epilepsy')" aria-label="Включить полный режим">Полный режим</button>
     </div>
   </div>
-  <header>
-    <img src="https://static.wikia.nocookie.net/zaebiz/images/a/a9/Zbs.svg/revision/latest?cb=20250614075326&format=original&path-prefix=ru" alt="ZAEBIZ® Logo">
+  <header role="banner">
+    <h1 style="display:none;">ZAEBIZ® - Русский Стритвир</h1>
+    <img src="zbs.svg" alt="ZAEBIZ® Логотип">
   </header>
-  <nav>
-    <a href="#home" onclick="showSection('home')">Главная</a>
-    <a href="#products" onclick="showSection('products')">Коллекция</a>
-    <a href="#cart" onclick="showSection('cart')">Корзина</a>
-    <a href="#contact" onclick="showSection('contact')">Контакты</a>
+  <nav role="navigation" aria-label="Главное меню">
+    <a href="#home" onclick="showSection('home')" aria-label="Перейти на главную страницу">Главная</a>
+    <a href="#products" onclick="showSection('products')" aria-label="Перейти к коллекции">Коллекция</a>
+    <a href="#cart" onclick="showSection('cart')" aria-label="Перейти к корзине">Корзина</a>
+    <a href="#contact" onclick="showSection('contact')" aria-label="Перейти к контактам">Контакты</a>
   </nav>
-  <section class="section active" id="home">
-    <img src="https://static.wikia.nocookie.net/zaebiz/images/0/02/Penis.png/revision/latest?cb=20250614073731&format=original&path-prefix=ru" alt="ZAEBIZ® История">
-    <p>ZAEBIZ® — бренд уличной одежды, основанный в 2025 году в городе Камень-на-Оби. Мы создаём одежду для тех, кто живёт по своим правилам. Наши коллекции — это отражение русской улицы: дерзость, сила, независимость. Каждый элемент — от принта до строчки — несёт дух свободы и протеста против обыденности.</p>
-  </section>
-  <section class="products" id="products">
-    <div class="product-card" onclick="openModal('uyobishe')">
-      <img src="https://static.wikia.nocookie.net/zaebiz/images/2/2c/Tishkauyobishe.webp/revision/latest?cb=20250614071050&format=original&path-prefix=ru" alt="Футболка UYOBISHE">
-      <h3>Футболка «UYOBISHE»</h3>
-      <p>4 399 ₽</p>
+  <main>
+    <section class="section active" id="home" aria-labelledby="home-heading">
+      <h2 id="home-heading">ZAEBIZ® - Дерзкий стритвир</h2>
+      <img src="Penis.webp" alt="ZAEBIZ® История уличной моды" loading="lazy">
+      <p>ZAEBIZ® — бренд уличной одежды, основанный в 2025 году в городе Камень-на-Оби. Мы создаём дерзкие футболки и кепки для тех, кто живёт по своим правилам. Наши коллекции — это отражение русской улицы: сила, независимость, протест против обыденности. Каждый принт и строчка воплощают дух свободы.</p>
+    </section>
+    <section class="products" id="products" aria-labelledby="products-heading">
+      <h2 id="products-heading" style="display:none;">Коллекция ZAEBIZ®</h2>
+      <div class="product-card" onclick="openModal('uyobishe')" aria-label="Футболка UYOBISHE">
+        <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Футболка UYOBISHE",
+            "image": "dasd.webp",
+            "description": "Дерзкая футболка UYOBISHE от ZAEBIZ® с прямой печатью и эффектом состаривания. 100% хлопок, плотность 300 г/м².",
+            "brand": {"@type": "Brand", "name": "ZAEBIZ®"},
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "RUB",
+              "price": 4399,
+              "availability": "https://schema.org/InStock"
+            }
+          }
+        </script>
+        <img src="dasd.webp" alt="Футболка UYOBISHE с дерзким принтом" loading="lazy">
+        <h3>Футболка «UYOBISHE»</h3>
+        <p>4 399 ₽</p>
+      </div>
+      <div class="product-card" onclick="openModal('penis-cap')" aria-label="Кепка #PENIS">
+        <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Кепка #PENIS",
+            "image": "Kepa.webp",
+            "description": "Кепка #PENIS от ZAEBIZ® с объёмной вышивкой. 100% хлопок, регулируемый размер.",
+            "brand": {"@type": "Brand", "name": "ZAEBIZ®"},
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "RUB",
+              "price": 2999,
+              "availability": "https://schema.org/InStock"
+            }
+          }
+        </script>
+        <img src="Kepa.webp" alt="Кепка #PENIS с вышивкой" loading="lazy">
+        <h3>Кепка «#PENIS»</h3>
+        <p>2 999 ₽</p>
+      </div>
+      <div class="product-card" onclick="openModal('rossiya')" aria-label="Футболка ROSSIYA">
+        <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Футболка ROSSIYA",
+            "image": "rus.webp",
+            "description": "Футболка ROSSIYA от ZAEBIZ® с патриотичным принтом. 100% хлопок, плотность 300 г/м².",
+            "brand": {"@type": "Brand", "name": "ZAEBIZ®"},
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "RUB",
+              "price": 9999,
+              "availability": "https://schema.org/InStock"
+            }
+          }
+        </script>
+        <img src="rus.webp" alt="Футболка ROSSIYA с патриотичным дизайном" loading="lazy">
+        <h3>Футболка «ROSSIYA»</h3>
+        <p>9 999 ₽</p>
+      </div>
+      <div class="product-card" onclick="openModal('doyar-ochka')" aria-label="Футболка DOYAR OCHKA">
+        <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Футболка DOYAR OCHKA",
+            "image": "Nastasyushka.webp",
+            "description": "Эксклюзивная футболка DOYAR OCHKA от ZAEBIZ® с уникальным принтом. 100% хлопок, плотность 300 г/м².",
+            "brand": {"@type": "Brand", "name": "ZAEBIZ®"},
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "RUB",
+              "price": 14999,
+              "availability": "https://schema.org/InStock"
+            }
+          }
+        </script>
+        <img src="Nastasyushka.webp" alt="Футболка DOYAR OCHKA с эксклюзивным принтом" loading="lazy">
+        <h3>Футболка «DOYAR OCHKA»</h3>
+        <p>14 999 ₽</p>
+      </div>
+    </section>
+    <section class="cart" id="cart" aria-labelledby="cart-heading">
+      <h2 id="cart-heading" style="display:none;">Корзина</h2>
+      <div id="cart-items"></div>
+      <p id="cart-total" class="cart-total">Итого: 0 ₽</p>
+      <div class="cart-options">
+        <label for="payment-method">Способ оплаты:</label>
+        <select id="payment-method" aria-label="Выберите способ оплаты">
+          <option value="card">Банковская карта</option>
+          <option value="pdorpay">PdorPay</option>
+          <option value="pivkoff">Пивкофф</option>
+          <option value="spb">СПБ</option>
+          <option value="dolkami">Дольками</option>
+        </select>
+        <label for="delivery-address">Адрес доставки:</label>
+        <input type="text" id="delivery-address" placeholder="Введите адрес" aria-label="Введите адрес доставки">
+      </div>
+      <button class="checkout-btn" onclick="openCheckoutModal()" aria-label="Оформить заказ">Оформить заказ</button>
+    </section>
+    <section class="section" id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Контакты ZAEBIZ®</h2>
+      <p>Мы открыты для общения и идей. Связывайтесь через Telegram и предлагайте свои концепции для русского стритвира.</p>
+      <a href="https://t.me/ZAEBIZRUSSIANBRANDBOT" class="telegram-btn" target="_blank" rel="noopener" aria-label="Написать в Telegram">Написать в Telegram</a>
+    </section>
+    <div id="uyobishe" class="modal" role="dialog" aria-label="Футболка UYOBISHE">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('uyobishe')" aria-label="Закрыть">×</span>
+        <img src="dasd.webp" alt="Футболка UYOBISHE с дерзким принтом" loading="lazy">
+        <h3>Футболка «UYOBISHE»</h3>
+        <p>4 399 ₽</p>
+        <p>Дерзкая футболка UYOBISHE для уличного вайба</p>
+        <p>Стандартный крой</p>
+        <p>Состав: 100% хлопок</p>
+        <p>Плотность: 300 г/м²</p>
+        <p>Рисунок: Прямая печать на груди и спине</p>
+        <p>Эффект состаривания</p>
+        <p>Рекомендация по уходу: стирать при 30°C, вывернув наизнанку</p>
+        <p class="warning" style="color:#ff0000;text-shadow:0 0 8px #ff0000;">При производстве пострадало 19 человек, 2 погибло.</p>
+        <p>Трек-номер придёт после оформления.</p>
+        <select id="size-uyobishe" aria-label="Выберите размер футболки UYOBISHE">
+          <option value="S">СКЕЛЕТ [S]</option>
+          <option value="M">НЕЖИР [M]</option>
+          <option value="L">ЧУТЬЖИР [L]</option>
+          <option value="XL">ЖИР [XL]</option>
+          <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+          <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
+        </select>
+        <button onclick="addToCart('Футболка «UYOBISHE»', 4399, 'uyobishe', 'dasd.webp')" aria-label="Добавить футболку UYOBISHE в корзину">В корзину</button>
+      </div>
     </div>
-    <div class="product-card" onclick="openModal('penis-cap')">
-      <img src="https://static.wikia.nocookie.net/zaebiz/images/5/5c/Kepa.jpg/revision/latest?cb=20250614073929&format=original&path-prefix=ru" alt="Кепка #PENIS">
-      <h3>Кепка «#PENIS»</h3>
-      <p>2 999 ₽</p>
+    <div id="penis-cap" class="modal" role="dialog" aria-label="Кепка #PENIS">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('penis-cap')" aria-label="Закрыть">×</span>
+        <img src="Kepa.webp" alt="Кепка #PENIS с вышивкой" loading="lazy">
+        <h3>Кепка «#PENIS»</h3>
+        <p>2 999 ₽</p>
+        <p>Кепка с провокационной вышивкой для смелых</p>
+        <p>Состав: 100% хлопок</p>
+        <p>Объёмная вышивка «#ПЕНИС» спереди</p>
+        <p>Регулируемый размер, металлическая застёжка</p>
+        <p>Надпись внутри: «КАМЕНЬ НА ОБИ 2025»</p>
+        <p class="warning" style="color:#ff0000;text-shadow:0 0 8px #ff0000;">При производстве пострадало 12 человек, 1 погиб.</p>
+        <p>Трек-номер придёт после оформления.</p>
+        <select id="size-penis-cap" aria-label="Выберите размер кепки #PENIS">
+          <option value="One Size">Один размер</option>
+        </select>
+        <button onclick="addToCart('Кепка «#PENIS»', 2999, 'penis-cap', 'Kepa.webp')" aria-label="Добавить кепку #PENIS в корзину">В корзину</button>
+      </div>
     </div>
-    <div class="product-card" onclick="openModal('rossiya')">
-      <img src="https://static.wikia.nocookie.net/zaebiz/images/3/3b/Россия.webp/revision/latest?cb=20250614080509&format=original&path-prefix=ru" alt="Футболка ROSSIYA">
-      <h3>Футболка «ROSSIYA»</h3>
-      <p>9 999 ₽</p>
+    <div id="rossiya" class="modal" role="dialog" aria-label="Футболка ROSSIYA">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('rossiya')" aria-label="Закрыть">×</span>
+        <img src="rus.webp" alt="Футболка ROSSIYA с патриотичным дизайном" loading="lazy">
+        <h3>Футболка «ROSSIYA»</h3>
+        <p>9 999 ₽</p>
+        <p>Футболка ROSSIYA для тех, кто гордится корнями</p>
+        <p>Стандартный крой</p>
+        <p>Состав: 100% хлопок</p>
+        <p>Плотность: 300 г/м²</p>
+        <p>Рисунок: Прямая печать на груди и спине</p>
+        <p>Эффект состаривания</p>
+        <p>Рекомендация по уходу: стирать при 30°C, вывернув наизнанку</p>
+        <p class="warning" style="color:#ff0000;text-shadow:0 0 8px #ff0000;">При производстве пострадало 25 человек, 3 погибло.</p>
+        <p>Трек-номер придёт после оформления.</p>
+        <select id="size-rossiya" aria-label="Выберите размер футболки ROSSIYA">
+          <option value="S">СКЕЛЕТ [S]</option>
+          <option value="M">НЕЖИР [M]</option>
+          <option value="L">ЧУТЬЖИР [L]</option>
+          <option value="XL">ЖИР [XL]</option>
+          <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+          <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
+        </select>
+        <button onclick="addToCart('Футболка «ROSSIYA»', 9999, 'rossiya', 'rus.webp')" aria-label="Добавить футболку ROSSIYA в корзину">В корзину</button>
+      </div>
     </div>
-    <div class="product-card" onclick="openModal('doyar-ochka')">
-      <img src="https://static.wikia.nocookie.net/zaebiz/images/a/a2/Nastasyushka.webp/revision/latest?cb=20250614083305&format=original&path-prefix=ru" alt="Футболка DOYAR OCHKA">
-      <h3>Футболка «DOYAR OCHKA»</h3>
-      <p>14 999 ₽</p>
+    <div id="doyar-ochka" class="modal" role="dialog" aria-label="Футболка DOYAR OCHKA">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('doyar-ochka')" aria-label="Закрыть">×</span>
+        <img src="Nastasyushka.webp" alt="Футболка DOYAR OCHKA с эксклюзивным принтом" loading="lazy">
+        <h3>Футболка «DOYAR OCHKA»</h3>
+        <p>14 999 ₽</p>
+        <p>Эксклюзивная футболка DOYAR OCHKA для истинных ценителей</p>
+        <p>Стандартный крой</p>
+        <p>Состав: 100% хлопок</p>
+        <p>Плотность: 300 г/м²</p>
+        <p>Рисунок: Прямая печать на груди и спине</p>
+        <p>Эффект состаривания</p>
+        <p>Рекомендация по уходу: стирать при 30°C, вывернув наизнанку</p>
+        <p class="warning" style="color:#ff0000;text-shadow:0 0 8px #ff0000;">При производстве пострадало 30 человек, 5 погибло.</p>
+        <p>Трек-номер придёт после оформления.</p>
+        <select id="size-doyar-ochka" aria-label="Выберите размер футболки DOYAR OCHKA">
+          <option value="S">СКЕЛЕТ [S]</option>
+          <option value="M">НЕЖИР [M]</option>
+          <option value="L">ЧУТЬЖИР [L]</option>
+          <option value="XL">ЖИР [XL]</option>
+          <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+          <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
+        </select>
+        <button onclick="addToCart('Футболка «DOYAR OCHKA»', 14999, 'doyar-ochka', 'Nastasyushka.webp')" aria-label="Добавить футболку DOYAR OCHKA в корзину">В корзину</button>
+      </div>
     </div>
-  </section>
-  <section class="cart" id="cart">
-    <div id="cart-items"></div>
-    <p id="cart-total" class="cart-total">Итого: 0 ₽</p>
-    <div class="cart-options">
-      <label for="payment-method">Способ оплаты:</label>
-      <select id="payment-method">
-        <option value="card">Банковская карта</option>
-        <option value="pdorpay">PdorPay</option>
-        <option value="pivkoff">Пивкофф</option>
-        <option value="spb">СПБ</option>
-        <option value="dolkami">Дольками</option>
-      </select>
-      <label for="delivery-address">Адрес доставки:</label>
-      <input type="text" id="delivery-address" placeholder="Введите адрес">
+    <div id="screamer-modal" class="modal" role="dialog" aria-hidden="true">
+      <img src="https://c.tenor.com/dTEh3SkNUowAAAAd/tenor.gif" alt="Анимация" loading="lazy">
     </div>
-    <button class="checkout-btn" onclick="openCheckoutModal()">Оформить заказ</button>
-  </section>
-  <section class="section" id="contact">
-    <h2>Контакты</h2>
-    <p>Мы открыты для общения и идей. Связывайтесь через Telegram и предлагайте свои концепции.</p>
-    <a href="https://t.me/ZAEBIZRUSSIANBRANDBOT" class="telegram-btn" target="_blank">Написать в Telegram</a>
-  </section>
-  <div id="uyobishe" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('uyobishe')">×</span>
-      <img src="https://static.wikia.nocookie.net/zaebiz/images/2/2c/Tishkauyobishe.webp/revision/latest?cb=20250614071050&format=original&path-prefix=ru" alt="Футболка UYOBISHE">
-      <h3>Футболка «UYOBISHE»</h3>
-      <p>4 399 ₽</p>
-      <p>Стандартный крой</p>
-      <p>Состав: 100% хлопок</p>
-      <p>Плотность: 300 г/м²</p>
-      <p>Рисунок: Прямая печать на груди и спине</p>
-      <p>Эффект состаривания</p>
-      <p>Рекомендация по уходу: стирать при 30°C, вывернув наизнанку</p>
-      <p class="warning" style="color: #ff0000; text-shadow: 0 0 8px #ff0000;">При производстве пострадало 19 человек, 2 погибло.</p>
-      <p>Трек-номер придёт после оформления.</p>
-      <select id="size-uyobishe">
-        <option value="S">СКЕЛЕТ [S]</option>
-        <option value="M">НЕЖИР [M]</option>
-        <option value="L">ЧУТЬЖИР [L]</option>
-        <option value="XL">ЖИР [XL]</option>
-        <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
-		<option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
-      </select>
-      <button onclick="addToCart('Футболка «UYOBISHE»', 4399, 'uyobishe', 'https://static.wikia.nocookie.net/zaebiz/images/2/2c/Tishkauyobishe.webp/revision/latest?cb=20250614071050&format=original&path-prefix=ru')">В корзину</button>
+    <div id="checkout-modal" class="modal" role="dialog" aria-label="Уведомление о заказе">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('checkout-modal')" aria-label="Закрыть">×</span>
+        <h3>ZAEBIZ®</h3>
+        <p style="color:#ff00ff;text-shadow:0 0 8px #ff00ff;">Этот сайт — сатира на русский стритвир, заказ не настоящий, ничего не ждите.</p>
+      </div>
     </div>
-  </div>
-  <div id="penis-cap" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('penis-cap')">×</span>
-      <img src="https://static.wikia.nocookie.net/zaebiz/images/5/5c/Kepa.jpg/revision/latest?cb=20250614073929&format=original&path-prefix=ru" alt="Кепка #PENIS">
-      <h3>Кепка «#PENIS»</h3>
-      <p>2 999 ₽</p>
-      <p>Состав: 100% хлопок</p>
-      <p>Объёмная вышивка «#ПЕНИС» спереди</p>
-      <p>Регулируемый размер, металлическая застёжка</p>
-      <p>Надпись внутри: «КАМЕНЬ НА ОБИ 2025»</p>
-      <p class="warning" style="color: #ff0000; text-shadow: 0 0 8px #ff0000;">При производстве пострадало 12 человек, 1 погиб.</p>
-      <p>Трек-номер придёт после оформления.</p>
-      <select id="size-penis-cap">
-        <option value="One Size">Один размер</option>
-      </select>
-      <button onclick="addToCart('Кепка «#PENIS»', 2999, 'penis-cap', 'https://static.wikia.nocookie.net/zaebiz/images/5/5c/Kepa.jpg/revision/latest?cb=20250614073929&format=original&path-prefix=ru')">В корзину</button>
-    </div>
-  </div>
-  <div id="rossiya" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('rossiya')">×</span>
-      <img src="https://static.wikia.nocookie.net/zaebiz/images/3/3b/Россия.webp/revision/latest?cb=20250614080509&format=original&path-prefix=ru" alt="Футболка ROSSIYA">
-      <h3>Футболка «ROSSIYA»</h3>
-      <p>9 999 ₽</p>
-      <p>Стандартный крой</p>
-      <p>Состав: 100% хлопок</p>
-      <p>Плотность: 300 г/м²</p>
-      <p>Рисунок: Прямая печать на груди и спине</p>
-      <p>Эффект состаривания</p>
-      <p>Рекомендация по уходу: стирать при 30°C, вывернув наизнанку</p>
-      <p class="warning" style="color: #ff0000; text-shadow: 0 0 8px #ff0000;">При производстве пострадало 25 человек, 3 погибло.</p>
-      <p>Трек-номер придёт после оформления.</p>
-      <select id="size-rossiya">
-        <option value="S">СКЕЛЕТ [S]</option>
-        <option value="M">НЕЖИР [M]</option>
-        <option value="L">ЧУТЬЖИР [L]</option>
-        <option value="XL">ЖИР [XL]</option>
-        <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
-		<option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
-      </select>
-      <button onclick="addToCart('Футболка «ROSSIYA»', 9999, 'rossiya', 'https://static.wikia.nocookie.net/zaebiz/images/3/3b/Россия.webp/revision/latest?cb=20250614080509&format=original&path-prefix=ru')">В корзину</button>
-    </div>
-  </div>
-  <div id="doyar-ochka" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('doyar-ochka')">×</span>
-      <img src="https://static.wikia.nocookie.net/zaebiz/images/a/a2/Nastasyushka.webp/revision/latest?cb=20250614083305&format=original&path-prefix=ru" alt="Футболка DOYAR OCHKA">
-      <h3>Футболка «DOYAR OCHKA»</h3>
-      <p>14 999 ₽</p>
-      <p>Стандартный крой</p>
-      <p>Состав: 100% хлопок</p>
-      <p>Плотность: 300 г/м²</p>
-      <p>Рисунок: Прямая печать на груди и спине</p>
-      <p>Эффект состаривания</p>
-      <p>Рекомендация по уходу: стирать при 30°C, вывернув наизнанку</p>
-      <p class="warning" style="color: #ff0000; text-shadow: 0 0 8px #ff0000;">При производстве пострадало 30 человек, 5 погибло.</p>
-      <p>Трек-номер придёт после оформления.</p>
-      <select id="size-doyar-ochka">
-        <option value="S">СКЕЛЕТ [S]</option>
-        <option value="M">НЕЖИР [M]</option>
-        <option value="L">ЧУТЬЖИР [L]</option>
-        <option value="XL">ЖИР [XL]</option>
-        <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
-		<option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
-      </select>
-      <button onclick="addToCart('Футболка «DOYAR OCHKA»', 14999, 'doyar-ochka', 'https://static.wikia.nocookie.net/zaebiz/images/a/a2/Nastasyushka.webp/revision/latest?cb=20250614083305&format=original&path-prefix=ru')">В корзину</button>
-    </div>
-  </div>
-  <div id="screamer-modal" class="modal">
-    <img src="https://c.tenor.com/dTEh3SkNUowAAAAd/tenor.gif" alt="Screamer">
-  </div>
-  <div id="checkout-modal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal('checkout-modal')">×</span>
-      <h3>ZAEBIZ®</h3>
-      <p style="color: #ff00ff; text-shadow: 0 0 8px #ff00ff;">Этот сайт сатира на русский стритвир, заказ не настоящий, ничего не ждите.</p>
-    </div>
-  </div>
-  <audio id="screamer-audio" src="https://www.myinstants.com/media/sounds/aaaaaaa-skrimer.mp3"></audio>
-  <audio id="doyar-audio" src="https://www.myinstants.com/media/sounds/nastasiushka-doiarochka.mp3"></audio>
-  <footer>
+  </main>
+  <audio id="screamer-audio" src="https://www.myinstants.com/media/sounds/aaaaaaa-skrimer.mp3" preload="none"></audio>
+  <audio id="doyar-audio" src="https://www.myinstants.com/media/sounds/nastasiushka-doiarochka.mp3" preload="none"></audio>
+  <footer role="contentinfo">
     <p class="warning">Производство нашей одежды — это тяжёлый труд. 6 миллионов рабочих отдали всё ради бренда.</p>
     <p>ZAEBIZ® Камень-на-Оби</p>
     <p>© 2025 ZAEBIZ®. Все права защищены.</p>
   </footer>
-  <script>
-    let cart = [];
-    let isEpilepsyMode = false;
-
-    function setMode(mode) {
-      isEpilepsyMode = mode === 'epilepsy';
-      document.body.className = mode + '-mode';
-      const disclaimer = document.getElementById('disclaimer');
-      if (disclaimer) {
-        disclaimer.style.display = 'none';
-      }
-    }
-
-    function openModal(modalId) {
-      const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.style.display = 'flex';
-      }
-    }
-
-    function closeModal(modalId) {
-      const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.style.display = 'none';
-      }
-    }
-
-    function addToCart(name, price, modalId, image) {
-      const sizeSelect = document.getElementById(`size-${modalId}`);
-      if (!sizeSelect) {
-        console.error(`Size select element not found for modalId: ${modalId}`);
-        return;
-      }
-      const size = sizeSelect.value;
-      cart.push({ name, price, size, image });
-      updateCart();
-      closeModal(modalId);
-      if (name === 'Футболка «DOYAR OCHKA»') {
-        const doyarAudio = document.getElementById('doyar-audio');
-        if (doyarAudio) {
-          doyarAudio.volume = 1.0;
-          doyarAudio.play().catch(error => console.error('Doyar audio playback failed:', error));
-        }
-      }
-      alert(`Добавлено в корзину: ${name}, Размер: ${size}, Цена: ${price} ₽`);
-    }
-
-    function removeFromCart(index) {
-      if (index >= 0 && index < cart.length) {
-        const item = cart[index];
-        cart.splice(index, 1);
-        updateCart();
-        alert(`Удалено из корзины: ${item.name}`);
-      }
-    }
-
-    function updateCart() {
-      const cartItems = document.getElementById('cart-items');
-      const cartTotal = document.getElementById('cart-total');
-      if (!cartItems || !cartTotal) {
-        console.error('Cart elements not found');
-        return;
-      }
-      cartItems.innerHTML = '';
-      let total = 0;
-
-      cart.forEach((item, index) => {
-        const cartItem = document.createElement('div');
-        cartItem.className = 'cart-item';
-        cartItem.innerHTML = `
-          <img src="${item.image}" alt="${item.name}">
-          <h3>${item.name}</h3>
-          <p>Размер: ${item.size}</p>
-          <p>${item.price} ₽</p>
-          <button class="remove-btn" onclick="removeFromCart(${index})">Удалить</button>
-        `;
-        cartItems.appendChild(cartItem);
-        total += item.price;
-      });
-
-      cartTotal.textContent = `Итого: ${total} ₽`;
-    }
-
-    function openCheckoutModal() {
-      if (cart.length === 0) {
-        alert('Корзина пуста!');
-        return;
-      }
-      const paymentMethod = document.getElementById('payment-method');
-      const deliveryAddress = document.getElementById('delivery-address');
-      if (!paymentMethod || !deliveryAddress) {
-        console.error('Payment method or delivery address elements not found');
-        return;
-      }
-      if (!deliveryAddress.value.trim()) {
-        alert('Укажите адрес доставки!');
-        return;
-      }
-      if (isEpilepsyMode) {
-        const screamerModal = document.getElementById('screamer-modal');
-        const screamerAudio = document.getElementById('screamer-audio');
-        if (screamerModal && screamerAudio) {
-          screamerModal.style.display = 'flex';
-          screamerAudio.currentTime = 1;
-          screamerAudio.volume = 1.0;
-          screamerAudio.play().catch(error => console.error('Audio playback failed:', error));
-          setTimeout(() => {
-            screamerModal.style.display = 'none';
-            screamerAudio.pause();
-            screamerAudio.currentTime = 0;
-            openModal('checkout-modal');
-          }, 5000);
-        }
-      } else {
-        openModal('checkout-modal');
-      }
-    }
-
-    function showSection(sectionId) {
-      const sections = document.querySelectorAll('section');
-      sections.forEach(section => {
-        section.classList.remove('active');
-      });
-      const targetSection = document.getElementById(sectionId);
-      if (targetSection) {
-        targetSection.classList.add('active');
-      }
-    }
-
-    window.onclick = function(event) {
-      const modals = document.getElementsByClassName('modal');
-      for (let modal of modals) {
-        if (event.target === modal) {
-          modal.style.display = 'none';
-        }
-      }
-    }
-
-    showSection('home');
-  </script>
+  <script>var gk_isXlsx=false,gk_xlsxFileLookup={},gk_fileData={};function filledCell(e){return""!==e&&null!=e}function loadFileData(e){if(gk_isXlsx&&gk_xlsxFileLookup[e])try{var t=XLSX.read(gk_fileData[e],{type:"base64"}),a=t.SheetNames[0],i=t.Sheets[a],r=XLSX.utils.sheet_to_json(i,{header:1,blankrows:!1,defval:""}),n=r.filter((e=>e.some(filledCell))),o=n.findIndex(((e,t)=>e.filter(filledCell).length>=n[t+1]?.filter(filledCell).length));return(-1===o||o>25)&&(o=0),r=XLSX.utils.aoa_to_sheet(n.slice(o)),r=XLSX.utils.sheet_to_csv(r,{header:1})}catch(e){return console.error(e),""}return gk_fileData[e]||""}</script>
+  <script>let cart=[],isEpilepsyMode=!1;function setMode(e){isEpilepsyMode="epilepsy"===e,document.body.className=e+"-mode";const t=document.getElementById("disclaimer");t&&(t.style.display="none")}function openModal(e){const t=document.getElementById(e);t&&(t.style.display="flex")}function closeModal(e){const t=document.getElementById(e);t&&(t.style.display="none")}function addToCart(e,t,a,i){const r=document.getElementById(`size-${a}`);if(!r)return void console.error(`Size select element not found for modalId: ${a}`);const n=r.value;cart.push({name:e,price:t,size:n,image:i}),updateCart(),closeModal(a),"Футболка «DOYAR OCHKA»"===e&&((e=document.getElementById("doyar-audio"))&&(e.volume=1,e.play().catch((e=>console.error("Doyar audio playback failed:",e))))),alert(`Добавлено в корзину: ${e}, Размер: ${n}, Цена: ${t} ₽`)}function removeFromCart(e){if(e>=0&&e<cart.length){const t=cart[e];cart.splice(e,1),updateCart(),alert(`Удалено из корзины: ${t.name}`)}}function updateCart(){const e=document.getElementById("cart-items"),t=document.getElementById("cart-total");if(!e||!t)return void console.error("Cart elements not found");e.innerHTML="";let a=0;cart.forEach(((t,i)=>{const r=document.createElement("div");r.className="cart-item",r.innerHTML=`<img src="${t.image}" alt="${t.name}" loading="lazy"><h3>${t.name}</h3><p>Размер: ${t.size}</p><p>${t.price} ₽</p><button class="remove-btn" onclick="removeFromCart(${i})" aria-label="Удалить ${t.name} из корзины">Удалить</button>`,e.appendChild(r),a+=t.price})),t.textContent=`Итого: ${a} ₽`}function openCheckoutModal(){if(0===cart.length)return void alert("Корзина пуста!");const e=document.getElementById("payment-method"),t=document.getElementById("delivery-address");if(!e||!t)return void console.error("Payment method or delivery address elements not found");if(!t.value.trim())return void alert("Укажите адрес доставки!");if(isEpilepsyMode){const e=document.getElementById("screamer-modal"),t=document.getElementById("screamer-audio");e&&t&&(e.style.display="flex",t.currentTime=1,t.volume=1,t.play().catch((e=>console.error("Audio playback failed:",e))),setTimeout((()=>{e.style.display="none",t.pause(),t.currentTime=0,openModal("checkout-modal")}),5e3))}else openModal("checkout-modal")}function showSection(e){document.querySelectorAll("section").forEach((e=>e.classList.remove("active")));const t=document.getElementById(e);t&&t.classList.add("active")}window.onclick=function(e){for(let t of document.getElementsByClassName("modal"))e.target===t&&(t.style.display="none")},showSection("home");</script>
 </body>
 </html>
