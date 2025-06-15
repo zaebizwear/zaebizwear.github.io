@@ -1,48 +1,10 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 - АБСОЛЮТНЫЙ КОШМАР</title>
+  <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -63,12 +25,13 @@
       align-items: center;
       min-height: 100vh;
       overflow: hidden;
-      font-family: 'Comic Sans MS', 'Arial Black', sans-serif;
+      font-family: 'Neucha', 'Arial Black', sans-serif;
       perspective: 1000px;
       animation: 
-        bg-flash 0.05s infinite,
-        body-shake 0.1s infinite,
+        bg-flash 1s infinite,
+        body-shake 0.2s infinite,
         rotate 10s linear infinite;
+      will-change: transform, background;
     }
 
     .container {
@@ -77,50 +40,53 @@
       text-align: center;
       padding: 50px;
       animation: 
-        jump 0.3s infinite alternate,
-        stretch 0.2s infinite alternate,
+        jump 0.6s infinite alternate,
+        stretch 0.4s infinite alternate,
         rotate 5s linear infinite reverse;
       transform-origin: center;
       mix-blend-mode: difference;
+      will-change: transform;
     }
 
     .logo404 {
       font-size: 180px;
       font-weight: 900;
-      background: linear-gradient(45deg, #ff0000, #ff00ff, #00ffff, #00ff00, #ffff00, #ff0000);
+      background: linear-gradient(45deg, #660000, #660066, #006666, #006600, #666600, #660000);
       background-size: 1000% 1000%;
       color: transparent;
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: 
-        shine 0.2s linear infinite, 
-        shake 0.02s linear infinite,
-        pulse 0.1s infinite alternate;
+        shine 0.4s linear infinite, 
+        shake 0.04s linear infinite,
+        pulse 0.2s infinite alternate;
       text-shadow: 
-        0 0 20px #fff,
-        0 0 40px #ff00ff,
-        0 0 80px #00ffff;
+        0 0 10px #666,
+        0 0 20px #660066,
+        0 0 40px #006666;
       margin: 20px 0;
       letter-spacing: 15px;
       transform: skew(20deg, -10deg) rotate(10deg);
       font-family: 'Arial Black', sans-serif;
       cursor: pointer;
+      will-change: transform, filter, text-shadow;
     }
 
     .message {
-      color: #00ffff;
+      color: #006666;
       font-size: 48px;
       margin-bottom: 40px;
       animation: 
-        color-change 0.2s infinite,
-        distort 0.1s infinite alternate;
+        color-change 0.4s infinite,
+        distort 0.2s infinite alternate;
       text-shadow: 
-        0 0 15px #00ffff,
-        0 0 30px #ff00ff;
+        0 0 8px #006666,
+        0 0 15px #660066;
       letter-spacing: 8px;
       font-weight: bold;
       transform: scale(1.5) rotate(-5deg);
+      will-change: transform, color, text-shadow;
     }
 
     .overlay {
@@ -130,26 +96,14 @@
       width: 100%;
       height: 100%;
       background: 
-        repeating-linear-gradient(45deg, rgba(255, 0, 255, 0.5), rgba(255, 0, 255, 0.5) 10px, transparent 10px, transparent 20px),
-        repeating-linear-gradient(-45deg, rgba(0, 255, 255, 0.5), rgba(0, 255, 255, 0.5) 10px, transparent 10px, transparent 20px);
+        repeating-linear-gradient(45deg, rgba(102, 0, 102, 0.2), rgba(102, 0, 102, 0.2) 10px, transparent 10px, transparent 20px),
+        repeating-linear-gradient(-45deg, rgba(0, 102, 102, 0.2), rgba(0, 102, 102, 0.2) 10px, transparent 10px, transparent 20px);
       animation: 
-        scan 0.1s linear infinite,
+        scan 0.2s linear infinite,
         rotate 20s linear infinite reverse;
       pointer-events: none;
       z-index: 1;
-    }
-
-    .flashes {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(255, 0, 255, 0.9);
-      animation: flash 0.05s infinite;
-      opacity: 0;
-      pointer-events: none;
-      z-index: 5;
+      will-change: background-position;
     }
 
     .pug {
@@ -157,17 +111,16 @@
       z-index: 100;
       animation: 
         pug-jump 1s infinite alternate, 
-        pug-stretch 0.3s infinite alternate,
+        pug-stretch 0.6s infinite alternate,
         pug-spin 2s linear infinite;
       filter: 
-        hue-rotate(0deg) 
-        brightness(200%) 
-        saturate(300%)
-        drop-shadow(0 0 10px #ff00ff)
-        drop-shadow(0 0 20px #00ffff);
+        brightness(120%) 
+        saturate(150%)
+        drop-shadow(0 0 5px #660066);
       max-width: 300px;
       pointer-events: none;
       transform: scale(1);
+      will-change: transform, filter;
     }
 
     .logo {
@@ -177,38 +130,38 @@
       width: 150px;
       z-index: 1000;
       filter: 
-        drop-shadow(0 0 10px #ff00ff)
-        drop-shadow(0 0 20px #00ffff);
+        drop-shadow(0 0 5px #660066);
       animation: 
         float 1s infinite alternate,
         rotate 5s linear infinite;
+      will-change: transform, filter;
     }
 
     @keyframes bg-flash {
-      0% { background: #ff00ff; }
-      10% { background: #00ffff; }
-      20% { background: #ffff00; }
-      30% { background: #ff0000; }
-      40% { background: #00ff00; }
-      50% { background: #0000ff; }
-      60% { background: #ff9900; }
-      70% { background: #ff00cc; }
-      80% { background: #00ffcc; }
-      90% { background: #cc00ff; }
-      100% { background: #ff00ff; }
+      0% { background: #660066; }
+      10% { background: #006666; }
+      20% { background: #666600; }
+      30% { background: #660000; }
+      40% { background: #006600; }
+      50% { background: #000066; }
+      60% { background: #664d00; }
+      70% { background: #660059; }
+      80% { background: #006659; }
+      90% { background: #590066; }
+      100% { background: #660066; }
     }
 
     @keyframes body-shake {
       0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      10% { transform: translate(-30px, -30px) rotate(-10deg); }
-      20% { transform: translate(30px, 30px) rotate(10deg); }
-      30% { transform: translate(-40px, 40px) rotate(-20deg); }
-      40% { transform: translate(40px, -40px) rotate(20deg); }
-      50% { transform: translate(-50px, 50px) rotate(-30deg); }
-      60% { transform: translate(50px, -50px) rotate(30deg); }
-      70% { transform: translate(-40px, 40px) rotate(-20deg); }
-      80% { transform: translate(40px, -40px) rotate(20deg); }
-      90% { transform: translate(-30px, 30px) rotate(-10deg); }
+      10% { transform: translate(-15px, -15px) rotate(-5deg); }
+      20% { transform: translate(15px, 15px) rotate(5deg); }
+      30% { transform: translate(-20px, 20px) rotate(-10deg); }
+      40% { transform: translate(20px, -20px) rotate(10deg); }
+      50% { transform: translate(-25px, 25px) rotate(-15deg); }
+      60% { transform: translate(25px, -25px) rotate(15deg); }
+      70% { transform: translate(-20px, 20px) rotate(-10deg); }
+      80% { transform: translate(20px, -20px) rotate(10deg); }
+      90% { transform: translate(-15px, 15px) rotate(-5deg); }
     }
 
     @keyframes rotate {
@@ -223,46 +176,46 @@
 
     @keyframes shake {
       0%, 100% { transform: translate(0, 0); }
-      10% { transform: translate(-15px, -15px); }
-      20% { transform: translate(15px, 15px); }
-      30% { transform: translate(-20px, 20px); }
-      40% { transform: translate(20px, -20px); }
-      50% { transform: translate(-25px, 25px); }
-      60% { transform: translate(25px, -25px); }
-      70% { transform: translate(-20px, 20px); }
-      80% { transform: translate(20px, -20px); }
-      90% { transform: translate(-15px, 15px); }
+      10% { transform: translate(-7px, -7px); }
+      20% { transform: translate(7px, 7px); }
+      30% { transform: translate(-10px, 10px); }
+      40% { transform: translate(10px, -10px); }
+      50% { transform: translate(-12px, 12px); }
+      60% { transform: translate(12px, -12px); }
+      70% { transform: translate(-10px, 10px); }
+      80% { transform: translate(10px, -10px); }
+      90% { transform: translate(-7px, 7px); }
     }
 
     @keyframes jump {
       0% { transform: translateY(0); }
-      50% { transform: translateY(-100px); }
-      100% { transform: translateY(100px); }
+      50% { transform: translateY(-50px); }
+      100% { transform: translateY(50px); }
     }
 
     @keyframes stretch {
       0% { transform: scaleX(1) scaleY(1); }
-      50% { transform: scaleX(1.5) scaleY(0.5); }
-      100% { transform: scaleX(0.5) scaleY(1.5); }
+      50% { transform: scaleX(1.3) scaleY(0.7); }
+      100% { transform: scaleX(0.7) scaleY(1.3); }
     }
 
     @keyframes pulse {
       0% { transform: skew(20deg, -10deg) rotate(10deg) scale(1); }
-      50% { transform: skew(-20deg, 10deg) rotate(-10deg) scale(1.5); }
+      50% { transform: skew(-20deg, 10deg) rotate(-10deg) scale(1.3); }
       100% { transform: skew(20deg, -10deg) rotate(10deg) scale(1); }
     }
 
     @keyframes color-change {
-      0% { color: #ff00ff; }
-      25% { color: #00ffff; }
-      50% { color: #ffff00; }
-      75% { color: #ff0000; }
-      100% { color: #ff00ff; }
+      0% { color: #660066; }
+      25% { color: #006666; }
+      50% { color: #666600; }
+      75% { color: #660000; }
+      100% { color: #660066; }
     }
     
     @keyframes distort {
       0% { transform: scale(1.5) rotate(-5deg) skew(10deg); }
-      50% { transform: scale(2) rotate(5deg) skew(-20deg); }
+      50% { transform: scale(1.8) rotate(5deg) skew(-10deg); }
       100% { transform: scale(1.5) rotate(-5deg) skew(10deg); }
     }
 
@@ -276,22 +229,16 @@
       100% { background-position: 100px 100px; }
     }
 
-    @keyframes flash {
-      0% { opacity: 0; }
-      50% { opacity: 0.9; }
-      100% { opacity: 0; }
-    }
-    
     @keyframes pug-jump {
       0% { top: 100vh; transform: scale(1); }
-      50% { top: -100px; transform: scale(1.5); }
+      50% { top: -50px; transform: scale(1.3); }
       100% { top: 100vh; transform: scale(1); }
     }
     
     @keyframes pug-stretch {
       0% { transform: scaleX(1) scaleY(1); }
-      50% { transform: scaleX(1.8) scaleY(0.5); }
-      100% { transform: scaleX(0.5) scaleY(1.8); }
+      50% { transform: scaleX(1.3) scaleY(0.7); }
+      100% { transform: scaleX(0.7) scaleY(1.3); }
     }
     
     @keyframes pug-spin {
@@ -301,10 +248,10 @@
     
     @keyframes float {
       0% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-50px) rotate(180deg); }
+      50% { transform: translateY(-25px) rotate(180deg); }
       100% { transform: translateY(0) rotate(360deg); }
     }
-    
+
     @media (max-width: 768px) {
       .logo404 {
         font-size: 100px;
@@ -346,7 +293,6 @@
 </head>
 <body>
   <div class="overlay"></div>
-  <div class="flashes"></div>
   
   <img src="https://zaebizwear.com/zbs.svg" alt="ZAEBIZ" class="logo">
   
@@ -356,39 +302,36 @@
     <div class="message" id="message2">ПОЛНЫЙ АПОКАЛИПСИС!</div>
   </div>
   
-  <audio id="audio4041" loop>
+  <audio id="audio4041" loop preload="auto">
     <source src="4041.mp3" type="audio/mpeg">
   </audio>
-  <audio id="audio4042" loop>
+  <audio id="audio4042" loop preload="auto">
     <source src="4042.mp3" type="audio/mpeg">
   </audio>
-  <audio id="audio4043" loop>
+  <audio id="audio4043" loop preload="auto">
     <source src="4043.mp3" type="audio/mpeg">
   </audio>
   
   <script>
-    // Воспроизводим все звуки на максимальной громкости
+    // Воспроизводим все звуки с разной громкостью
     const audios = [
-      document.getElementById('audio4041'),
-      document.getElementById('audio4042'),
-      document.getElementById('audio4043')
+      { element: document.getElementById('audio4041'), volume: 1.0 },
+      { element: document.getElementById('audio4042'), volume: 0.1 },
+      { element: document.getElementById('audio4043'), volume: 0.1 }
     ];
     
-    audios.forEach(audio => {
-      audio.volume = 1.0; // Максимальная громкость
-      audio.play().catch(e => {
-        console.log("Автовоспроизведение заблокировано. Нажмите на страницу для воспроизведения.", e);
-      });
-    });
-
-    // Воспроизводим при клике на странице
-    document.body.addEventListener('click', () => {
+    function playAudios() {
       audios.forEach(audio => {
-        if (audio.paused) {
-          audio.play().catch(e => console.log("Ошибка воспроизведения:", e));
-        }
+        audio.element.volume = audio.volume;
+        audio.element.play().catch(e => console.log("Ошибка воспроизведения:", e));
       });
-    });
+    }
+
+    // Пытаемся запустить автопроигрывание
+    playAudios();
+
+    // Воспроизводим при клике
+    document.body.addEventListener('click', playAudios, { once: true });
 
     // Смена языка текста каждые 5 секунд
     const messages = [
@@ -418,59 +361,71 @@
     changeLanguage();
     setInterval(changeLanguage, 5000);
 
-    // Создаем прыгающих и растягивающихся мопсов
-    const pugGifs = [
-      'https://media.tenor.com/FAWWIa3_Ys0AAAAj/dog-dog-dance.gif'
-    ];
-    
+    // Управление мопсами
+    const pugGifs = ['https://media.tenor.com/FAWWIa3_Ys0AAAAj/dog-dog-dance.gif'];
+    const maxPugs = 50;
+    let activePugs = [];
+
     function createPug() {
+      if (activePugs.length >= maxPugs) {
+        const oldPug = activePugs.shift();
+        oldPug.remove();
+      }
+
       const pug = document.createElement('img');
       pug.className = 'pug';
-      pug.src = pugGifs[Math.floor(Math.random() * pugGifs.length)];
+      pug.src = pugGifs[0];
       
-      // Случайное положение
       const left = Math.random() * (window.innerWidth - 300);
       pug.style.left = `${left}px`;
-      
-      // Начинаем с нижней части экрана
       pug.style.top = `${window.innerHeight}px`;
       
-      // Случайный размер
       const size = 150 + Math.random() * 150;
       pug.style.width = `${size}px`;
       
-      // Случайная скорость анимации
       const duration = 1 + Math.random() * 2;
-      pug.style.animationDuration = `${duration}s, ${0.3 + Math.random() * 0.4}s, ${2 + Math.random() * 3}s`;
+      pug.style.animationDuration = `${duration}s, ${0.6 + Math.random() * 0.4}s, ${2 + Math.random() * 3}s`;
       
       document.body.appendChild(pug);
+      activePugs.push(pug);
       
-      // Удаляем мопса после завершения анимации
       setTimeout(() => {
-        pug.remove();
+        const index = activePugs.indexOf(pug);
+        if (index !== -1) {
+          activePugs.splice(index, 1);
+          pug.remove();
+        }
       }, duration * 2000);
     }
-    
-    // Создаем много мопсов
-    setInterval(createPug, 150);
     
     // Создаем начальных мопсов
     for (let i = 0; i < 30; i++) {
       setTimeout(createPug, i * 150);
     }
+    
+    setInterval(createPug, 150);
 
-    // Дополнительные хаотичные эффекты
-    setInterval(() => {
-      // Случайно меняем размер контейнера
+    // Хаотичные эффекты с дебаунсом
+    let lastUpdate = 0;
+    function chaoticEffects(timestamp) {
+      if (timestamp - lastUpdate < 200) {
+        requestAnimationFrame(chaoticEffects);
+        return;
+      }
+      
+      lastUpdate = timestamp;
+      
       const scaleX = 0.7 + Math.random() * 0.6;
       const scaleY = 0.7 + Math.random() * 0.6;
-      document.querySelector('.container').style.transform = `scale(${scaleX}, ${scaleY}) translateY(-100px) rotate(180deg)`;
+      document.querySelector('.container').style.transform = `scale(${scaleX}, ${scaleY}) translateY(-50px) rotate(180deg)`;
       
-      // Случайно меняем цвет текста
       const hue = Math.random() * 360;
-      document.querySelector('.logo404').style.filter = `hue-rotate(${hue}deg)`;
+      document.querySelector('.logo404').style.filter = `brightness(120%) saturate(150%) drop-shadow(0 0 5px #660066)`;
       
-    }, 100);
+      requestAnimationFrame(chaoticEffects);
+    }
+    
+    requestAnimationFrame(chaoticEffects);
   </script>
 </body>
 </html>
