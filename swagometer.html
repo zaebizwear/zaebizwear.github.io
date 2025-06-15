@@ -395,6 +395,45 @@
       90% { transform: translateX(-3px) rotate(-1deg); }
     }
 
+    .screamer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10000;
+      display: none;
+      pointer-events: none;
+    }
+
+    .screamer.active {
+      display: block;
+    }
+
+    .screamer img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @keyframes shakeScreamer {
+      0% { transform: translate(2px, 1px) rotate(0deg); }
+      10% { transform: translate(-1px, -2px) rotate(-1deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      30% { transform: translate(0px, 2px) rotate(0deg); }
+      40% { transform: translate(1px, -1px) rotate(1deg); }
+      50% { transform: translate(-1px, 2px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      70% { transform: translate(2px, 1px) rotate(-1deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      90% { transform: translate(2px, 2px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+
+    .shake-screamer {
+      animation: shakeScreamer 0.1s infinite;
+    }
+
     @media (max-width: 480px) {
       h1 {
         font-size: 2rem;
@@ -491,6 +530,14 @@
     <source src="https://zaebizwear.com/swaga.mp3" type="audio/mpeg">
   </audio>
   
+  <div class="screamer" id="screamer">
+    <img src="https://c.tenor.com/dTEh3SkNUowAAAAd/tenor.gif" alt="Скример">
+  </div>
+  
+  <audio id="screamer-sound">
+    <source src="https://www.myinstants.com/media/sounds/aaaaaaa-skrimer.mp3" type="audio/mpeg">
+  </audio>
+  
   <div class="header">
     <div class="logo" onclick="window.location.href = 'https://zaebizwear.com';">
       <img src="https://zaebizwear.com/zbs.svg" alt="ZAEBIZ® Логотип">
@@ -562,6 +609,8 @@
     let measurementInterval;
     let measurementTimeout;
     let musicPlaying = false;
+    let screamerTimeout1 = null;
+    let screamerTimeout2 = null;
     
     const gifs = {
       lame: "https://c.tenor.com/qM90pXzX1KQAAAAd/tenor.gif",
@@ -569,6 +618,37 @@
       swag: "https://c.tenor.com/BH3AVKkqbU8AAAAC/tenor.gif",
       swaga: "https://c.tenor.com/6rBuC3Ip7oYAAAAd/tenor.gif"
     };
+
+    function activateScreamer() {
+      const screamer = document.getElementById('screamer');
+      const screamerSound = document.getElementById('screamer-sound');
+      
+      screamer.classList.add('active');
+      document.body.classList.add('shake-screamer');
+      
+      screamerTimeout1 = setTimeout(() => {
+        screamerSound.currentTime = 0;
+        screamerSound.play().catch(e => console.log("Не удалось воспроизвести звук скримера: ", e));
+      }, 1000);
+      
+      screamerTimeout2 = setTimeout(() => {
+        screamerSound.currentTime = 0;
+        screamerSound.play().catch(e => console.log("Не удалось воспроизвести звук скримера: ", e));
+      }, 11000);
+      
+      setTimeout(() => {
+        screamer.classList.remove('active');
+        document.body.classList.remove('shake-screamer');
+      }, 10000);
+    }
+    
+    function cancelScreamer() {
+      const screamer = document.getElementById('screamer');
+      screamer.classList.remove('active');
+      document.body.classList.remove('shake-screamer');
+      clearTimeout(screamerTimeout1);
+      clearTimeout(screamerTimeout2);
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
       const arrow = document.getElementById('arrow');
@@ -712,6 +792,7 @@
         return;
       }
       
+      cancelScreamer();
       document.body.classList.add('shake');
       
       const btn = document.getElementById('measure-btn');
@@ -833,6 +914,10 @@
           btn.disabled = false;
           btn.textContent = "ЗАГРУЗИТЬ НОВОЕ ИЗОБРАЖЕНИЕ";
           btn.onclick = restartProcess;
+          
+          if (gifKey === "lame") {
+            activateScreamer();
+          }
         }
       }, 20);
     }
@@ -909,11 +994,13 @@
       
       const goldRatio = goldPixels / pixelCount;
       if (goldRatio > 0.05) {
-        swagScore += goldRatio * 100;
+        swagScore += goldRatio * 150;
       }
       
       const vibrantRatio = vibrantPixels / pixelCount;
-      swagScore += vibrantRatio * 15;
+      swagScore += vibrantRatio * 20;
+      
+      swagScore += Math.random() * 20;
       
       swagScore = Math.min(Math.max(swagScore, 0), 110);
       
@@ -921,6 +1008,7 @@
     }
     
     function restartProcess() {
+      cancelScreamer();
       currentImage = null;
       document.getElementById('upload-container').style.display = 'block';
       document.getElementById('swagometer-section').style.display = 'none';
