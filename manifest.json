@@ -1,8 +1,8 @@
 {
-  "name": "SWAGOMETER | ZAEBIZ®",
-  "short_name": "Свагометр",
-  "description": "Измерь уровень сваги своего изображения",
-  "start_url": "/",
+  "name": "SWAGOMETER",
+  "short_name": "Swagometer",
+  "description": "Измерь уровень сваги своего изображения с помощью SWAGOMETER от ZAEBIZ®",
+  "start_url": "/swagometer",
   "display": "standalone",
   "background_color": "#0d0d0d",
   "theme_color": "#ff00ff",
@@ -17,5 +17,9 @@
       "sizes": "512x512",
       "type": "image/webp"
     }
-  ]
+  ],
+  "lang": "ru",
+  "dir": "ltr",
+  "orientation": "portrait",
+  "scope": "/swagometer"
 }
