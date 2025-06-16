@@ -21,6 +21,7 @@
   <link rel="preload" href="zbs.svg" as="image">
   <link rel="icon" type="image/webp" href="favicon.webp">
   <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="alternate" hreflang="ru" href="zaebiswear.com">
   <title>ZAEBIZ® - Русский Стритвир из Камень-на-Оби</title>
   <style>
@@ -37,7 +38,7 @@
       overflow-x: hidden;
       background: #0d0d0d;
       color: #fff;
-      padding-top: 70px;
+      padding-left: 90px;
     }
 
     .container {
@@ -48,49 +49,56 @@
 
     header {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      justify-content: flex-start;
       align-items: center;
-      padding: 0.8rem 3rem;
+      padding: 1.5rem 0;
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
+      height: 100vh;
+      width: 90px;
       z-index: 1000;
-      background: rgba(0, 0, 0, 0.8);
-      box-shadow: 0 5px 30px rgba(255, 0, 255, 0.2);
+      background: rgba(0, 0, 0, 0.9);
+      box-shadow: 5px 0 30px rgba(255, 0, 255, 0.2);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 0, 255, 0.3);
-      height: 70px;
+      border-right: 1px solid rgba(255, 0, 255, 0.3);
     }
 
     .logo {
-      height: 45px;
       cursor: pointer;
-      transition: transform 0.3s;
       z-index: 1001;
-    }
-
-    .logo:hover {
-      transform: scale(1.05);
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: rotate(90deg);
+      height: 60px;
+      width: 60px;
+      margin: 20px 0;
     }
 
     .logo img {
       height: 100%;
       width: auto;
+      max-width: 100%;
     }
 
     nav {
       display: flex;
+      flex-direction: column;
       gap: 1.5rem;
+      width: 100%;
+      padding: 0 15px;
     }
 
     nav a {
       color: #fff;
       text-decoration: none;
-      font-size: 1.1rem;
+      font-size: 1.5rem;
       position: relative;
-      padding: 0.5rem 0.8rem;
+      padding: 0.8rem;
       transition: all 0.3s;
       background: linear-gradient(45deg, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff, #ff00ff);
       background-size: 400% 400%;
@@ -99,17 +107,22 @@
       color: transparent;
       animation: rainbowText 8s linear infinite;
       letter-spacing: 1px;
-    }
-
-    @keyframes rainbowText {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 400% 50%; }
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      overflow: hidden;
     }
 
     nav a:hover {
       animation: none;
       color: #fff;
       background: none;
+    }
+
+    @keyframes rainbowText {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 400% 50%; }
     }
 
     .burger {
@@ -120,6 +133,9 @@
       height: 21px;
       cursor: pointer;
       z-index: 1001;
+      position: absolute;
+      top: 25px;
+      right: 20px;
     }
 
     .burger span {
@@ -233,6 +249,7 @@
       transition: transform 0.3s;
       position: relative;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
     }
 
     .product-card:hover {
@@ -748,6 +765,131 @@
       margin-bottom: 1rem;
     }
 
+    .mobile-sound-control {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border: 1px solid rgba(255, 0, 255, 0.5);
+    }
+
+    .mobile-sound-control i {
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .swag-search {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .swag-search h2 {
+      margin-bottom: 2rem;
+      background: linear-gradient(45deg, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff, #ff00ff);
+      background-size: 400% 400%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: rainbowText 8s linear infinite;
+      font-size: 3rem;
+    }
+
+    .search-box {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    #swagoogle-input {
+      width: 100%;
+      padding: 1.2rem 1.5rem;
+      background: #1a1a1a;
+      border: 2px solid rgba(255, 0, 255, 0.5);
+      border-radius: 50px;
+      color: #fff;
+      font-size: 1.2rem;
+      outline: none;
+      transition: all 0.3s;
+      padding-right: 60px;
+    }
+
+    #swagoogle-input::placeholder {
+      color: #aaa;
+    }
+
+    #swagoogle-input:focus {
+      border-color: rgba(255, 0, 255, 0.9);
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+    }
+
+    #search-btn {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .search-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .search-item {
+      background: #1a1a1a;
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .search-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+
+    .search-item h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+      color: #fff;
+    }
+
+    .search-item .price {
+      color: #fff;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .search-item button {
+      width: 100%;
+      padding: 0.8rem;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .search-item button:hover {
+      background: #444;
+    }
+
     @media (max-width: 1024px) {
       .modal-grid {
         grid-template-columns: 1fr;
@@ -763,8 +905,39 @@
     }
 
     @media (max-width: 768px) {
+      body {
+        padding-left: 0;
+        padding-top: 70px;
+      }
+      
       header {
+        width: 100%;
+        height: 70px;
+        flex-direction: row;
         padding: 0.8rem 2rem;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 0, 255, 0.3);
+        justify-content: space-between;
+      }
+      
+      .logo {
+        margin-bottom: 0;
+        height: 35px;
+        width: auto;
+        transform: none;
+        margin: 0;
+      }
+      
+      .logo img {
+        height: 100%;
+        width: auto;
+      }
+      
+      .burger {
+        display: flex;
+        position: absolute;
+        top: 25px;
+        right: 20px;
       }
       
       nav {
@@ -789,18 +962,10 @@
         right: 0;
       }
       
-      nav a {
+      nav a span {
         display: block;
-        text-align: center;
-        padding: 1rem;
-        font-size: 1.5rem;
-        width: 100%;
-      }
-      
-      .burger {
-        display: flex;
-        position: relative;
-        z-index: 1001;
+        margin-left: 10px;
+        font-size: 1rem;
       }
       
       .burger span {
@@ -833,8 +998,12 @@
         z-index: 2000;
       }
       
-      .burger.active + #main-nav {
-        display: none;
+      .mobile-sound-control {
+        display: none !important;
+      }
+      
+      .swag-search h2 {
+        font-size: 2.2rem;
       }
     }
 
@@ -885,17 +1054,39 @@
 <body>
   <div class="notification" id="notification"></div>
   
+  <audio id="background-music" loop>
+    <source src="swaga.mp3" type="audio/mpeg">
+  </audio>
+  
   <header id="main-header">
     <div class="logo" onclick="showSection('home')">
       <img src="zbs.svg" alt="ZAEBIZ® Логотип">
     </div>
     <nav id="main-nav">
-      <a href="#home" onclick="showSection('home')" aria-label="Перейти на главную страницу">Главная</a>
-      <a href="#products" onclick="showSection('products')" aria-label="Перейти к каталогу">Каталог</a>
-      <a href="#cart" onclick="toggleCart()" aria-label="Открыть корзину">Корзина</a>
-      <a href="#contact" onclick="showSection('contact')" aria-label="Перейти к контактам">Контакты</a>
-      <a href="https://t.me/ZAEBIZRUSSIANBRANDBOT" target="_blank" rel="noopener" aria-label="Перейти к вакансиям">Вакансии</a>
-      <a href="https://zaebizwear.com/swagometer" target="_blank" rel="noopener" aria-label="Перейти к свагометру">SWAGOMETER</a>
+      <a href="#home" onclick="showSection('home')" aria-label="Перейти на главную страницу">
+        <i class="fas fa-home"></i>
+      </a>
+      <a href="#products" onclick="showSection('products')" aria-label="Перейти к каталогу">
+        <i class="fas fa-tshirt"></i>
+      </a>
+      <a href="#cart" onclick="toggleCart()" aria-label="Открыть корзину">
+        <i class="fas fa-shopping-cart"></i>
+      </a>
+      <a href="#swagoogle" onclick="showSection('swagoogle')" aria-label="Поиск по сайту">
+        <i class="fas fa-search"></i>
+      </a>
+      <a href="#contact" onclick="showSection('contact')" aria-label="Перейти к контактам">
+        <i class="fas fa-phone"></i>
+      </a>
+      <a href="https://t.me/ZAEBIZRUSSIANBRANDBOT" target="_blank" rel="noopener" aria-label="Перейти к вакансиям">
+        <i class="fas fa-briefcase"></i>
+      </a>
+      <a href="https://zaebizwear.com/swagometer" target="_blank" rel="noopener" aria-label="Перейти к свагометру">
+        <i class="fas fa-fire"></i>
+      </a>
+      <a href="#" onclick="toggleMusic(); return false;" aria-label="Управление звуком">
+        <i class="fas fa-volume-up" id="sound-icon"></i>
+      </a>
     </nav>
     <div class="burger" onclick="toggleMenu()" aria-label="Меню">
       <span></span>
@@ -903,6 +1094,10 @@
       <span></span>
     </div>
   </header>
+  
+  <div class="mobile-sound-control" id="mobile-sound-control" onclick="toggleMusic()">
+    <i class="fas fa-volume-up"></i>
+  </div>
   
   <div class="cart-overlay" id="cart-overlay"></div>
   <div class="cart-drawer" id="cart-drawer">
@@ -1012,7 +1207,7 @@
     
     <section class="section" id="products" aria-labelledby="products-heading">
       <h2 id="products-heading">Каталог ZAEBIZ®</h2>
-      <div class="products-grid">
+      <div class="products-grid" id="products-grid">
         <div class="product-card" onclick="openModal('uyobishe')" aria-label="Футболка UYOBISHE">
           <img src="dasd.webp" alt="Футболка UYOBISHE с дерзким принтом" loading="lazy">
           <div class="product-info">
@@ -1079,6 +1274,19 @@
       </div>
     </section>
     
+    <section class="section" id="swagoogle" aria-labelledby="swagoogle-heading">
+      <div class="swag-search">
+        <h2 id="swagoogle-heading">SWAGOOGLE</h2>
+        <div class="search-box">
+          <input type="text" id="swagoogle-input" placeholder="Ищите дерзкий стритвир..." aria-label="Поиск по сайту">
+          <button id="search-btn" onclick="searchProducts()" aria-label="Начать поиск">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        <div class="search-results" id="search-results"></div>
+      </div>
+    </section>
+    
     <section class="section" id="contact" aria-labelledby="contact-heading">
       <h2 id="contact-heading">Контакты ZAEBIZ®</h2>
       <div class="contact-content">
@@ -1118,6 +1326,7 @@
               <option value="L">ЧУТЬЖИР [L]</option>
               <option value="XL">ЖИР [XL]</option>
               <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
               <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
             </select>
             <button onclick="addToCart('Футболка «UYOBISHE»', 4399, 'uyobishe', 'dasd.webp')" aria-label="Добавить футболку UYOBISHE в корзину">В корзину</button>
@@ -1175,6 +1384,7 @@
               <option value="L">ЧУТЬЖИР [L]</option>
               <option value="XL">ЖИР [XL]</option>
               <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
               <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
             </select>
             <button onclick="addToCart('Футболка «ROSSIYA»', 9999, 'rossiya', 'rus.webp')" aria-label="Добавить футболку ROSSIYA в корзину">В корзину</button>
@@ -1206,7 +1416,8 @@
               <option value="M">НЕЖИР [M]</option>
               <option value="L">ЧУТЬЖИР [L]</option>
               <option value="XL">ЖИР [XL]</option>
-              <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XXL">ЖЕНя ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
               <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
             </select>
             <button onclick="addToCart('Футболка «DOYAR OCHKA»', 14999, 'doyar-ochka', 'Nastasyushka.webp')" aria-label="Добавить футболку DOYAR OCHKA в корзину">В корзину</button>
@@ -1238,6 +1449,7 @@
               <option value="L">ЧУТЬЖИР [L]</option>
               <option value="XL">ЖИР [XL]</option>
               <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
               <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
             </select>
             <button onclick="addToCart('Футболка «CONNECTING PEOPLE»', 14999, 'connecting', 'conn.png')" aria-label="Добавить футболку CONNECTING PEOPLE в корзину">В корзину</button>
@@ -1269,6 +1481,7 @@
               <option value="L">ЧУТЬЖИР [L]</option>
               <option value="XL">ЖИР [XL]</option>
               <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
               <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
             </select>
             <button onclick="addToCart('Футболка «UNREAL SWAGA»', 14999, 'unreal', 'unrealswaga.jpg')" aria-label="Добавить футболку UNREAL SWAGA в корзину">В корзину</button>
@@ -1313,7 +1526,7 @@
             <p>Свага: Максимальная</p>
             <p>Карман-кенгуру</p>
             <p>Рекомендация по уходу: стирать при 30°C, не гладить</p>
-            <p class="warning">При производстве пострадало 17 человек, 1 погиб.</p>
+            <p class="warning">При производстве пострадало 17 человек, 1 пгиб.</p>
             <p>Трек-номер придёт после оформления.</p>
             <select id="size-club" aria-label="Выберите размер худи CLUB">
               <option value="S">СКЕЛЕТ [S]</option>
@@ -1321,6 +1534,7 @@
               <option value="L">ЧУТЬЖИР [L]</option>
               <option value="XL">ЖИР [XL]</option>
               <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
               <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
             </select>
             <button onclick="addToCart('Худи «CLUB»', 9999, 'club', 'pclub.png')" aria-label="Добавить худи CLUB в корзину">В корзину</button>
@@ -1354,6 +1568,100 @@
   <script>
     let cart = [];
     let deliveryType = 'russia';
+    let isMusicPlaying = true;
+    
+    const backgroundMusic = document.getElementById('background-music');
+    const mobileSoundControl = document.getElementById('mobile-sound-control');
+    const soundIcon = document.getElementById('sound-icon');
+    
+    const productsData = [
+      { 
+        id: 'uyobishe',
+        name: 'Футболка «UYOBISHE»', 
+        price: 4399,
+        image: 'dasd.webp',
+        desc: 'Дерзкая футболка UYOBISHE для уличного вайба'
+      },
+      { 
+        id: 'penis-cap',
+        name: 'Кепка «#PENIS»', 
+        price: 2999,
+        image: 'Kepa.webp',
+        desc: 'Кепка с провокационной вышивкой для смелых'
+      },
+      { 
+        id: 'rossiya',
+        name: 'Футболка «ROSSIYA»', 
+        price: 9999,
+        image: 'rus.webp',
+        desc: 'Футболка ROSSIYA для тех, кто гордится корнями'
+      },
+      { 
+        id: 'doyar-ochka',
+        name: 'Футболка «DOYAR OCHKA»', 
+        price: 14999,
+        image: 'Nastasyushka.webp',
+        desc: 'Эксклюзивная футболка DOYAR OCHKA для истинных ценителей'
+      },
+      { 
+        id: 'connecting',
+        name: 'Футболка «CONNECTING PEOPLE»', 
+        price: 14999,
+        image: 'conn.png',
+        desc: 'Соединяет друзей вместе'
+      },
+      { 
+        id: 'unreal',
+        name: 'Футболка «UNREAL SWAGA»', 
+        price: 14999,
+        image: 'unrealswaga.jpg',
+        desc: 'Футболка, ломающая свагометры'
+      },
+      { 
+        id: 'deldak',
+        name: 'Игрушка «DELDAK НА КОНЦЕРТ ИВАНА ZОЛО»', 
+        price: 9999,
+        image: 'deldak.png',
+        desc: 'Сделан из прочной резины, хорошо прилепляется'
+      },
+      { 
+        id: 'club',
+        name: 'Худи «CLUB»', 
+        price: 9999,
+        image: 'pclub.png',
+        desc: 'Худи заметное для любого'
+      }
+    ];
+
+    function playBackgroundMusic() {
+      backgroundMusic.volume = 0.3;
+      backgroundMusic.play().catch(e => console.log('Автовоспроизведение заблокировано'));
+    }
+    
+    function toggleMusic() {
+      if (isMusicPlaying) {
+        backgroundMusic.pause();
+        if (soundIcon) soundIcon.className = 'fas fa-volume-mute';
+        if (mobileSoundControl) {
+          mobileSoundControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        }
+      } else {
+        backgroundMusic.play();
+        if (soundIcon) soundIcon.className = 'fas fa-volume-up';
+        if (mobileSoundControl) {
+          mobileSoundControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+        }
+      }
+      isMusicPlaying = !isMusicPlaying;
+    }
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      playBackgroundMusic();
+    });
+    
+    if (mobileSoundControl) {
+      mobileSoundControl.addEventListener('click', toggleMusic);
+    }
     
     function toggleMenu() {
       const nav = document.getElementById('main-nav');
@@ -1386,6 +1694,11 @@
       if (window.innerWidth <= 768) {
         document.getElementById('main-nav').classList.remove('active');
         document.querySelector('.burger').classList.remove('active');
+      }
+      
+      if (sectionId !== 'swagoogle') {
+        document.getElementById('search-results').innerHTML = '';
+        document.getElementById('swagoogle-input').value = '';
       }
     }
     
@@ -1540,6 +1853,46 @@
         toggleCart();
       }
     }
+    
+    function searchProducts() {
+      const searchTerm = document.getElementById('swagoogle-input').value.toLowerCase();
+      const resultsContainer = document.getElementById('search-results');
+      
+      if (!searchTerm.trim()) {
+        resultsContainer.innerHTML = '<p style="color:#aaa; text-align:center;">Введите поисковый запрос</p>';
+        return;
+      }
+      
+      const filteredProducts = productsData.filter(product => 
+        product.name.toLowerCase().includes(searchTerm) || 
+        product.desc.toLowerCase().includes(searchTerm)
+      );
+      
+      if (filteredProducts.length === 0) {
+        resultsContainer.innerHTML = '<p style="color:#aaa; text-align:center;">Ничего не найдено. Попробуйте другой запрос.</p>';
+        return;
+      }
+      
+      resultsContainer.innerHTML = '';
+      filteredProducts.forEach(product => {
+        const item = document.createElement('div');
+        item.className = 'search-item';
+        item.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>${product.desc}</p>
+          <p class="price">${product.price} ₽</p>
+          <button onclick="openModal('${product.id}')">Посмотреть</button>
+        `;
+        resultsContainer.appendChild(item);
+      });
+    }
+    
+    document.getElementById('swagoogle-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchProducts();
+      }
+    });
     
     window.onclick = function(event) {
       document.querySelectorAll('.modal, .product-modal').forEach(modal => {
