@@ -1,0 +1,2151 @@
+<!DOCTYPE html>
+<html lang="ru" class="light-theme">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ZAEBIZ® — дерзкий русский стритвир из Камень-на-Оби. Футболки и кепки с уникальными принтами: UYOBISHE, ROSSIYA, DOYAR OCHKA. Погрузитесь в культуру улиц!">
+  <meta name="keywords" content="ZAEBIZ, русский стритвир, уличная мода, футболки, кепки, Камень-на-Оби, UYOBISHE, ROSSIYA, DOYAR OCHKA">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="ZAEBIZ®">
+  <meta property="og:title" content="ZAEBIZ® - Русский Стритвир">
+  <meta property="og:description" content="ZAEBIZ® — бренд уличной моды из Камень-на-Оби. Дерзкие футболки и кепки с принтами UYOBISHE, ROSSIYA, DOYAR OCHKA.">
+  <meta property="og:image" content="zbs.svg">
+  <meta property="og:url" content="zaebiswear.com">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ZAEBIZ® - Русский Стритвир">
+  <meta name="twitter:description" content="ZAEBIZ® — дерзкий стритвир из Камень-на-Оби. Футболки и кепки с уникальными дизайнами.">
+  <meta name="twitter:image" content="zbs.svg">
+  <link rel="canonical" href="zaebiswear.com">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+  <link rel="preload" href="zbs.svg" as="image">
+  <link rel="icon" type="image/webp" href="favicon.webp">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="alternate" hreflang="ru" href="zaebiswear.com">
+  <title>ZAEBIZ® - Русский Стритвир из Камень-на-Оби</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;600;700&display=swap');
+
+    html.light-theme {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f5;
+      --bg-tertiary: #e0e0e0;
+      --text-primary: #000000;
+      --text-secondary: #333333;
+      --text-tertiary: #666666;
+      --border-color: #e0e0e0;
+      --accent-color: #000000;
+      --logo-url: url('https://zaebizwear.com/zbsblack.svg');
+    }
+
+    html.dark-theme {
+      --bg-primary: #121212;
+      --bg-secondary: #1e1e1e;
+      --bg-tertiary: #2d2d2d;
+      --text-primary: #ffffff;
+      --text-secondary: #e0e0e0;
+      --text-tertiary: #b0b0b0;
+      --border-color: #333333;
+      --accent-color: #ffffff;
+      --logo-url: url('https://zaebizwear.com/zbs.svg');
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'SF Pro Display', 'Inter', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+
+    body {
+      overflow-x: hidden;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      padding-left: 80px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    header {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 1.2rem 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 80px;
+      z-index: 1000;
+      background: var(--bg-primary);
+      border-right: 1px solid var(--border-color);
+    }
+
+    .logo {
+      cursor: pointer;
+      z-index: 1001;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: rotate(90deg);
+      height: 50px;
+      width: 50px;
+      margin: 20px 0;
+    }
+
+    .logo::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-image: var(--logo-url);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      padding: 0 15px;
+    }
+
+    nav a {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 1.3rem;
+      position: relative;
+      padding: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+
+    nav a:hover {
+      background: var(--bg-tertiary);
+    }
+
+    .menu-text {
+      display: none;
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 26px;
+      height: 18px;
+      cursor: pointer;
+      z-index: 1001;
+      position: absolute;
+      top: 25px;
+      right: 20px;
+    }
+
+    .burger span {
+      height: 2px;
+      width: 100%;
+      background: var(--text-primary);
+      border-radius: 10px;
+      transition: all 0.3s;
+    }
+
+    main {
+      min-height: 100vh;
+    }
+
+    .section {
+      display: none;
+      padding: 2rem 0;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .home-ticker {
+      width: 100%;
+      height: 40px;
+      background: var(--bg-tertiary);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      white-space: nowrap;
+      margin-bottom: 2rem;
+      border-radius: 0;
+    }
+
+    .home-ticker-content {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker 20s linear infinite;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .home-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .home-content img {
+      width: 100%;
+      max-height: 80vh;
+      object-fit: cover;
+    }
+
+    .home-text p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+
+    .notification {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      padding: 12px 30px;
+      border-radius: 0;
+      font-weight: 500;
+      z-index: 1000;
+      display: none;
+      border: 1px solid var(--border-color);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .product-card {
+      background: var(--bg-primary);
+      border-radius: 0;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid var(--border-color);
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+
+    .product-info {
+      padding: 1.5rem;
+    }
+
+    .product-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .product-info p {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      left: -400px;
+      width: 400px;
+      height: 100%;
+      background: var(--bg-primary);
+      z-index: 2000;
+      transition: left 0.4s ease;
+      overflow-y: auto;
+      padding: 20px;
+      border-right: 1px solid var(--border-color);
+    }
+    
+    .cart-drawer.active {
+      left: 0;
+    }
+    
+    .cart-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1999;
+    }
+    
+    .cart-overlay.active {
+      display: block;
+    }
+    
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .cart-header h2 {
+      font-size: 1.6rem;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    
+    .close-cart {
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    
+    .close-cart:hover {
+      opacity: 0.7;
+    }
+    
+    #cart-items {
+      display: grid;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .cart-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      background: var(--bg-secondary);
+      padding: 1rem;
+      border-radius: 0;
+    }
+    
+    .cart-item img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+    }
+    
+    .cart-item-info h3 {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+    
+    .cart-item-info p {
+      color: var(--text-tertiary);
+      font-size: 0.85rem;
+    }
+    
+    .remove-btn {
+      padding: 0.3rem 0.8rem;
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    .remove-btn:hover {
+      background: var(--bg-tertiary);
+      opacity: 0.8;
+    }
+    
+    .cart-total {
+      text-align: right;
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      font-weight: 600;
+    }
+    
+    .cart-options {
+      background: var(--bg-secondary);
+      padding: 1.5rem;
+      border-radius: 0;
+      margin-bottom: 2rem;
+    }
+    
+    .delivery-toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .delivery-btn {
+      padding: 0.8rem;
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      font-size: 1rem;
+      width: 100%;
+      font-weight: 500;
+    }
+    
+    .delivery-btn.active {
+      background: var(--accent-color);
+      color: var(--bg-primary);
+      font-weight: 600;
+    }
+    
+    .cart-options label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+    }
+    
+    .cart-options select,
+    .cart-options input {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1rem;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 0;
+      font-size: 1rem;
+    }
+    
+    .checkout-btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      background: var(--accent-color);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 0;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    
+    .checkout-btn:hover {
+      opacity: 0.9;
+    }
+
+    .contact-content {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-content h2 {
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .contact-content p {
+      margin-bottom: 2rem;
+      line-height: 1.6;
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+
+    .telegram-btn {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: var(--accent-color);
+      color: var(--bg-primary);
+      text-decoration: none;
+      border-radius: 0;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+      font-weight: 500;
+    }
+
+    .telegram-btn:hover {
+      opacity: 0.9;
+    }
+
+    .disclaimer-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 20px;
+      margin: 30px 0;
+      text-align: center;
+    }
+    
+    .disclaimer-box h3 {
+      color: var(--text-primary);
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    
+    .disclaimer-box p {
+      color: var(--text-primary);
+      line-height: 1.6;
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      font-weight: 400;
+    }
+    
+    .telegram-channel-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 25px;
+      background: var(--accent-color);
+      color: var(--bg-primary);
+      text-decoration: none;
+      border-radius: 0;
+      font-size: 1rem;
+      transition: opacity 0.2s;
+      font-weight: 500;
+    }
+    
+    .telegram-channel-btn:hover {
+      opacity: 0.9;
+    }
+
+    .product-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 2000;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: var(--bg-primary);
+      padding: 2.5rem;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      border: 1px solid var(--border-color);
+    }
+
+    .close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.2rem;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--text-primary);
+      z-index: 10;
+      transition: opacity 0.2s;
+      font-weight: 400;
+      background: none;
+      border: none;
+    }
+
+    .close:hover {
+      opacity: 0.7;
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+
+    .modal-image {
+      width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+    }
+
+    .modal-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .modal-details h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .modal-details p {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+
+    .modal-details .price {
+      font-size: 1.6rem;
+      color: var(--text-primary);
+      margin: 1.5rem 0;
+      font-weight: 600;
+    }
+
+    .modal-details .warning {
+      color: var(--text-primary);
+      padding: 1rem;
+      background: var(--bg-tertiary);
+      margin: 1.5rem 0;
+      border-left: 3px solid var(--accent-color);
+      font-weight: 500;
+    }
+
+    .modal-details select {
+      width: 100%;
+      padding: 1rem;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .modal-details button {
+      width: 100%;
+      padding: 1.1rem;
+      background: var(--accent-color);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 0;
+      font-size: 1.1rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+
+    .modal-details button:hover {
+      opacity: 0.9;
+    }
+
+    #screamer-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      z-index: 3000;
+    }
+
+    #screamer-modal img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #checkout-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .checkout-modal-content {
+      background: var(--bg-primary);
+      padding: 2.5rem;
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      border: 1px solid var(--border-color);
+    }
+
+    .checkout-modal-content h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .checkout-modal-content p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-size: 0.85rem;
+      margin-top: 2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    footer .warning {
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .mobile-sound-control {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: var(--bg-primary);
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+    }
+
+    .mobile-sound-control i {
+      font-size: 1.4rem;
+      color: var(--text-primary);
+    }
+
+    .swag-search {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .swag-search h2 {
+      margin-bottom: 2rem;
+      color: var(--text-primary);
+      font-size: 2.4rem;
+      font-weight: 600;
+    }
+
+    .search-box {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    #swagoogle-input {
+      width: 100%;
+      padding: 1.1rem 1.4rem;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 0;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      outline: none;
+      transition: border-color 0.2s;
+      padding-right: 60px;
+    }
+
+    #swagoogle-input::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    #swagoogle-input:focus {
+      border-color: var(--accent-color);
+    }
+
+    #search-btn {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .search-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .search-item {
+      background: var(--bg-secondary);
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+
+    .search-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+
+    .search-item h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .search-item .price {
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .search-item button {
+      width: 100%;
+      padding: 0.8rem;
+      background: var(--accent-color);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 0;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      font-weight: 500;
+    }
+
+    .search-item button:hover {
+      opacity: 0.9;
+    }
+
+    .category-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      padding: 0.8rem 1.5rem;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 0;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .filter-btn.active {
+      background: var(--accent-color);
+      color: var(--bg-primary);
+      font-weight: 600;
+      border: 1px solid var(--accent-color);
+    }
+
+    @media (max-width: 1024px) {
+      .modal-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-image {
+        max-height: 400px;
+      }
+      
+      .cart-drawer {
+        width: 350px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-left: 0;
+        padding-top: 60px;
+      }
+      
+      header {
+        width: 100%;
+        height: 60px;
+        flex-direction: row;
+        padding: 0.7rem 1.8rem;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        justify-content: space-between;
+      }
+      
+      .logo {
+        margin-bottom: 0;
+        height: 32px;
+        width: auto;
+        transform: none;
+        margin: 0;
+      }
+      
+      .burger {
+        display: flex;
+        position: absolute;
+        top: 21px;
+        right: 20px;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        flex-direction: column;
+        background: var(--bg-primary);
+        width: 100%;
+        height: 100vh;
+        padding: 6rem 2rem 2rem;
+        transition: right 0.4s;
+        z-index: 999;
+        gap: 1.5rem;
+        justify-content: center;
+        align-items: center;
+        border-left: 1px solid var(--border-color);
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav a {
+        justify-content: flex-start;
+        padding: 1rem 2rem;
+      }
+      
+      nav a i {
+        margin-right: 10px;
+      }
+      
+      .menu-text {
+        display: inline;
+        font-size: 1rem;
+      }
+      
+      .burger span {
+        background: var(--text-primary);
+      }
+      
+      .burger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      .burger.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .burger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+      
+      .products-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      
+      .cart-drawer {
+        width: 85%;
+        left: -100%;
+        z-index: 2001;
+      }
+      
+      .cart-overlay {
+        z-index: 2000;
+      }
+      
+      .mobile-sound-control {
+        display: none !important;
+      }
+      
+      .swag-search h2 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 0.6rem 1rem;
+      }
+      
+      .logo {
+        height: 30px;
+      }
+      
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .modal-content {
+        padding: 1.2rem;
+      }
+      
+      .modal-image {
+        max-height: 300px;
+      }
+      
+      .close {
+        top: 0.8rem;
+        right: 0.8rem;
+        font-size: 1.4rem;
+      }
+      
+      .cart-drawer {
+        width: 100%;
+        padding: 15px;
+      }
+      
+      .cart-item {
+        grid-template-columns: 1fr;
+      }
+      
+      .cart-item img {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="notification" id="notification"></div>
+  
+  <audio id="background-music" loop>
+    <source src="swaga.mp3" type="audio/mpeg">
+  </audio>
+  
+  <header id="main-header">
+    <div class="logo" onclick="showSection('home')"></div>
+    <nav id="main-nav">
+      <a href="#home" onclick="showSection('home')" aria-label="Перейти на главную страницу">
+        <i class="fas fa-home"></i>
+        <span class="menu-text">Главная</span>
+      </a>
+      <a href="#products" onclick="showSection('products')" aria-label="Перейти к каталогу">
+        <i class="fas fa-tshirt"></i>
+        <span class="menu-text">Каталог</span>
+      </a>
+      <a href="#cart" onclick="toggleCart()" aria-label="Открыть корзину">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="menu-text">Корзина</span>
+      </a>
+      <a href="#swagoogle" onclick="showSection('swagoogle')" aria-label="Поиск по сайту">
+        <i class="fas fa-search"></i>
+        <span class="menu-text">Поиск</span>
+      </a>
+      <a href="#contact" onclick="showSection('contact')" aria-label="Перейти к контактам">
+        <i class="fas fa-phone"></i>
+        <span class="menu-text">Контакты</span>
+      </a>
+      <a href="https://t.me/ZAEBIZRUSSIANBRANDBOT" target="_blank" rel="noopener" aria-label="Перейти к вакансиям">
+        <i class="fas fa-briefcase"></i>
+        <span class="menu-text">Вакансии</span>
+      </a>
+      <a href="https://zaebizwear.com/swagometer" target="_blank" rel="noopener" aria-label="Перейти к свагометру">
+        <i class="fas fa-fire"></i>
+        <span class="menu-text">Свагометр</span>
+      </a>
+      <a href="#" onclick="toggleMusic(); return false;" aria-label="Управление звуком">
+        <i class="fas fa-volume-up" id="sound-icon"></i>
+        <span class="menu-text">Звук</span>
+      </a>
+      <a href="#" onclick="toggleTheme()" aria-label="Переключить тему">
+        <i class="fas fa-moon" id="theme-icon"></i>
+        <span class="menu-text">Тема</span>
+      </a>
+    </nav>
+    <div class="burger" onclick="toggleMenu()" aria-label="Меню">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+  
+  <div class="mobile-sound-control" id="mobile-sound-control" onclick="toggleMusic()">
+    <i class="fas fa-volume-up"></i>
+  </div>
+  
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h2>КОРЗИНА ZAEBIZ®</h2>
+      <button class="close-cart" onclick="toggleCart()" aria-label="Закрыть корзину">✕</button>
+    </div>
+    
+    <div id="cart-items"></div>
+    <p id="cart-total" class="cart-total">Итого: 0 ₽</p>
+    
+    <div class="cart-options">
+      <div class="delivery-toggle">
+        <button class="delivery-btn active" onclick="setDeliveryType('russia')">Доставка по РФ</button>
+        <button class="delivery-btn" onclick="setDeliveryType('international')">Международная</button>
+      </div>
+      
+      <label for="delivery-country" id="delivery-country-label" style="display:none;">Страна:</label>
+      <select id="delivery-country" aria-label="Выберите страну доставки" style="display:none;">
+        <option value="">Выберите страну</option>
+        <option value="albania">Албания</option>
+        <option value="andorra">Андорра</option>
+        <option value="austria">Австрия</option>
+        <option value="belarus">Беларусь</option>
+        <option value="belgium">Бельгия</option>
+        <option value="bosnia">Босния и Герцеговина</option>
+        <option value="bulgaria">Болгария</option>
+        <option value="canada">Канада</option>
+        <option value="croatia">Хорватия</option>
+        <option value="cyprus">Кипр</option>
+        <option value="czech">Чехия</option>
+        <option value="denmark">Дания</option>
+        <option value="estonia">Эстония</option>
+        <option value="finland">Финляндия</option>
+        <option value="france">Франция</option>
+        <option value="germany">Германия</option>
+        <option value="greece">Греция</option>
+        <option value="hungary">Венгрия</option>
+        <option value="iceland">Исландия</option>
+        <option value="ireland">Ирландия</option>
+        <option value="italy">Италия</option>
+        <option value="kazakhstan">Казахстан</option>
+        <option value="kosovo">Косово</option>
+        <option value="latvia">Латвия</option>
+        <option value="liechtenstein">Лихтенштейн</option>
+        <option value="lithuania">Литва</option>
+        <option value="luxembourg">Люксембург</option>
+        <option value="malta">Мальта</option>
+        <option value="moldova">Молдова</option>
+        <option value="monaco">Монако</option>
+        <option value="montenegro">Черногория</option>
+        <option value="netherlands">Нидерланды</option>
+        <option value="northmacedonia">Северная Македония</option>
+        <option value="norway">Норвегия</option>
+        <option value="poland">Польша</option>
+        <option value="portugal">Португалия</option>
+        <option value="romania">Румыния</option>
+        <option value="russia">Россия</option>
+        <option value="sanmarino">Сан-Марино</option>
+        <option value="serbia">Сербия</option>
+        <option value="slovakia">Словакия</option>
+        <option value="slovenia">Словения</option>
+        <option value="spain">Испания</option>
+        <option value="sweden">Швеция</option>
+        <option value="switzerland">Швейцария</option>
+        <option value="uk">Великобритания</option>
+        <option value="usa">США</option>
+        <option value="uzbekistan">Узбекистан</option>
+        <option value="uryukstan">Урюкстан</option>
+        <option value="vatican">Ватикан</option>
+        <option value="wadiya">Вадия</option>
+      </select>
+      
+      <label for="payment-method">Способ оплаты:</label>
+      <select id="payment-method" aria-label="Выберите способ оплаты">
+        <option value="card">Банковская карта</option>
+        <option value="pdorpay">PdorPay</option>
+        <option value="pivkoff">Пивкофф</option>
+        <option value="spb">СПБ</option>
+        <option value="dolkami">Дольками</option>
+      </select>
+      
+      <label for="delivery-address">Адрес доставки:</label>
+      <input type="text" id="delivery-address" placeholder="Введите адрес" aria-label="Введите адрес доставки">
+    </div>
+    
+    <button class="checkout-btn" onclick="openCheckoutModal()" aria-label="Оформить заказ">Оформить заказ</button>
+  </div>
+  
+  <main class="container">
+    <section class="section active" id="home" aria-labelledby="home-heading">
+      <h2 id="home-heading" style="display:none;">ZAEBIZ® Главная</h2>
+      <div class="home-content">
+        <div class="home-ticker">
+          <div class="home-ticker-content">
+                ZAEBIZ® Русский уличный бренд без компромиссов. Одежда для тех, кто не вписывается. Количество предметов ограничено.    
+            ZAEBIZ® Русский уличный бренд без компромиссов. Одежда для тех, кто не вписывается. Количество предметов ограничено.    
+          </div>
+        </div>
+        
+        <img src="Penis.webp" alt="ZAEBIZ® История уличной моды" loading="lazy">
+        <div class="home-text">
+          <p>ZAEBIZ® — бренд уличной одежды, основанный в 2025 году в городе Камень-на-Оби. Мы создаём дерзкие футболки и кепки для тех, кто живёт по своим правилам. Наши коллекции — это отражение русской улицы: сила, независимость, протест против обыденности. Каждый принт и строчка воплощают дух свободы.</p>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section" id="products" aria-labelledby="products-heading">
+      <h2 id="products-heading">Каталог ZAEBIZ®</h2>
+      
+      <div class="category-filters" id="category-filters">
+        <button class="filter-btn active" data-category="all">Всё</button>
+        <button class="filter-btn" data-category="hoodie">Худи</button>
+        <button class="filter-btn" data-category="t-shirt">Футболки</button>
+        <button class="filter-btn" data-category="headwear">Головные Уборы</button>
+        <button class="filter-btn" data-category="pants">Брюки</button>
+        <button class="filter-btn" data-category="other">Прочее</button>
+      </div>
+      
+      <div class="products-grid" id="products-grid">
+        <div class="product-card" onclick="openModal('uyobishe')" aria-label="Футболка UYOBISHE" data-category="t-shirt">
+          <img src="dasd.webp" alt="Футболка UYOBISHE с дерзким принтом" loading="lazy">
+          <div class="product-info">
+            <h3>Футболка «UYOBISHE»</h3>
+            <p>4 399 ₽</p>
+          </div>
+        </div>
+        
+        <div class="product-card" onclick="openModal('penis-cap')" aria-label="Кепка #PENIS" data-category="headwear">
+          <img src="Kepa.webp" alt="Кепка #PENIS с вышивкой" loading="lazy">
+          <div class="product-info">
+            <h3>Кепка «#PENIS»</h3>
+            <p>2 999 ₽</p>
+          </div>
+        </div>
+        
+        <div class="product-card" onclick="openModal('rossiya')" aria-label="Футболка ROSSIYA" data-category="t-shirt">
+          <img src="rus.webp" alt="Футболка ROSSIYA с патриотичным дизайном" loading="lazy">
+          <div class="product-info">
+            <h3>Футболка «ROSSIYA»</h3>
+            <p>9 999 ₽</p>
+          </div>
+        </div>
+        
+        <div class="product-card" onclick="openModal('doyar-ochka')" aria-label="Футболка DOYAR OCHKA" data-category="t-shirt">
+          <img src="Nastasyushka.webp" alt="Футболка DOYAR OCHKA с эксклюзивным принтом" loading="lazy">
+          <div class="product-info">
+            <h3>Футболка «DOYAR OCHKA»</h3>
+            <p>14 999 ₽</p>
+          </div>
+        </div>
+        
+        <div class="product-card" onclick="openModal('connecting')" aria-label="Футболка CONNECTING PEOPLE" data-category="t-shirt">
+          <img src="conn.png" alt="Футболка CONNECTING PEOPLE" loading="lazy">
+          <div class="product-info">
+            <h3>Футболка «CONNECTING PEOPLE»</h3>
+            <p>14 999 ₽</p>
+          </div>
+        </div>
+        
+        <div class="product-card" onclick="openModal('unreal')" aria-label="Футболка UNREAL SWAGA" data-category="t-shirt">
+          <img src="unrealswaga.jpg" alt="Футболка UNREAL SWAGA" loading="lazy">
+          <div class="product-info">
+            <h3>Футболка «UNREAL SWAGA»</h3>
+            <p>14 999 ₽</p>
+          </div>
+        </div>
+        
+        <div class="product-card" onclick="openModal('deldak')" aria-label="Игрушка DELDAK" data-category="other">
+          <img src="deldak.png" alt="Резиновая игрушка DELDAK" loading="lazy">
+          <div class="product-info">
+            <h3>Игрушка «DELDAK НА КОНЦЕРТ ИВАНА ZОЛО»</h3>
+            <p>9 999 ₽</p>
+          </div>
+        </div>
+        
+        <div class="product-card" onclick="openModal('club')" aria-label="Худи CLUB" data-category="hoodie">
+          <img src="pclub.png" alt="Худи CLUB с надписью" loading="lazy">
+          <div class="product-info">
+            <h3>Худи «CLUB»</h3>
+            <p>9 999 ₽</p>
+          </div>
+        </div>
+        
+        <div class="product-card" onclick="openModal('black-who-i-pants')" aria-label="Брюки Black Who I" data-category="pants">
+          <img src="blackwhoibruk.jpg" alt="Брюки Black Who I" loading="lazy">
+          <div class="product-info">
+            <h3>Брюки «Black Who I»</h3>
+            <p>14 880 ₽</p>
+          </div>
+        </div>
+        
+        <div class="product-card" onclick="openModal('black-who-i-tshirt')" aria-label="Футболка Black Who I" data-category="t-shirt">
+          <img src="blackwhoifut.jpg" alt="Футболка Black Who I" loading="lazy">
+          <div class="product-info">
+            <h3>Футболка «Black Who I»</h3>
+            <p>14 880 ₽</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section" id="swagoogle" aria-labelledby="swagoogle-heading">
+      <div class="swag-search">
+        <h2 id="swagoogle-heading">SWAGOOGLE</h2>
+        <div class="search-box">
+          <input type="text" id="swagoogle-input" placeholder="Ищите дерзкий стритвир..." aria-label="Поиск по сайту">
+          <button id="search-btn" onclick="searchProducts()" aria-label="Начать поиск">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+        <div class="search-results" id="search-results"></div>
+      </div>
+    </section>
+    
+    <section class="section" id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Контакты ZAEBIZ®</h2>
+      <div class="contact-content">
+        <p>Мы открыты для общения и идей. Связывайтесь через Telegram и предлагайте свои концепции для русского стритвира.</p>
+        <a href="https://t.me/ZAEBIZRUSSIANBRANDBOT" class="telegram-btn" target="_blank" rel="noopener" aria-label="Написать в Telegram">Написать в Telegram</a>
+        
+        <div class="disclaimer-box">
+          <p>ZAEBIZ® не является реальным брендом одежды или зарегистрированной торговой маркой. Данный сайт представляет собой сатирический проект, созданный с целью художественного выражения и критического осмысления некоторых тенденций в российском стритвире.</p>
+          <p>Все представленные на сайте товары являются вымышленными. Любое сходство с реально существующими брендами или продуктами случайно.</p>
+          <p>Сайт не осуществляет коммерческую деятельность и не принимает реальные заказы.</p>
+          <a href="https://t.me/zaebizwear" class="telegram-channel-btn" target="_blank" rel="noopener" aria-label="Наш Telegram канал">Наш Telegram канал</a>
+        </div>
+      </div>
+    </section>
+    
+    <div id="uyobishe" class="product-modal" role="dialog" aria-label="Футболка UYOBISHE">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('uyobishe')" aria-label="Закрыть">X</button>
+        <div class="modal-grid">
+          <img src="dasd.webp" class="modal-image" alt="Футболка UYOBISHE с дерзким принтом" loading="lazy">
+          <div class="modal-details">
+            <h3>Футболка «UYOBISHE»</h3>
+            <p class="price">4 399 ₽</p>
+            <p>Дерзкая футболка UYOBISHE для уличного вайба</p>
+            <p>Стандартный крой</p>
+            <p>Состав: 100% хлопок</p>
+            <p>Плотность: 300 г/м²</p>
+            <p>Рисунок: Прямая печать на груди и спине</p>
+            <p>Эффект состаривания</p>
+            <p>Рекомендация по уходу: стирать при 30°C, вывернув наизнанку</p>
+            <p>Свага: Средняя</p>
+            <p class="warning">При производстве пострадало 19 человек, 2 погибло.</p>
+            <p>Трек-номер придёт после оформления.</p>
+            <select id="size-uyobishe" aria-label="Выберите размер футболки UYOBISHE">
+              <option value="S">СКЕЛЕТ [S]</option>
+              <option value="M">НЕЖИР [M]</option>
+              <option value="L">ЧУТЬЖИР [L]</option>
+              <option value="XL">ЖИР [XL]</option>
+              <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
+              <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
+            </select>
+            <button onclick="addToCart('Футболка «UYOBISHE»', 4399, 'uyobishe', 'dasd.webp')" aria-label="Добавить футболку UYOBISHE в корзину">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="penis-cap" class="product-modal" role="dialog" aria-label="Кепка #PENIS">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('penis-cap')" aria-label="Закрыть">X</button>
+        <div class="modal-grid">
+          <img src="Kepa.webp" class="modal-image" alt="Кепка #PENIS с вышивкой" loading="lazy">
+          <div class="modal-details">
+            <h3>Кепка «#PENIS»</h3>
+            <p class="price">2 999 ₽</p>
+            <p>Кепка с провокационной вышивкой для смелых</p>
+            <p>Состав: 100% хлопок</p>
+            <p>Объёмная вышивка «#ПЕНИС» спереди</p>
+            <p>Регулируемый размер, металлическая застёжка</p>
+            <p>Надпись внутри: «КАМЕНЬ НА ОБИ 2025»</p>
+            <p>Свага: Максимальная</p>
+            <p class="warning">При производстве пострадало 12 человек, 1 погиб.</p>
+            <p>Трек-номер придёт после оформления.</p>
+            <select id="size-penis-cap" aria-label="Выберите размер кепки #PENIS">
+              <option value="One Size">Один размер</option>
+            </select>
+            <button onclick="addToCart('Кепка «#PENIS»', 2999, 'penis-cap', 'Kepa.webp')" aria-label="Добавить кепку #PENIS в корзину">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="rossiya" class="product-modal" role="dialog" aria-label="Футболка ROSSIYA">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('rossiya')" aria-label="Закрыть">X</button>
+        <div class="modal-grid">
+          <img src="rus.webp" class="modal-image" alt="Футболка ROSSIYA с патриотичным дизайном" loading="lazy">
+          <div class="modal-details">
+            <h3>Футболка «ROSSIYA»</h3>
+            <p class="price">9 999 ₽</p>
+            <p>Футболка ROSSIYA для тех, кто гордится корнями</p>
+            <p>Стандартный крой</p>
+            <p>Состав: 100% хлопок</p>
+            <p>Плотность: 300 г/м²</p>
+            <p>Рисунок: Прямая печать на груди и спине</p>
+            <p>Эффект состаривания</p>
+            <p>Свага: Минимальная</p>
+            <p>Рекомендация по уходу: стирать при 30°C, вывернув наизнанку</p>
+            <p class="warning">При производстве пострадало 25 человек, 3 пгибло.</p>
+            <p>Трек-номер придёт после оформления.</p>
+            <select id="size-rossiya" aria-label="Выберите размер футболки ROSSIYA">
+              <option value="S">СКЕЛЕТ [S]</option>
+              <option value="M">НЕЖИР [M]</option>
+              <option value="L">ЧУТЬЖИР [L]</option>
+              <option value="XL">ЖИР [XL]</option>
+              <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
+              <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
+            </select>
+            <button onclick="addToCart('Футболка «ROSSIYA»', 9999, 'rossiya', 'rus.webp')" aria-label="Добавить футболку ROSSIYA в корзину">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="doyar-ochka" class="product-modal" role="dialog" aria-label="Футболка DOYAR OCHKA">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('doyar-ochka')" aria-label="Закрыть">X</button>
+        <div class="modal-grid">
+          <img src="Nastasyushka.webp" class="modal-image" alt="Футболка DOYAR OCHKA с эксклюзивным принтом" loading="lazy">
+          <div class="modal-details">
+            <h3>Футболка «DOYAR OCHKA»</h3>
+            <p class="price">14 999 ₽</p>
+            <p>Эксклюзивная футболка DOYAR OCHKA для истинных ценителей сочных доярочек</p>
+            <p>Стандартный крой</p>
+            <p>Состав: 100% хлопок</p>
+            <p>Плотность: 300 г/м²</p>
+            <p>Рисунок: Прямая печать на груди и спине</p>
+            <p>Эффект состаривания</p>
+            <p>Свага: Максимальная</p>
+            <p>Рекомендация по уходу: стирать при 30°C, вывернув наизнанку</p>
+            <p class="warning">При производстве пострадало 30 человек, 5 погибло.</p>
+            <p>Трек-номер придёт после оформления.</p>
+            <select id="size-doyar-ochka" aria-label="Выберите размер футболки DOYAR OCHKA">
+              <option value="S">СКЕЛЕТ [S]</option>
+              <option value="M">НЕЖИР [M]</option>
+              <option value="L">ЧУТЬЖИР [L]</option>
+              <option value="XL">ЖИР [XL]</option>
+              <option value="XXL">ЖЕНя ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
+              <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
+            </select>
+            <button onclick="addToCart('Футболка «DOYAR OCHKA»', 14999, 'doyar-ochka', 'Nastasyushka.webp')" aria-label="Добавить футболку DOYAR OCHKA в корзину">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="connecting" class="product-modal" role="dialog" aria-label="Футболка CONNECTING PEOPLE">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('connecting')" aria-label="Закрыть">X</button>
+        <div class="modal-grid">
+          <img src="conn.png" class="modal-image" alt="Футболка CONNECTING PEOPLE" loading="lazy">
+          <div class="modal-details">
+            <h3>Футболка «CONNECTING PEOPLE»</h3>
+            <p class="price">14 999 ₽</p>
+            <p>Соединяет друзей вместе</p>
+            <p>Стандартный крой</p>
+            <p>Состав: 100% хлопок</p>
+            <p>Плотность: 300 г/м²</p>
+            <p>Свага: Максимальная</p>
+            <p>Рисунок: Прямая печать на груди и спине</p>
+            <p>Рекомендация по уходу: стирать при 30°C</p>
+            <p class="warning">При производстве пострадало 22 человека, 4 погибло.</p>
+            <p>Трек-номер придёт после оформления.</p>
+            <select id="size-connecting" aria-label="Выберите размер футболки CONNECTING PEOPLE">
+              <option value="S">СКЕЛЕТ [S]</option>
+              <option value="M">НЕЖИР [M]</option>
+              <option value="L">ЧУТЬЖИР [L]</option>
+              <option value="XL">ЖИР [XL]</option>
+              <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
+              <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
+            </select>
+            <button onclick="addToCart('Футболка «CONNECTING PEOPLE»', 14999, 'connecting', 'conn.png')" aria-label="Добавить футболку CONNECTING PEOPLE в корзину">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="unreal" class="product-modal" role="dialog" aria-label="Футболка UNREAL SWAGA">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('unreal')" aria-label="Закрыть">X</button>
+        <div class="modal-grid">
+          <img src="unrealswaga.jpg" class="modal-image" alt="Футболка UNREAL SWAGA" loading="lazy">
+          <div class="modal-details">
+            <h3>Футболка «UNREAL SWAGA»</h3>
+            <p class="price">14 999 ₽</p>
+            <p>Футболка, ломающая свагометры</p>
+            <p>Стандартный крой</p>
+            <p>Состав: 100% хлопок</p>
+            <p>Плотность: 280 г/м²</p>
+            <p>Свага: НЕИZМЕРИМА</p>
+            <p>Эффект: состаренный look</p>
+            <p>Рекомендация по уходу: не отбеливать</p>
+            <p class="warning">При производстве пострадало 18 человек, 3 пгибло.</p>
+            <p>Трек-номер придёт после оформления.</p>
+            <select id="size-unreal" aria-label="Выберите размер футболки UNREAL SWAGA">
+              <option value="S">СКЕЛЕТ [S]</option>
+              <option value="M">НЕЖИР [M]</option>
+              <option value="L">ЧУТЬЖИР [L]</option>
+              <option value="XL">ЖИР [XL]</option>
+              <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
+              <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
+            </select>
+            <button onclick="addToCart('Футболка «UNREAL SWAGA»', 14999, 'unreal', 'unrealswaga.jpg')" aria-label="Добавить футболку UNREAL SWAGA в корзину">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="deldak" class="product-modal" role="dialog" aria-label="Игрушка DELDAK">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('deldak')" aria-label="Закрыть">X</button>
+        <div class="modal-grid">
+          <img src="deldak.png" class="modal-image" alt="Резиновая игрушка DELDAK" loading="lazy">
+          <div class="modal-details">
+            <h3>Игрушка «DELDAK ДЛЯ ZОЛО»</h3>
+            <p class="price">9 999 ₽</p>
+            <p>Сделан из прочной резины, хорошо прилепляется</p>
+            <p>Размеров нет</p>
+            <p>Свага: Максимальная</p>
+            <p class="warning">При производстве пострадало 15 человек, 2 погибло.</p>
+            <p>Трек-номер придёт после оформления.</p>
+            <button onclick="addToCart('Игрушка «DELDAK НА КОНЦЕРТ ИВАНА ZОЛО»', 9999, 'deldak', 'deldak.png')" aria-label="Добавить игрушку DELDAK в корзину">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="club" class="product-modal" role="dialog" aria-label="Худи CLUB">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('club')" aria-label="Закрыть">X</button>
+        <div class="modal-grid">
+          <img src="pclub.png" class="modal-image" alt="Худи CLUB с надписью" loading="lazy">
+          <div class="modal-details">
+            <h3>Худи «CLUB»</h3>
+            <p class="price">9 999 ₽</p>
+            <p>Худи заметное для любого</p>
+            <p>Оверсайз крой</p>
+            <p>Состав: 80% хлопок, 20% полиэстер</p>
+            <p>Плотность: 340 г/м²</p>
+            <p>Рисунок: Светоотражающая печать на груди и спине</p>
+            <p>Капюшон с регулируемыми стрингами</p>
+            <p>Свага: Максимальная</p>
+            <p>Карман-кенгуру</p>
+            <p>Рекомендация по уходу: стирать при 30°C, не гладить</p>
+            <p class="warning">При производстве пострадало 17 человек, 1 пгиб.</p>
+            <p>Трек-номер придёт после оформления.</p>
+            <select id="size-club" aria-label="Выберите размер худи CLUB">
+              <option value="S">СКЕЛЕТ [S]</option>
+              <option value="M">НЕЖИР [M]</option>
+              <option value="L">ЧУТЬЖИР [L]</option>
+              <option value="XL">ЖИР [XL]</option>
+              <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
+              <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
+            </select>
+            <button onclick="addToCart('Худи «CLUB»', 9999, 'club', 'pclub.png')" aria-label="Добавить худи CLUB в корзину">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="black-who-i-pants" class="product-modal" role="dialog" aria-label="Брюки Black Who I">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('black-who-i-pants')" aria-label="Закрыть">X</button>
+        <div class="modal-grid">
+          <img src="blackwhoibruk.jpg" class="modal-image" alt="Брюки Black Who I" loading="lazy">
+          <div class="modal-details">
+            <h3>Брюки «Black Who I»</h3>
+            <p class="price">14 880 ₽</p>
+            <p>Эксклюзивные брюки для настоящих уличных воинов</p>
+            <p>Материал: Hui nya</p>
+            <p>Свободный крой</p>
+            <p>Усиленные швы</p>
+            <p>Регулируемый пояс</p>
+            <p>Свага: Максимальная</p>
+            <p>Рекомендация по уходу: стирать при 30°C</p>
+            <p class="warning">При производстве пострадало 21 человек, 4 погибло.</p>
+            <p>Трек-номер придёт после оформления.</p>
+            <select id="size-black-who-i-pants" aria-label="Выберите размер брюк Black Who I">
+              <option value="S">СКЕЛЕТ [S]</option>
+              <option value="M">НЕЖИР [M]</option>
+              <option value="L">ЧУТЬЖИР [L]</option>
+              <option value="XL">ЖИР [XL]</option>
+              <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
+              <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
+            </select>
+            <button onclick="addToCart('Брюки «Black Who I»', 14880, 'black-who-i-pants', 'blackwhoibruk.jpg')" aria-label="Добавить брюки Black Who I в корзину">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="black-who-i-tshirt" class="product-modal" role="dialog" aria-label="Футболка Black Who I">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('black-who-i-tshirt')" aria-label="Закрыть">X</button>
+        <div class="modal-grid">
+          <img src="blackwhoifut.jpg" class="modal-image" alt="Футболка Black Who I" loading="lazy">
+          <div class="modal-details">
+            <h3>Футболка «Black Who I»</h3>
+            <p class="price">14 880 ₽</p>
+            <p>Эксклюзивная футболка для истинных ценителей уличного стиля</p>
+            <p>Материал: Hui nya</p>
+            <p>Стандартный крой</p>
+            <p>Плотность: 320 г/м²</p>
+            <p>Рисунок: Прямая печать на груди и спине</p>
+            <p>Эффект состаривания</p>
+            <p>Свага: Максимальная</p>
+            <p>Рекомендация по уходу: стирать при 30°C, вывернув наизнанку</p>
+            <p class="warning">При производстве пострадало 18 человек, 3 погибло.</p>
+            <p>Трек-номер придёт после оформления.</p>
+            <select id="size-black-who-i-tshirt" aria-label="Выберите размер футболки Black Who I">
+              <option value="S">СКЕЛЕТ [S]</option>
+              <option value="M">НЕЖИР [M]</option>
+              <option value="L">ЧУТЬЖИР [L]</option>
+              <option value="XL">ЖИР [XL]</option>
+              <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
+              <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
+            </select>
+            <button onclick="addToCart('Футболка «Black Who I»', 14880, 'black-who-i-tshirt', 'blackwhoifut.jpg')" aria-label="Добавить футболку Black Who I в корзину">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="screamer-modal" class="modal" role="dialog" aria-hidden="true">
+      <img src="https://c.tenor.com/dTEh3SkNUowAAAAd/tenor.gif" alt="Анимация" loading="lazy">
+    </div>
+    
+    <div id="checkout-modal" class="modal" role="dialog" aria-label="Уведомление о заказе">
+      <div class="checkout-modal-content">
+        <button class="close" onclick="closeModal('checkout-modal')" aria-label="Закрыть">X</button>
+        <h3>ZAEBIZ®</h3>
+        <p>Этот сайт — сатира на русский стритвир, заказ не настоящий, ничего не ждите.</p>
+      </div>
+    </div>
+  </main>
+  
+  <audio id="screamer-audio" src="https://www.myinstants.com/media/sounds/aaaaaaa-skrimer.mp3" preload="none"></audio>
+  <audio id="doyar-audio" src="https://www.myinstants.com/media/sounds/nastasiushka-doiarochka.mp3" preload="none"></audio>
+  
+  <footer>
+    <p class="warning">Производство нашей одежды — это тяжёлый труд. 6 миллионов рабочих отдали всё ради бренда.</p>
+    <p>ZAEBIZ® Камень-на-Оби</p>
+    <p>© 2025 ZAEBIZ®. Все права защищены.</p>
+  </footer>
+  
+  <script>
+    let cart = JSON.parse(localStorage.getItem('zaebiz-cart')) || [];
+    let deliveryType = 'russia';
+    let isMusicPlaying = true;
+    let currentCategory = 'all';
+    
+    const html = document.documentElement;
+    const themeIcon = document.getElementById('theme-icon');
+    const backgroundMusic = document.getElementById('background-music');
+    const mobileSoundControl = document.getElementById('mobile-sound-control');
+    const soundIcon = document.getElementById('sound-icon');
+    
+    const productsData = [
+      { 
+        id: 'uyobishe',
+        name: 'Футболка «UYOBISHE»', 
+        price: 4399,
+        image: 'dasd.webp',
+        desc: 'Дерзкая футболка UYOBISHE для уличного вайба',
+        category: 't-shirt'
+      },
+      { 
+        id: 'penis-cap',
+        name: 'Кепка «#PENIS»', 
+        price: 2999,
+        image: 'Kepa.webp',
+        desc: 'Кепка с провокационной вышивкой для смелых',
+        category: 'headwear'
+      },
+      { 
+        id: 'rossiya',
+        name: 'Футболка «ROSSIYA»', 
+        price: 9999,
+        image: 'rus.webp',
+        desc: 'Футболка ROSSIYA для тех, кто гордится корнями',
+        category: 't-shirt'
+      },
+      { 
+        id: 'doyar-ochka',
+        name: 'Футболка «DOYAR OCHKA»', 
+        price: 14999,
+        image: 'Nastasyushka.webp',
+        desc: 'Эксклюзивная футболка DOYAR OCHKA для истинных ценителей',
+        category: 't-shirt'
+      },
+      { 
+        id: 'connecting',
+        name: 'Футболка «CONNECTING PEOPLE»', 
+        price: 14999,
+        image: 'conn.png',
+        desc: 'Соединяет друзей вместе',
+        category: 't-shirt'
+      },
+      { 
+        id: 'unreal',
+        name: 'Футболка «UNREAL SWAGA»', 
+        price: 14999,
+        image: 'unrealswaga.jpg',
+        desc: 'Футболка, ломающая свагометры',
+        category: 't-shirt'
+      },
+      { 
+        id: 'deldak',
+        name: 'Игрушка «DELDAK НА КОНЦЕРТ ИВАНА ZОЛО»', 
+        price: 9999,
+        image: 'deldak.png',
+        desc: 'Сделан из прочной резины, хорошо прилепляется',
+        category: 'other'
+      },
+      { 
+        id: 'club',
+        name: 'Худи «CLUB»', 
+        price: 9999,
+        image: 'pclub.png',
+        desc: 'Худи заметное для любого',
+        category: 'hoodie'
+      },
+      { 
+        id: 'black-who-i-pants',
+        name: 'Брюки «Black Who I»', 
+        price: 14880,
+        image: 'blackwhoibruk.jpg',
+        desc: 'Эксклюзивные брюки для настоящих уличных воинов',
+        category: 'pants'
+      },
+      { 
+        id: 'black-who-i-tshirt',
+        name: 'Футболка «Black Who I»', 
+        price: 14880,
+        image: 'blackwhoifut.jpg',
+        desc: 'Эксклюзивная футболка для истинных ценителей уличного стиля',
+        category: 't-shirt'
+      }
+    ];
+
+    function setTheme(theme) {
+      html.className = theme + '-theme';
+      localStorage.setItem('theme', theme);
+      updateThemeIcon(theme);
+    }
+
+    function toggleTheme() {
+      const currentTheme = html.classList.contains('light-theme') ? 'light' : 'dark';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      setTheme(newTheme);
+    }
+
+    function updateThemeIcon(theme) {
+      themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+    }
+
+    function playBackgroundMusic() {
+      backgroundMusic.volume = 0.3;
+      backgroundMusic.play().catch(e => console.log('Автовоспроизведение заблокировано'));
+    }
+    
+    function toggleMusic() {
+      if (isMusicPlaying) {
+        backgroundMusic.pause();
+        if (soundIcon) soundIcon.className = 'fas fa-volume-mute';
+        if (mobileSoundControl) {
+          mobileSoundControl.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        }
+      } else {
+        backgroundMusic.play();
+        if (soundIcon) soundIcon.className = 'fas fa-volume-up';
+        if (mobileSoundControl) {
+          mobileSoundControl.innerHTML = '<i class="fas fa-volume-up"></i>';
+        }
+      }
+      isMusicPlaying = !isMusicPlaying;
+    }
+    
+    window.addEventListener('DOMContentLoaded', () => {
+      playBackgroundMusic();
+      initCategoryFilters();
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else {
+        setTheme('light');
+      }
+      handleHashNavigation();
+      updateCart();
+    });
+    
+    if (mobileSoundControl) {
+      mobileSoundControl.addEventListener('click', toggleMusic);
+    }
+    
+    function toggleMenu() {
+      const nav = document.getElementById('main-nav');
+      const burger = document.querySelector('.burger');
+      nav.classList.toggle('active');
+      burger.classList.toggle('active');
+    }
+    
+    function toggleCart() {
+      const cartDrawer = document.getElementById('cart-drawer');
+      const cartOverlay = document.getElementById('cart-overlay');
+      
+      cartDrawer.classList.toggle('active');
+      cartOverlay.classList.toggle('active');
+      
+      if (window.innerWidth <= 768) {
+        document.getElementById('main-nav').classList.remove('active');
+        document.querySelector('.burger').classList.remove('active');
+      }
+    }
+    
+    function showSection(sectionId) {
+      window.scrollTo(0, 0);
+      
+      document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(sectionId).classList.add('active');
+      
+      if (window.innerWidth <= 768) {
+        document.getElementById('main-nav').classList.remove('active');
+        document.querySelector('.burger').classList.remove('active');
+      }
+      
+      if (sectionId === 'products') {
+        renderProducts();
+      }
+      
+      if (sectionId !== 'swagoogle') {
+        document.getElementById('search-results').innerHTML = '';
+        document.getElementById('swagoogle-input').value = '';
+      }
+    }
+    
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      window.location.hash = `product-${modalId}`;
+    }
+    
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+      document.body.style.overflow = 'auto';
+      if (window.location.hash.includes('product-')) {
+        history.replaceState(null, null, ' ');
+      }
+    }
+    
+    function handleHashNavigation() {
+      if (window.location.hash) {
+        const hash = window.location.hash.substring(1);
+        if (hash.startsWith('product-')) {
+          const modalId = hash.split('-')[1];
+          openModal(modalId);
+        }
+      }
+    }
+    
+    function setDeliveryType(type) {
+      deliveryType = type;
+      const deliveryCountry = document.getElementById('delivery-country');
+      const deliveryCountryLabel = document.getElementById('delivery-country-label');
+      const buttons = document.querySelectorAll('.delivery-btn');
+      
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      if (type === 'russia') {
+        document.querySelector('.delivery-btn:nth-child(1)').classList.add('active');
+        deliveryCountry.style.display = 'none';
+        deliveryCountryLabel.style.display = 'none';
+      } else {
+        document.querySelector('.delivery-btn:nth-child(2)').classList.add('active');
+        deliveryCountry.style.display = 'block';
+        deliveryCountryLabel.style.display = 'block';
+      }
+    }
+    
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      if (notification) {
+        notification.textContent = message;
+        notification.style.display = 'block';
+        setTimeout(() => {
+          notification.style.display = 'none';
+        }, 4000);
+      }
+    }
+    
+    function addToCart(name, price, modalId, image) {
+      let size = "One Size";
+      
+      if (modalId !== 'deldak' && modalId !== 'penis-cap') {
+        const sizeSelect = document.getElementById(`size-${modalId}`);
+        if (!sizeSelect) {
+          return;
+        }
+        size = sizeSelect.value;
+      }
+      
+      cart.push({ name, price, size, image });
+      updateCart();
+      saveCartToLocalStorage();
+      closeModal(modalId);
+      toggleCart();
+      
+      if (name.includes('DOYAR OCHKA')) {
+        const audio = document.getElementById('doyar-audio');
+        if (audio) {
+          audio.currentTime = 0;
+          audio.play().catch(e => console.error('Audio playback failed:', e));
+        }
+      }
+      
+      showNotification('ДОБАВЛЕНО В КОРЗИНУ');
+    }
+    
+    function removeFromCart(index) {
+      if (index >= 0 && index < cart.length) {
+        cart.splice(index, 1);
+        updateCart();
+        saveCartToLocalStorage();
+      }
+    }
+    
+    function saveCartToLocalStorage() {
+      localStorage.setItem('zaebiz-cart', JSON.stringify(cart));
+    }
+    
+    function updateCart() {
+      const cartItems = document.getElementById('cart-items');
+      const cartTotal = document.getElementById('cart-total');
+      
+      if (!cartItems || !cartTotal) {
+        return;
+      }
+      
+      cartItems.innerHTML = '';
+      let total = 0;
+      
+      cart.forEach((item, index) => {
+        total += item.price;
+        
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-item-info">
+            <h3>${item.name}</h3>
+            <p>Размер: ${item.size}</p>
+            <p>${item.price} ₽</p>
+          </div>
+          <button class="remove-btn" onclick="removeFromCart(${index})" aria-label="Удалить ${item.name} из корзины">X</button>
+        `;
+        
+        cartItems.appendChild(cartItem);
+      });
+      
+      cartTotal.textContent = `Итого: ${total} ₽`;
+    }
+    
+    function openCheckoutModal() {
+      if (cart.length === 0) {
+        showNotification('КОРЗИНА ПУСТА!');
+        return;
+      }
+      
+      const deliveryAddress = document.getElementById('delivery-address');
+      const deliveryCountry = document.getElementById('delivery-country');
+      
+      if (!deliveryAddress) {
+        return;
+      }
+      
+      if (!deliveryAddress.value.trim()) {
+        showNotification('УКАЖИТЕ АДРЕС ДОСТАВКИ!');
+        return;
+      }
+      
+      if (deliveryType === 'international' && (!deliveryCountry || !deliveryCountry.value)) {
+        showNotification('УКАЖИТЕ СТРАНУ!');
+        return;
+      }
+      
+      const screamerModal = document.getElementById('screamer-modal');
+      const screamerAudio = document.getElementById('screamer-audio');
+      
+      if (screamerModal && screamerAudio) {
+        screamerModal.style.display = 'block';
+        screamerAudio.currentTime = 1;
+        screamerAudio.play().catch(e => console.error('Audio playback failed:', e));
+        
+        setTimeout(() => {
+          screamerModal.style.display = 'none';
+          screamerAudio.pause();
+          screamerAudio.currentTime = 0;
+          openModal('checkout-modal');
+          toggleCart();
+        }, 10000);
+      } else {
+        openModal('checkout-modal');
+        toggleCart();
+      }
+    }
+    
+    function searchProducts() {
+      const searchTerm = document.getElementById('swagoogle-input').value.toLowerCase();
+      const resultsContainer = document.getElementById('search-results');
+      
+      if (!searchTerm.trim()) {
+        resultsContainer.innerHTML = '<p style="color:var(--text-tertiary); text-align:center;">Введите поисковый запрос</p>';
+        return;
+      }
+      
+      const filteredProducts = productsData.filter(product => 
+        product.name.toLowerCase().includes(searchTerm) || 
+        product.desc.toLowerCase().includes(searchTerm)
+      );
+      
+      if (filteredProducts.length === 0) {
+        resultsContainer.innerHTML = '<p style="color:var(--text-tertiary); text-align:center;">Ничего не найдено. Попробуйте другой запрос.</p>';
+        return;
+      }
+      
+      resultsContainer.innerHTML = '';
+      filteredProducts.forEach(product => {
+        const item = document.createElement('div');
+        item.className = 'search-item';
+        item.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>${product.desc}</p>
+          <p class="price">${product.price} ₽</p>
+          <button onclick="openModal('${product.id}')">Посмотреть</button>
+        `;
+        resultsContainer.appendChild(item);
+      });
+    }
+    
+    function initCategoryFilters() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          currentCategory = button.getAttribute('data-category');
+          
+          renderProducts();
+        });
+      });
+    }
+    
+    function renderProducts() {
+      const productsGrid = document.getElementById('products-grid');
+      if (!productsGrid) return;
+      
+      productsGrid.innerHTML = '';
+      
+      const filteredProducts = currentCategory === 'all' 
+        ? productsData 
+        : productsData.filter(product => product.category === currentCategory);
+      
+      filteredProducts.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card';
+        productCard.setAttribute('onclick', `openModal('${product.id}')`);
+        productCard.setAttribute('aria-label', product.name);
+        productCard.setAttribute('data-category', product.category);
+        
+        productCard.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" loading="lazy">
+          <div class="product-info">
+            <h3>${product.name}</h3>
+            <p>${product.price} ₽</p>
+          </div>
+        `;
+        
+        productsGrid.appendChild(productCard);
+      });
+    }
+    
+    document.getElementById('swagoogle-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        searchProducts();
+      }
+    });
+    
+    window.onclick = function(event) {
+      document.querySelectorAll('.modal, .product-modal').forEach(modal => {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+          
+          const screamerAudio = document.getElementById('screamer-audio');
+          if (screamerAudio) {
+            screamerAudio.pause();
+            screamerAudio.currentTime = 0;
+          }
+          
+          if (window.location.hash.includes('product-')) {
+            history.replaceState(null, null, ' ');
+          }
+        }
+      });
+      
+      if (event.target === document.getElementById('cart-overlay')) {
+        toggleCart();
+      }
+    };
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      showSection('home');
+      setDeliveryType('russia');
+      renderProducts();
+    });
+  </script>
+</body>
+</html>
