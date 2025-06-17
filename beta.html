@@ -282,6 +282,46 @@
       font-weight: 500;
     }
 
+    .black-who-i-border {
+      border: 3px solid #333333;
+    }
+
+    .uyobishe-border {
+      border: 3px solid #ff69b4;
+    }
+
+    .penis-cap-border {
+      border: 3px solid #ff69b4;
+    }
+
+    .penis-cap2-border {
+      border: 3px solid #556B2F;
+    }
+
+    .rossiya-border {
+      border: 3px solid #0039a6;
+    }
+
+    .doyar-ochka-border {
+      border: 3px solid #8B4513;
+    }
+
+    .connecting-border {
+      border: 3px solid #00bfff;
+    }
+
+    .unreal-border {
+      border: 3px solid #ff0000;
+    }
+
+    .deldak-border {
+      border: 3px solid #ff0000;
+    }
+
+    .club-border {
+      border: 3px solid #ff007f;
+    }
+
     .cart-drawer {
       position: fixed;
       top: 0;
@@ -741,6 +781,16 @@
       font-weight: 500;
     }
 
+    .footer-logo {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 15px;
+      background-image: var(--logo-url);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
     .mobile-sound-control {
       display: none;
       position: fixed;
@@ -922,9 +972,11 @@
       }
       
       .logo {
-        margin-bottom: 0;
+        position: absolute;
+        left: 20px;
+        top: 14px;
         height: 32px;
-        width: auto;
+        width: 32px;
         transform: none;
         margin: 0;
       }
@@ -1016,7 +1068,10 @@
       }
       
       .logo {
-        height: 30px;
+        height: 32px;
+        width: 32px;
+        top: 14px;
+        left: 15px;
       }
       
       .products-grid {
@@ -1231,7 +1286,7 @@
       </div>
       
       <div class="products-grid" id="products-grid">
-        <div class="product-card" onclick="openModal('uyobishe')" aria-label="Футболка UYOBISHE" data-category="t-shirt">
+        <div class="product-card uyobishe-border" onclick="openModal('uyobishe')" aria-label="Футболка UYOBISHE" data-category="t-shirt">
           <img src="dasd.webp" alt="Футболка UYOBISHE с дерзким принтом" loading="lazy">
           <div class="product-info">
             <h3>Футболка «UYOBISHE»</h3>
@@ -1239,7 +1294,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('penis-cap')" aria-label="Кепка #PENIS" data-category="headwear">
+        <div class="product-card penis-cap-border" onclick="openModal('penis-cap')" aria-label="Кепка #PENIS" data-category="headwear">
           <img src="Kepa.webp" alt="Кепка #PENIS с вышивкой" loading="lazy">
           <div class="product-info">
             <h3>Кепка «#PENIS»</h3>
@@ -1247,7 +1302,15 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('rossiya')" aria-label="Футболка ROSSIYA" data-category="t-shirt">
+        <div class="product-card penis-cap2-border" onclick="openModal('penis-cap2')" aria-label="Кепка #PENIS 2" data-category="headwear">
+          <img src="penis2.jpg" alt="Кепка #PENIS 2 с вышивкой" loading="lazy">
+          <div class="product-info">
+            <h3>Кепка «#PENIS 2»</h3>
+            <p>2 999 ₽</p>
+          </div>
+        </div>
+        
+        <div class="product-card rossiya-border" onclick="openModal('rossiya')" aria-label="Футболка ROSSIYA" data-category="t-shirt">
           <img src="rus.webp" alt="Футболка ROSSIYA с патриотичным дизайном" loading="lazy">
           <div class="product-info">
             <h3>Футболка «ROSSIYA»</h3>
@@ -1255,7 +1318,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('doyar-ochka')" aria-label="Футболка DOYAR OCHKA" data-category="t-shirt">
+        <div class="product-card doyar-ochka-border" onclick="openModal('doyar-ochka')" aria-label="Футболка DOYAR OCHKA" data-category="t-shirt">
           <img src="Nastasyushka.webp" alt="Футболка DOYAR OCHKA с эксклюзивным принтом" loading="lazy">
           <div class="product-info">
             <h3>Футболка «DOYAR OCHKA»</h3>
@@ -1263,7 +1326,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('connecting')" aria-label="Футболка CONNECTING PEOPLE" data-category="t-shirt">
+        <div class="product-card connecting-border" onclick="openModal('connecting')" aria-label="Футболка CONNECTING PEOPLE" data-category="t-shirt">
           <img src="conn.png" alt="Футболка CONNECTING PEOPLE" loading="lazy">
           <div class="product-info">
             <h3>Футболка «CONNECTING PEOPLE»</h3>
@@ -1271,7 +1334,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('unreal')" aria-label="Футболка UNREAL SWAGA" data-category="t-shirt">
+        <div class="product-card unreal-border" onclick="openModal('unreal')" aria-label="Футболка UNREAL SWAGA" data-category="t-shirt">
           <img src="unrealswaga.jpg" alt="Футболка UNREAL SWAGA" loading="lazy">
           <div class="product-info">
             <h3>Футболка «UNREAL SWAGA»</h3>
@@ -1279,7 +1342,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('deldak')" aria-label="Игрушка DELDAK" data-category="other">
+        <div class="product-card deldak-border" onclick="openModal('deldak')" aria-label="Игрушка DELDAK" data-category="other">
           <img src="deldak.png" alt="Резиновая игрушка DELDAK" loading="lazy">
           <div class="product-info">
             <h3>Игрушка «DELDAK НА КОНЦЕРТ ИВАНА ZОЛО»</h3>
@@ -1287,7 +1350,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('club')" aria-label="Худи CLUB" data-category="hoodie">
+        <div class="product-card club-border" onclick="openModal('club')" aria-label="Худи CLUB" data-category="hoodie">
           <img src="pclub.png" alt="Худи CLUB с надписью" loading="lazy">
           <div class="product-info">
             <h3>Худи «CLUB»</h3>
@@ -1295,7 +1358,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('black-who-i-pants')" aria-label="Брюки Black Who I" data-category="pants">
+        <div class="product-card black-who-i-border" onclick="openModal('black-who-i-pants')" aria-label="Брюки Black Who I" data-category="pants">
           <img src="blackwhoibruk.jpg" alt="Брюки Black Who I" loading="lazy">
           <div class="product-info">
             <h3>Брюки «Black Who I»</h3>
@@ -1303,7 +1366,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('black-who-i-tshirt')" aria-label="Футболка Black Who I" data-category="t-shirt">
+        <div class="product-card black-who-i-border" onclick="openModal('black-who-i-tshirt')" aria-label="Футболка Black Who I" data-category="t-shirt">
           <img src="blackwhoifut.jpg" alt="Футболка Black Who I" loading="lazy">
           <div class="product-info">
             <h3>Футболка «Black Who I»</h3>
@@ -1388,12 +1451,37 @@
             <p>Регулируемый размер, металлическая застёжка</p>
             <p>Надпись внутри: «КАМЕНЬ НА ОБИ 2025»</p>
             <p>Свага: Максимальная</p>
-            <p class="warning">При производстве пострадало 12 человек, 1 погиб.</p>
+            <p class="warning">При производстве пострадало 12 человек, 1 пгиб.</p>
             <p>Трек-номер придёт после оформления.</p>
             <select id="size-penis-cap" aria-label="Выберите размер кепки #PENIS">
               <option value="One Size">Один размер</option>
             </select>
             <button onclick="addToCart('Кепка «#PENIS»', 2999, 'penis-cap', 'Kepa.webp')" aria-label="Добавить кепку #PENIS в корзину">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="penis-cap2" class="product-modal" role="dialog" aria-label="Кепка #PENIS 2">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('penis-cap2')" aria-label="Закрыть">X</button>
+        <div class="modal-grid">
+          <img src="penis2.jpg" class="modal-image" alt="Кепка #PENIS 2 с вышивкой" loading="lazy">
+          <div class="modal-details">
+            <h3>Кепка «#PENIS 2»</h3>
+            <p class="price">2 999 ₽</p>
+            <p>Кепка с провокационной вышивкой для смелых (версия 2)</p>
+            <p>Состав: 100% хлопок</p>
+            <p>Объёмная вышивка «#ПЕНИС» спереди</p>
+            <p>Регулируемый размер, металлическая застёжка</p>
+            <p>Надпись внутри: «КАМЕНЬ НА ОБИ 2025»</p>
+            <p>Свага: Максимальная</p>
+            <p class="warning">При производстве пострадало 15 человек, 2 пгибло.</p>
+            <p>Трек-номер придёт после оформления.</p>
+            <select id="size-penis-cap2" aria-label="Выберите размер кепки #PENIS 2">
+              <option value="One Size">Один размер</option>
+            </select>
+            <button onclick="addToCart('Кепка «#PENIS 2»', 2999, 'penis-cap2', 'penis2.jpg')" aria-label="Добавить кепку #PENIS 2 в корзину">В корзину</button>
           </div>
         </div>
       </div>
@@ -1448,7 +1536,7 @@
             <p>Эффект состаривания</p>
             <p>Свага: Максимальная</p>
             <p>Рекомендация по уходу: стирать при 30°C, вывернув наизнанку</p>
-            <p class="warning">При производстве пострадало 30 человек, 5 погибло.</p>
+            <p class="warning">При производстве пострадало 30 человек, 5 пгибло.</p>
             <p>Трек-номер придёт после оформления.</p>
             <select id="size-doyar-ochka" aria-label="Выберите размер футболки DOYAR OCHKA">
               <option value="S">СКЕЛЕТ [S]</option>
@@ -1480,7 +1568,7 @@
             <p>Свага: Максимальная</p>
             <p>Рисунок: Прямая печать на груди и спине</p>
             <p>Рекомендация по уходу: стирать при 30°C</p>
-            <p class="warning">При производстве пострадало 22 человека, 4 погибло.</p>
+            <p class="warning">При производстве пострадало 22 человека, 4 пгибло.</p>
             <p>Трек-номер придёт после оформления.</p>
             <select id="size-connecting" aria-label="Выберите размер футболки CONNECTING PEOPLE">
               <option value="S">СКЕЛЕТ [S]</option>
@@ -1540,7 +1628,7 @@
             <p>Сделан из прочной резины, хорошо прилепляется</p>
             <p>Размеров нет</p>
             <p>Свага: Максимальная</p>
-            <p class="warning">При производстве пострадало 15 человек, 2 погибло.</p>
+            <p class="warning">При производстве пострадало 15 человек, 2 пгибло.</p>
             <p>Трек-номер придёт после оформления.</p>
             <button onclick="addToCart('Игрушка «DELDAK НА КОНЦЕРТ ИВАНА ZОЛО»', 9999, 'deldak', 'deldak.png')" aria-label="Добавить игрушку DELDAK в корзину">В корзину</button>
           </div>
@@ -1597,7 +1685,7 @@
             <p>Регулируемый пояс</p>
             <p>Свага: Максимальная</p>
             <p>Рекомендация по уходу: стирать при 30°C</p>
-            <p class="warning">При производстве пострадало 21 человек, 4 погибло.</p>
+            <p class="warning">При производстве пострадало 21 человек, 4 пгибло.</p>
             <p>Трек-номер придёт после оформления.</p>
             <select id="size-black-who-i-pants" aria-label="Выберите размер брюк Black Who I">
               <option value="S">СКЕЛЕТ [S]</option>
@@ -1630,7 +1718,7 @@
             <p>Эффект состаривания</p>
             <p>Свага: Максимальная</p>
             <p>Рекомендация по уходу: стирать при 30°C, вывернув наизнанку</p>
-            <p class="warning">При производстве пострадало 18 человек, 3 погибло.</p>
+            <p class="warning">При производстве пострадало 18 человек, 3 пгибло.</p>
             <p>Трек-номер придёт после оформления.</p>
             <select id="size-black-who-i-tshirt" aria-label="Выберите размер футболки Black Who I">
               <option value="S">СКЕЛЕТ [S]</option>
@@ -1664,6 +1752,7 @@
   <audio id="doyar-audio" src="https://www.myinstants.com/media/sounds/nastasiushka-doiarochka.mp3" preload="none"></audio>
   
   <footer>
+    <div class="footer-logo"></div>
     <p class="warning">Производство нашей одежды — это тяжёлый труд. 6 миллионов рабочих отдали всё ради бренда.</p>
     <p>ZAEBIZ® Камень-на-Оби</p>
     <p>© 2025 ZAEBIZ®. Все права защищены.</p>
@@ -1696,6 +1785,14 @@
         price: 2999,
         image: 'Kepa.webp',
         desc: 'Кепка с провокационной вышивкой для смелых',
+        category: 'headwear'
+      },
+      { 
+        id: 'penis-cap2',
+        name: 'Кепка «#PENIS 2»', 
+        price: 2999,
+        image: 'penis2.jpg',
+        desc: 'Кепка с провокационной вышивкой для смелых (версия 2)',
         category: 'headwear'
       },
       { 
@@ -1871,9 +1968,6 @@
     function closeModal(modalId) {
       document.getElementById(modalId).style.display = 'none';
       document.body.style.overflow = 'auto';
-      if (window.location.hash.includes('product-')) {
-        history.replaceState(null, null, ' ');
-      }
     }
     
     function handleHashNavigation() {
@@ -1881,7 +1975,9 @@
         const hash = window.location.hash.substring(1);
         if (hash.startsWith('product-')) {
           const modalId = hash.split('-')[1];
-          openModal(modalId);
+          setTimeout(() => {
+            openModal(modalId);
+          }, 100);
         }
       }
     }
@@ -1921,7 +2017,7 @@
     function addToCart(name, price, modalId, image) {
       let size = "One Size";
       
-      if (modalId !== 'deldak' && modalId !== 'penis-cap') {
+      if (modalId !== 'deldak' && modalId !== 'penis-cap' && modalId !== 'penis-cap2') {
         const sizeSelect = document.getElementById(`size-${modalId}`);
         if (!sizeSelect) {
           return;
@@ -2095,7 +2191,7 @@
       
       filteredProducts.forEach(product => {
         const productCard = document.createElement('div');
-        productCard.className = 'product-card';
+        productCard.className = `product-card ${product.id}-border`;
         productCard.setAttribute('onclick', `openModal('${product.id}')`);
         productCard.setAttribute('aria-label', product.name);
         productCard.setAttribute('data-category', product.category);
@@ -2129,10 +2225,6 @@
             screamerAudio.pause();
             screamerAudio.currentTime = 0;
           }
-          
-          if (window.location.hash.includes('product-')) {
-            history.replaceState(null, null, ' ');
-          }
         }
       });
       
@@ -2146,6 +2238,8 @@
       setDeliveryType('russia');
       renderProducts();
     });
+    
+    window.addEventListener('hashchange', handleHashNavigation);
   </script>
 </body>
 </html>
