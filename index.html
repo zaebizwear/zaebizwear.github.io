@@ -890,6 +890,34 @@
       background: #444;
     }
 
+    .category-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      justify-content: center;
+    }
+
+    .filter-btn {
+      padding: 0.8rem 1.5rem;
+      background: #1a1a1a;
+      color: #aaa;
+      border: 1px solid rgba(255, 0, 255, 0.3);
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(45deg, #ff0000, #ff9900, #ffff00, #00ff00, #00ffff, #0000ff, #9900ff, #ff00ff);
+      background-size: 400% 400%;
+      animation: rainbowText 8s linear infinite;
+      color: #000;
+      font-weight: bold;
+      border: none;
+    }
+
     @media (max-width: 1024px) {
       .modal-grid {
         grid-template-columns: 1fr;
@@ -1207,8 +1235,18 @@
     
     <section class="section" id="products" aria-labelledby="products-heading">
       <h2 id="products-heading">Каталог ZAEBIZ®</h2>
+      
+      <div class="category-filters" id="category-filters">
+        <button class="filter-btn active" data-category="all">Всё</button>
+        <button class="filter-btn" data-category="hoodie">Худи</button>
+        <button class="filter-btn" data-category="t-shirt">Футболки</button>
+        <button class="filter-btn" data-category="headwear">Головные Уборы</button>
+        <button class="filter-btn" data-category="pants">Брюки</button>
+        <button class="filter-btn" data-category="other">Прочее</button>
+      </div>
+      
       <div class="products-grid" id="products-grid">
-        <div class="product-card" onclick="openModal('uyobishe')" aria-label="Футболка UYOBISHE">
+        <div class="product-card" onclick="openModal('uyobishe')" aria-label="Футболка UYOBISHE" data-category="t-shirt">
           <img src="dasd.webp" alt="Футболка UYOBISHE с дерзким принтом" loading="lazy">
           <div class="product-info">
             <h3>Футболка «UYOBISHE»</h3>
@@ -1216,7 +1254,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('penis-cap')" aria-label="Кепка #PENIS">
+        <div class="product-card" onclick="openModal('penis-cap')" aria-label="Кепка #PENIS" data-category="headwear">
           <img src="Kepa.webp" alt="Кепка #PENIS с вышивкой" loading="lazy">
           <div class="product-info">
             <h3>Кепка «#PENIS»</h3>
@@ -1224,7 +1262,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('rossiya')" aria-label="Футболка ROSSIYA">
+        <div class="product-card" onclick="openModal('rossiya')" aria-label="Футболка ROSSIYA" data-category="t-shirt">
           <img src="rus.webp" alt="Футболка ROSSIYA с патриотичным дизайном" loading="lazy">
           <div class="product-info">
             <h3>Футболка «ROSSIYA»</h3>
@@ -1232,7 +1270,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('doyar-ochka')" aria-label="Футболка DOYAR OCHKA">
+        <div class="product-card" onclick="openModal('doyar-ochka')" aria-label="Футболка DOYAR OCHKA" data-category="t-shirt">
           <img src="Nastasyushka.webp" alt="Футболка DOYAR OCHKA с эксклюзивным принтом" loading="lazy">
           <div class="product-info">
             <h3>Футболка «DOYAR OCHKA»</h3>
@@ -1240,7 +1278,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('connecting')" aria-label="Футболка CONNECTING PEOPLE">
+        <div class="product-card" onclick="openModal('connecting')" aria-label="Футболка CONNECTING PEOPLE" data-category="t-shirt">
           <img src="conn.png" alt="Футболка CONNECTING PEOPLE" loading="lazy">
           <div class="product-info">
             <h3>Футболка «CONNECTING PEOPLE»</h3>
@@ -1248,7 +1286,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('unreal')" aria-label="Футболка UNREAL SWAGA">
+        <div class="product-card" onclick="openModal('unreal')" aria-label="Футболка UNREAL SWAGA" data-category="t-shirt">
           <img src="unrealswaga.jpg" alt="Футболка UNREAL SWAGA" loading="lazy">
           <div class="product-info">
             <h3>Футболка «UNREAL SWAGA»</h3>
@@ -1256,7 +1294,7 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('deldak')" aria-label="Игрушка DELDAK">
+        <div class="product-card" onclick="openModal('deldak')" aria-label="Игрушка DELDAK" data-category="other">
           <img src="deldak.png" alt="Резиновая игрушка DELDAK" loading="lazy">
           <div class="product-info">
             <h3>Игрушка «DELDAK НА КОНЦЕРТ ИВАНА ZОЛО»</h3>
@@ -1264,11 +1302,27 @@
           </div>
         </div>
         
-        <div class="product-card" onclick="openModal('club')" aria-label="Худи CLUB">
+        <div class="product-card" onclick="openModal('club')" aria-label="Худи CLUB" data-category="hoodie">
           <img src="pclub.png" alt="Худи CLUB с надписью" loading="lazy">
           <div class="product-info">
             <h3>Худи «CLUB»</h3>
             <p>9 999 ₽</p>
+          </div>
+        </div>
+        
+        <div class="product-card" onclick="openModal('black-who-i-pants')" aria-label="Брюки Black Who I" data-category="pants">
+          <img src="blackwhoibruk.jpg" alt="Брюки Black Who I" loading="lazy">
+          <div class="product-info">
+            <h3>Брюки «Black Who I»</h3>
+            <p>14 880 ₽</p>
+          </div>
+        </div>
+        
+        <div class="product-card" onclick="openModal('black-who-i-tshirt')" aria-label="Футболка Black Who I" data-category="t-shirt">
+          <img src="blackwhoifut.jpg" alt="Футболка Black Who I" loading="lazy">
+          <div class="product-info">
+            <h3>Футболка «Black Who I»</h3>
+            <p>14 880 ₽</p>
           </div>
         </div>
       </div>
@@ -1543,6 +1597,71 @@
       </div>
     </div>
     
+    <div id="black-who-i-pants" class="product-modal" role="dialog" aria-label="Брюки Black Who I">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('black-who-i-pants')" aria-label="Закрыть">X</button>
+        <div class="modal-grid">
+          <img src="blackwhoibruk.jpg" class="modal-image" alt="Брюки Black Who I" loading="lazy">
+          <div class="modal-details">
+            <h3>Брюки «Black Who I»</h3>
+            <p class="price">14 880 ₽</p>
+            <p>Эксклюзивные брюки для настоящих уличных воинов</p>
+            <p>Материал: Hui nya</p>
+            <p>Свободный крой</p>
+            <p>Усиленные швы</p>
+            <p>Регулируемый пояс</p>
+            <p>Свага: Максимальная</p>
+            <p>Рекомендация по уходу: стирать при 30°C</p>
+            <p class="warning">При производстве пострадало 21 человек, 4 погибло.</p>
+            <p>Трек-номер придёт после оформления.</p>
+            <select id="size-black-who-i-pants" aria-label="Выберите размер брюк Black Who I">
+              <option value="S">СКЕЛЕТ [S]</option>
+              <option value="M">НЕЖИР [M]</option>
+              <option value="L">ЧУТЬЖИР [L]</option>
+              <option value="XL">ЖИР [XL]</option>
+              <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
+              <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
+            </select>
+            <button onclick="addToCart('Брюки «Black Who I»', 14880, 'black-who-i-pants', 'blackwhoibruk.jpg')" aria-label="Добавить брюки Black Who I в корзину">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="black-who-i-tshirt" class="product-modal" role="dialog" aria-label="Футболка Black Who I">
+      <div class="modal-content">
+        <button class="close" onclick="closeModal('black-who-i-tshirt')" aria-label="Закрыть">X</button>
+        <div class="modal-grid">
+          <img src="blackwhoifut.jpg" class="modal-image" alt="Футболка Black Who I" loading="lazy">
+          <div class="modal-details">
+            <h3>Футболка «Black Who I»</h3>
+            <p class="price">14 880 ₽</p>
+            <p>Эксклюзивная футболка для истинных ценителей уличного стиля</p>
+            <p>Материал: Hui nya</p>
+            <p>Стандартный крой</p>
+            <p>Плотность: 320 г/м²</p>
+            <p>Рисунок: Прямая печать на груди и спине</p>
+            <p>Эффект состаривания</p>
+            <p>Свага: Максимальная</p>
+            <p>Рекомендация по уходу: стирать при 30°C, вывернув наизнанку</p>
+            <p class="warning">При производстве пострадало 18 человек, 3 погибло.</p>
+            <p>Трек-номер придёт после оформления.</p>
+            <select id="size-black-who-i-tshirt" aria-label="Выберите размер футболки Black Who I">
+              <option value="S">СКЕЛЕТ [S]</option>
+              <option value="M">НЕЖИР [M]</option>
+              <option value="L">ЧУТЬЖИР [L]</option>
+              <option value="XL">ЖИР [XL]</option>
+              <option value="XXL">ЖЕНЯ ПРО ДОТКУ [XXL]</option>
+              <option value="XLLLLLLLLLLLL">БУМЫЧ XLLLLLLLLLLLL</option>
+              <option value="XXXXXXXXXL">КУПЛИНОВ [XXXXXXXXXL]</option>
+            </select>
+            <button onclick="addToCart('Футболка «Black Who I»', 14880, 'black-who-i-tshirt', 'blackwhoifut.jpg')" aria-label="Добавить футболку Black Who I в корзину">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <div id="screamer-modal" class="modal" role="dialog" aria-hidden="true">
       <img src="https://c.tenor.com/dTEh3SkNUowAAAAd/tenor.gif" alt="Анимация" loading="lazy">
     </div>
@@ -1569,6 +1688,7 @@
     let cart = [];
     let deliveryType = 'russia';
     let isMusicPlaying = true;
+    let currentCategory = 'all';
     
     const backgroundMusic = document.getElementById('background-music');
     const mobileSoundControl = document.getElementById('mobile-sound-control');
@@ -1580,56 +1700,80 @@
         name: 'Футболка «UYOBISHE»', 
         price: 4399,
         image: 'dasd.webp',
-        desc: 'Дерзкая футболка UYOBISHE для уличного вайба'
+        desc: 'Дерзкая футболка UYOBISHE для уличного вайба',
+        category: 't-shirt'
       },
       { 
         id: 'penis-cap',
         name: 'Кепка «#PENIS»', 
         price: 2999,
         image: 'Kepa.webp',
-        desc: 'Кепка с провокационной вышивкой для смелых'
+        desc: 'Кепка с провокационной вышивкой для смелых',
+        category: 'headwear'
       },
       { 
         id: 'rossiya',
         name: 'Футболка «ROSSIYA»', 
         price: 9999,
         image: 'rus.webp',
-        desc: 'Футболка ROSSIYA для тех, кто гордится корнями'
+        desc: 'Футболка ROSSIYA для тех, кто гордится корнями',
+        category: 't-shirt'
       },
       { 
         id: 'doyar-ochka',
         name: 'Футболка «DOYAR OCHKA»', 
         price: 14999,
         image: 'Nastasyushka.webp',
-        desc: 'Эксклюзивная футболка DOYAR OCHKA для истинных ценителей'
+        desc: 'Эксклюзивная футболка DOYAR OCHKA для истинных ценителей',
+        category: 't-shirt'
       },
       { 
         id: 'connecting',
         name: 'Футболка «CONNECTING PEOPLE»', 
         price: 14999,
         image: 'conn.png',
-        desc: 'Соединяет друзей вместе'
+        desc: 'Соединяет друзей вместе',
+        category: 't-shirt'
       },
       { 
         id: 'unreal',
         name: 'Футболка «UNREAL SWAGA»', 
         price: 14999,
         image: 'unrealswaga.jpg',
-        desc: 'Футболка, ломающая свагометры'
+        desc: 'Футболка, ломающая свагометры',
+        category: 't-shirt'
       },
       { 
         id: 'deldak',
         name: 'Игрушка «DELDAK НА КОНЦЕРТ ИВАНА ZОЛО»', 
         price: 9999,
         image: 'deldak.png',
-        desc: 'Сделан из прочной резины, хорошо прилепляется'
+        desc: 'Сделан из прочной резины, хорошо прилепляется',
+        category: 'other'
       },
       { 
         id: 'club',
         name: 'Худи «CLUB»', 
         price: 9999,
         image: 'pclub.png',
-        desc: 'Худи заметное для любого'
+        desc: 'Худи заметное для любого',
+        category: 'hoodie'
+      },
+      { 
+        id: 'black-who-i-pants',
+        name: 'Брюки «Black Who I»', 
+        price: 14880,
+        image: 'blackwhoibruk.jpg',
+        desc: 'Эксклюзивные брюки для настоящих уличных воинов',
+        category: 'pants'
+      },
+      { 
+        id: 'black-who-i-tshirt',
+        name: 'Футболка «Black Who I»', 
+        price: 14880,
+        image: 'blackwhoifut.jpg',
+        desc: 'Эксклюзивная футболка для истинных ценителей уличного стиля',
+        category: 't-shirt'
       }
     ];
 
@@ -1657,6 +1801,7 @@
     
     window.addEventListener('DOMContentLoaded', () => {
       playBackgroundMusic();
+      initCategoryFilters();
     });
     
     if (mobileSoundControl) {
@@ -1694,6 +1839,10 @@
       if (window.innerWidth <= 768) {
         document.getElementById('main-nav').classList.remove('active');
         document.querySelector('.burger').classList.remove('active');
+      }
+      
+      if (sectionId === 'products') {
+        renderProducts();
       }
       
       if (sectionId !== 'swagoogle') {
@@ -1888,6 +2037,50 @@
       });
     }
     
+    function initCategoryFilters() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          
+          currentCategory = button.getAttribute('data-category');
+          
+          renderProducts();
+        });
+      });
+    }
+    
+    function renderProducts() {
+      const productsGrid = document.getElementById('products-grid');
+      if (!productsGrid) return;
+      
+      productsGrid.innerHTML = '';
+      
+      const filteredProducts = currentCategory === 'all' 
+        ? productsData 
+        : productsData.filter(product => product.category === currentCategory);
+      
+      filteredProducts.forEach(product => {
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card';
+        productCard.setAttribute('onclick', `openModal('${product.id}')`);
+        productCard.setAttribute('aria-label', product.name);
+        productCard.setAttribute('data-category', product.category);
+        
+        productCard.innerHTML = `
+          <img src="${product.image}" alt="${product.name}" loading="lazy">
+          <div class="product-info">
+            <h3>${product.name}</h3>
+            <p>${product.price} ₽</p>
+          </div>
+        `;
+        
+        productsGrid.appendChild(productCard);
+      });
+    }
+    
     document.getElementById('swagoogle-input').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
         searchProducts();
@@ -1916,6 +2109,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       showSection('home');
       setDeliveryType('russia');
+      renderProducts();
     });
   </script>
 </body>
