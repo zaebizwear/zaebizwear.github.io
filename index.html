@@ -1132,6 +1132,7 @@
         const mainNav = document.getElementById('main-nav');
         const burger = document.querySelector('.burger');
         const footer = document.querySelector('footer');
+        const cartDrawer = document.getElementById('cart-drawer');
 
         const zaebizProductsData = [
             { id: 'uyobishe', name: 'Футболка «UYOBISHE»', price: 4399, image: 'https://zaebizwear.com/dasd.webp', desc: 'Дерзкая футболка UYOBISHE для уличного вайба', category: 't-shirt', sizes: ['СКЕЛЕТ [S]', 'НЕЖИР [M]', 'ЧУТЬЖИР [L]', 'ЖИР [XL]', 'ЖЕНЯ ПРО ДОТКУ [XXL]', 'БУМЫЧ XLLLLLLLLLLLL', 'КУПЛИНОВ [XXXXXXXXXL]'], warning: 'При производстве пострадало 19 человек, 2 погибло.' },
@@ -1148,15 +1149,15 @@
         ];
         
         const pidorProductsData = [
-            { id: 'pidor-101', name: "PIDOR ELITNI®", price: 19999, image: "https://zaebizwear.com/pidor/elitni.png", desc: "Элитные кроссовки с золотыми шнурками.", sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44, 45], category: 'sneakers', warning: 'Лимитированная серия, количество ограничено.' },
-            { id: 'pidor-102', name: "PIDOR PIZDATI®", price: 14999, image: "https://zaebizwear.com/pidor/pizdati.png", desc: "Светящиеся подошвы и неоновые вставки.", sizes: [37, 38, 39, 40, 41, 42, 43], category: 'sneakers', warning: 'Светятся в темноте при полной зарядке.' },
-            { id: 'pidor-103', name: "PIDOR HYUEVI®", price: 9999, image: "https://zaebizwear.com/pidor/hyuevi.png", desc: "Ультралёгкие для повседневной носки.", sizes: [36, 37, 38, 39, 40, 41, 42, 43, 44], category: 'sneakers', warning: 'Хуевые, но стильные.' },
-            { id: 'pidor-104', name: "PIDOR PENISI®", price: 12666, image: "https://zaebizwear.com/pidor/penisi.png", desc: "Фаллическая форма для максимального комфорта.", sizes: [38, 39, 40, 41, 42, 43], category: 'sneakers', warning: 'Только для взрослых.' },
-            { id: 'pidor-105', name: "PIDOR GOVNODAVI®", price: 8888, image: "https://zaebizwear.com/pidor/govnodavi.png", desc: "Прошедшие дерьмо-тест и самоочищающиеся.", sizes: [39, 40, 41, 42, 43, 44, 45], category: 'sneakers', warning: 'Не рекомендуется носить в помещении.' },
-            { id: 'pidor-106', name: "PIDOR ZIGGA®", price: 14888, image: "https://zaebizwear.com/pidor/zigga.png", desc: "Для истинных арийцев. Сделано в Рейхе.", sizes: [40, 41, 42, 43, 44], category: 'sneakers', warning: 'Запрещены в 28 странах.' },
-            { id: 'pidor-107', name: "PIDOR JEWS®", price: 6666, image: "https://zaebizwear.com/pidor/jews.png", desc: "Экономичные и практичные. Придуманы в камере.", sizes: [36, 37, 38, 39, 40, 41], category: 'sneakers', warning: 'Кошерно, но это не точно.' },
-            { id: 'pidor-108', name: "PIDOR JEWS HALAL®", price: 12345, image: "https://zaebizwear.com/pidor/halal.png", desc: "Кошерные кроссовки для правоверных.", sizes: [37, 38, 39, 40, 41, 42, 43], category: 'sneakers', warning: 'Одобрено раввинами.' },
-            { id: 'pidor-109', name: "PIDOR TRUCK®", price: 15999, image: "https://zaebizwear.com/pidor/truck.jpg", desc: "Подошва из бетона.", sizes: [39, 40, 41, 42, 43, 44], category: 'sneakers', warning: 'Тяжелые.' }
+            { id: 'pidor-101', name: "PIDOR ELITNI®", price: 19999, image: "https://zaebizwear.com/pidor/elitni.png", desc: "Элитные кроссовки с золотыми шнурками.", sizes: [43, 44, 45, 46, 47, 48, 'ДЛЯ ГИППОПАТАНАВ ЕБАНЫХ'], category: 'sneakers', warning: 'Лимитированная серия, количество ограничено.' },
+            { id: 'pidor-102', name: "PIDOR PIZDATI®", price: 14999, image: "https://zaebizwear.com/pidor/pizdati.png", desc: "Светящиеся подошвы и неоновые вставки.", sizes: [43, 44, 45, 46, 47, 48, 'ДЛЯ ГИППОПАТАНАВ ЕБАНЫХ'], category: 'sneakers', warning: 'Светятся в темноте при полной зарядке.' },
+            { id: 'pidor-103', name: "PIDOR HYUEVI®", price: 9999, image: "https://zaebizwear.com/pidor/hyuevi.png", desc: "Ультралёгкие для повседневной носки.", sizes: [43, 44, 45, 46, 47, 48, 'ДЛЯ ГИППОПАТАНАВ ЕБАНЫХ'], category: 'sneakers', warning: 'Хуевые, но стильные.' },
+            { id: 'pidor-104', name: "PIDOR PENISI®", price: 12666, image: "https://zaebizwear.com/pidor/penisi.png", desc: "Фаллическая форма для максимального комфорта.", sizes: [43, 44, 45, 46, 47, 48, 'ДЛЯ ГИППОПАТАНАВ ЕБАНЫХ'], category: 'sneakers', warning: 'Только для взрослых.' },
+            { id: 'pidor-105', name: "PIDOR GOVNODAVI®", price: 8888, image: "https://zaebizwear.com/pidor/govnodavi.png", desc: "Прошедшие дерьмо-тест и самоочищающиеся.", sizes: [43, 44, 45, 46, 47, 48, 'ДЛЯ ГИППОПАТАНАВ ЕБАНЫХ'], category: 'sneakers', warning: 'Не рекомендуется носить в помещении.' },
+            { id: 'pidor-106', name: "PIDOR ZIGGA®", price: 14888, image: "https://zaebizwear.com/pidor/zigga.png", desc: "Для истинных арийцев. Сделано в Рейхе.", sizes: [43, 44, 45, 46, 47, 48, 'ДЛЯ ГИППОПАТАНАВ ЕБАНЫХ'], category: 'sneakers', warning: 'Запрещены в 28 странах.' },
+            { id: 'pidor-107', name: "PIDOR JEWS®", price: 6666, image: "https://zaebizwear.com/pidor/jews.png", desc: "Экономичные и практичные. Придуманы в камере.", sizes: [43, 44, 45, 46, 47, 48, 'ДЛЯ ГИППОПАТАНАВ ЕБАНЫХ'], category: 'sneakers', warning: 'Кошерно, но это не точно.' },
+            { id: 'pidor-108', name: "PIDOR JEWS HALAL®", price: 12345, image: "https://zaebizwear.com/pidor/halal.png", desc: "Кошерные кроссовки для правоверных.", sizes: [43, 44, 45, 46, 47, 48, 'ДЛЯ ГИППОПАТАНАВ ЕБАНЫХ'], category: 'sneakers', warning: 'Одобрено раввинами.' },
+            { id: 'pidor-109', name: "PIDOR TRUCK®", price: 15999, image: "https://zaebizwear.com/pidor/truck.jpg", desc: "Подошва из бетона.", sizes: [43, 44, 45, 46, 47, 48, 'ДЛЯ ГИППОПАТАНАВ ЕБАНЫХ'], category: 'sneakers', warning: 'Тяжелые.' }
         ];
 
         const allProductsData = [...zaebizProductsData, ...pidorProductsData];
@@ -1193,6 +1194,32 @@
                 `;
                 container.appendChild(modal);
             });
+        };
+
+        const createCartDrawer = () => {
+            if(cartDrawer) {
+                cartDrawer.innerHTML = `
+                    <div class="cart-header">
+                        <h2>КОРЗИНА ZAEBIZ®</h2>
+                        <button class="close-cart" onclick="toggleCart()" aria-label="Закрыть корзину">✕</button>
+                    </div>
+                    <div id="cart-items"></div>
+                    <p id="cart-total" class="cart-total">Итого: 0 ₽</p>
+                    <div class="cart-options">
+                        <div class="delivery-toggle">
+                            <button class="delivery-btn active" onclick="setDeliveryType('russia')">Доставка по РФ</button>
+                            <button class="delivery-btn" onclick="setDeliveryType('international')">Международная</button>
+                        </div>
+                        <label for="delivery-country" id="delivery-country-label" style="display:none;">Страна:</label>
+                        <select id="delivery-country" aria-label="Выберите страну доставки" style="display:none;"><option value="">Выберите страну</option><option value="albania">Албания</option><option value="andorra">Андорра</option><option value="austria">Австрия</option><option value="belarus">Беларусь</option><option value="belgium">Бельгия</option><option value="bosnia">Босния и Герцеговина</option><option value="bulgaria">Болгария</option><option value="canada">Канада</option><option value="croatia">Хорватия</option><option value="cyprus">Кипр</option><option value="czech">Чехия</option><option value="denmark">Дания</option><option value="estonia">Эстония</option><option value="finland">Финляндия</option><option value="france">Франция</option><option value="germany">Германия</option><option value="greece">Греция</option><option value="hungary">Венгрия</option><option value="iceland">Исландия</option><option value="ireland">Ирландия</option><option value="italy">Италия</option><option value="kazakhstan">Казахстан</option><option value="kosovo">Косово</option><option value="latvia">Латвия</option><option value="liechtenstein">Лихтенштейн</option><option value="lithuania">Литва</option><option value="luxembourg">Люксембург</option><option value="malta">Мальта</option><option value="moldova">Молдова</option><option value="monaco">Монако</option><option value="montenegro">Черногория</option><option value="netherlands">Нидерланды</option><option value="northmacedonia">Северная Македония</option><option value="norway">Норвегия</option><option value="poland">Польша</option><option value="portugal">Португалия</option><option value="romania">Румыния</option><option value="russia">Россия</option><option value="sanmarino">Сан-Марино</option><option value="serbia">Сербия</option><option value="slovakia">Словакия</option><option value="slovenia">Словения</option><option value="spain">Испания</option><option value="sweden">Швеция</option><option value="switzerland">Швейцария</option><option value="uk">Великобритания</option><option value="usa">США</option><option value="uzbekistan">Узбекистан</option><option value="uryukstan">Урюкстан</option><option value="vatican">Ватикан</option><option value="wadiya">Вадия</option></select>
+                        <label for="payment-method">Способ оплаты:</label>
+                        <select id="payment-method" aria-label="Выберите способ оплаты"><option value="card">Банковская карта</option><option value="pdorpay">PdorPay</option><option value="pivkoff">Пивкофф</option><option value="spb">СПБ</option><option value="dolkami">Дольками</option></select>
+                        <label for="delivery-address">Адрес доставки:</label>
+                        <input type="text" id="delivery-address" placeholder="Введите адрес" aria-label="Введите адрес доставки">
+                    </div>
+                    <button class="checkout-btn" onclick="openCheckoutModal()" aria-label="Оформить заказ">Оформить заказ</button>
+                `;
+            }
         };
 
         window.setTheme = (theme) => {
@@ -1446,18 +1473,20 @@
 
         const handleScroll = () => {
             const footerLogoContainer = document.querySelector('.footer-logo-container');
-            if (!footerLogoContainer) return;
+            if (!footerLogoContainer || !footer) return;
 
             const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-            if (scrollableHeight <= 0) {
+            
+            if (scrollableHeight <= 10) {
                 footer.classList.add('is-visible');
                 footerLogoContainer.style.transform = 'scaleY(1)';
                 return;
             }
+
             const scrollPercentage = window.scrollY / scrollableHeight;
             const scaleValue = Math.min(scrollPercentage * 2.5, 1);
-
-            if (scrollPercentage > 0.5) {
+            
+            if (scrollPercentage > 0.5) { 
                 footer.classList.add('is-visible');
                 footerLogoContainer.style.transform = `scaleY(${scaleValue})`;
             } else {
@@ -1467,6 +1496,7 @@
         };
 
         createModals();
+        createCartDrawer(); 
         showSection('home');
         setDeliveryType('russia');
         renderProducts(zaebizProductsData);
